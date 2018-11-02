@@ -12,23 +12,18 @@ public class InputPin extends Pin {
         this.state = STATE.INPUT;
     }
 
-    @Override
-    public void setValue(AbstractModule moduleChanging, boolean value) {
-        if(moduleChanging == owner) {
-            throw new InternalOperationNotPermitted("pin owner cannot change input value");
-        }
-        this.value = value;
-    }
-
     /**
      * InputPin cannot change state. To learn more see {@link Pin.STATE}
      * @see Pin.STATE
      * @param state
      */
+    @Override
     public void setState(STATE state) {
         throw new InternalOperationNotPermitted();
     }
 
-
-
+    @Override
+    public void setValueByModule(AbstractModule moduleChanging, boolean value) {
+        throw new InternalOperationNotPermitted("module cannot change the pin value by hand");
+    }
 }

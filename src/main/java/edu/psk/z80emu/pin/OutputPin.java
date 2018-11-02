@@ -5,12 +5,11 @@ import edu.psk.z80emu.module.AbstractModule;
 
 public class OutputPin extends Pin {
 
-    @Override
-    public void setValue(AbstractModule moduleChanging, boolean value) {
-        if(moduleChanging != owner) {
-            throw new InternalOperationNotPermitted("only pin owner can change output value");
-        }
-        this.value = value;
+    public OutputPin(AbstractModule owner, String name) {
+        this.owner = owner;
+        this.name = name;
+
+        this.state = STATE.OUTPUT;
     }
 
     /**
@@ -18,7 +17,13 @@ public class OutputPin extends Pin {
      * @see Pin.STATE
      * @param state
      */
+    @Override
     public void setState(STATE state) {
         throw new InternalOperationNotPermitted();
+    }
+
+    @Override
+    public void setValueByRoot(boolean value) {
+        throw new InternalOperationNotPermitted("cannot change output value by hand");
     }
 }

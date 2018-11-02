@@ -1,0 +1,22 @@
+package edu.psk.z80emu.module;
+
+import edu.psk.z80emu.pin.Pin;
+
+public abstract class AbstractModuleWithClock extends AbstractModule {
+
+    public static final String CLOCK = "CLOCK";
+
+    @Override
+    public void afterInputPinChanged(Pin pin, boolean oldValue) {
+        if(isClockPosedge(pin, oldValue)) {
+            onClockPosedge();
+        }
+    }
+
+    protected abstract void onClockPosedge();
+
+    protected boolean isClockPosedge(Pin pin, boolean oldValue) {
+        return (pin.getName() == CLOCK && !oldValue && pin.getValue());
+    }
+
+}

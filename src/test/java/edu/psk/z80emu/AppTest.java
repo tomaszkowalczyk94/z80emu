@@ -1,14 +1,18 @@
 package edu.psk.z80emu;
 
+import edu.psk.z80emu.module.test.ByteRegister;
+import edu.psk.z80emu.pin.InputPin;
+import edu.psk.z80emu.pin.OutputPin;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import static edu.psk.z80emu.module.test.ByteRegister.OUTPUT_ENABLE;
+
 /**
  * Unit test for simple App.
  */
-public class AppTest 
-    extends TestCase
+public class AppTest extends TestCase
 {
     /**
      * Create the test case
@@ -33,6 +37,24 @@ public class AppTest
      */
     public void testApp()
     {
-        assertTrue( true );
+//        InputPin inputPinFirst = new InputPin(null, "testInput1");
+//        InputPin inputPinSecond = new InputPin(null, "testInput2");
+//        OutputPin outputPin = new OutputPin(null, "testOutput");
+//
+//        assertFalse(inputPinFirst.getValue());
+//        assertFalse(inputPinSecond.getValue());
+//
+//        outputPin.connectInput(inputPinFirst);
+//        outputPin.connectInput(inputPinSecond);
+//
+//        outputPin.setValueByRoot(true);
+//
+//        assertTrue(inputPinFirst.getValue());
+//        assertTrue(inputPinSecond.getValue());
+
+        ByteRegister byteRegister = new ByteRegister();
+
+        byteRegister.getPin(OUTPUT_ENABLE).setValueByRoot(false);
+
     }
 }
