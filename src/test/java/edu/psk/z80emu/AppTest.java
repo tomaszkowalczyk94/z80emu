@@ -1,13 +1,11 @@
 package edu.psk.z80emu;
 
-import edu.psk.z80emu.module.test.ByteRegister;
-import edu.psk.z80emu.pin.InputPin;
-import edu.psk.z80emu.pin.OutputPin;
+import edu.psk.z80emu.module.register.ByteRegister;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import static edu.psk.z80emu.module.test.ByteRegister.OUTPUT_ENABLE;
+import static edu.psk.z80emu.module.register.ByteRegister.OUTPUT_ENABLE;
 
 /**
  * Unit test for simple App.

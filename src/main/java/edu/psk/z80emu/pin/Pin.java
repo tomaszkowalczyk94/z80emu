@@ -17,7 +17,7 @@ public abstract class Pin {
      * {@link edu.psk.z80emu.pin.InputPin} and {@link edu.psk.z80emu.pin.OutputPin} has defined state, which cannot be changed.
      * {@link edu.psk.z80emu.pin.InOutPin} have state, which can be changed in runtime.
      */
-    enum STATE {
+    public enum STATE {
         INPUT,
         OUTPUT
     }
@@ -57,9 +57,17 @@ public abstract class Pin {
     }
 
     public void setValueByRoot(boolean value) {
+        boolean oldValue = this.value;
+
         this.value = value;
+
         notifyConnectedInputPins();
-        notifyOwner(value);
+        notifyOwner(oldValue);
+    }
+
+    public void ticTokByRoot() {
+        setValueByRoot(true);
+        setValueByRoot(false);
     }
 
     public STATE getState() {
