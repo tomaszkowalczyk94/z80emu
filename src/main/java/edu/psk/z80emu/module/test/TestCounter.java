@@ -4,6 +4,7 @@ import edu.psk.z80emu.module.AbstractModuleWithClock;
 import edu.psk.z80emu.module.register.ByteRegister;
 import edu.psk.z80emu.pin.InputPin;
 import edu.psk.z80emu.pin.OutputPin;
+import edu.psk.z80emu.pin.Pin;
 
 public class TestCounter extends AbstractModuleWithClock {
 
@@ -22,6 +23,8 @@ public class TestCounter extends AbstractModuleWithClock {
     ByteRegister byteRegister = new ByteRegister();
 
     public TestCounter() {
+        byteRegister.setParent(this);
+
         this.pins.addPin(new OutputPin(this, OUTPUT_DB_0));
         this.pins.addPin(new OutputPin(this, OUTPUT_DB_1));
         this.pins.addPin(new OutputPin(this, OUTPUT_DB_2));
@@ -39,10 +42,15 @@ public class TestCounter extends AbstractModuleWithClock {
     protected void onClockPosedge() {
         if(getPin(COUNT).getValue(this)) {
 
+            byteRegister.getPin(ByteRegister.OUTPUT_ENABLE).setValue(this, true);
 
+            int intValue = byteRegister.getDbPinGroup().getIntValue(this);
+            System.out.println(intValue);
 
         }
 
         byteRegister.getPin(CLOCK).setValue(this, this.getPin(CLOCK).getValue(this));
     }
+
+
 }

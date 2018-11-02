@@ -3,6 +3,7 @@ package edu.psk.z80emu.module.test;
 import org.junit.Test;
 
 import static edu.psk.z80emu.module.AbstractModuleWithClock.CLOCK;
+import static edu.psk.z80emu.module.test.TestCounter.COUNT;
 import static org.junit.Assert.*;
 
 public class TestCounterTest {
@@ -11,7 +12,7 @@ public class TestCounterTest {
     public void test() {
 
         TestCounter testCounter = new TestCounter();
-
+        testCounter.getPin(COUNT).setValueByRoot(true);
         testCounter.getPin(CLOCK).ticTokByRoot();
 
     }

@@ -4,6 +4,7 @@ import edu.psk.z80emu.module.AbstractModuleWithClock;
 import edu.psk.z80emu.pin.InOutPin;
 import edu.psk.z80emu.pin.InputPin;
 import edu.psk.z80emu.pin.Pin;
+import edu.psk.z80emu.pin.PinGroup;
 
 
 public class ByteRegister extends AbstractModuleWithClock {
@@ -22,31 +23,49 @@ public class ByteRegister extends AbstractModuleWithClock {
     public static final String DB_6 = "DB_6";
     public static final String DB_7 = "DB_7";
 
+    protected PinGroup dbPinGroup = new PinGroup();
 
     private boolean[] value = new boolean[8];
 
     public ByteRegister() {
         super();
 
-        this.pins.addPin(new InputPin(this, OUTPUT_ENABLE));
-        this.pins.addPin(new InputPin(this, ENA));
+        pins.addPin(new InputPin(this, OUTPUT_ENABLE));
+        pins.addPin(new InputPin(this, ENA));
 
-        this.pins.addPin(new InOutPin(this, DB_0));
-        this.pins.addPin(new InOutPin(this, DB_1));
-        this.pins.addPin(new InOutPin(this, DB_2));
-        this.pins.addPin(new InOutPin(this, DB_3));
-        this.pins.addPin(new InOutPin(this, DB_4));
-        this.pins.addPin(new InOutPin(this, DB_5));
-        this.pins.addPin(new InOutPin(this, DB_6));
-        this.pins.addPin(new InOutPin(this, DB_7));
+        pins.addPin(new InOutPin(this, DB_0));
+        pins.addPin(new InOutPin(this, DB_1));
+        pins.addPin(new InOutPin(this, DB_2));
+        pins.addPin(new InOutPin(this, DB_3));
+        pins.addPin(new InOutPin(this, DB_4));
+        pins.addPin(new InOutPin(this, DB_5));
+        pins.addPin(new InOutPin(this, DB_6));
+        pins.addPin(new InOutPin(this, DB_7));
+
+        dbPinGroup.setPins(
+                pins.get(DB_0),
+                pins.get(DB_1),
+                pins.get(DB_2),
+                pins.get(DB_3),
+                pins.get(DB_4),
+                pins.get(DB_5),
+                pins.get(DB_6),
+                pins.get(DB_7)
+        );
 
     }
 
+    @Override
+    public void afterInputPinChanged(Pin pin, boolean oldValue) {
+        super.afterInputPinChanged(pin, oldValue);
+
+        if(pin.getName().equals(OUTPUT_ENABLE)) {
+            updateStateOfDbByOutputEnable();
+        }
+    }
 
     @Override
     protected void onClockPosedge() {
-
-        updateStateOfDbByOutputEnable();
         updateLatch();
         updateOutput();
     }
@@ -91,5 +110,9 @@ public class ByteRegister extends AbstractModuleWithClock {
         getPin(DB_5).setState(newState);
         getPin(DB_6).setState(newState);
         getPin(DB_7).setState(newState);
+    }
+
+    public PinGroup getDbPinGroup() {
+        return dbPinGroup;
     }
 }

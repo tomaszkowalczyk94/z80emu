@@ -21,7 +21,7 @@ public abstract class AbstractModuleWithClock extends AbstractModule {
     protected abstract void onClockPosedge();
 
     protected boolean isClockPosedge(Pin pin, boolean oldValue) {
-        return (pin.getName() == CLOCK && !oldValue && pin.getValue(this));
+        return (pin.getName().equals(CLOCK) && !oldValue && pin.getValue(this));
     }
 
 }

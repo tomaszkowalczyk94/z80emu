@@ -31,7 +31,7 @@ public class ByteRegisterTest {
         byteRegister.getPin(CLOCK).ticTokByRoot();
 
         Assert.assertEquals(Pin.STATE.OUTPUT, byteRegister.getPin(DB_7).getState());
-        Assert.assertEquals(true, byteRegister.getPin(DB_7).getValue(byteRegister));
+        Assert.assertEquals(true, byteRegister.getPin(DB_7).getValueByRoot());
 
 
     }

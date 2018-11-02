@@ -78,9 +78,10 @@ public abstract class Pin {
                 throw new InternalOperationNotPermitted("unsupporded state");
         }
 
+        this.value = value;
+
         notifyConnectedInputPins();
         notifyOwner(value);
-        this.value = value;
     }
 
     protected void checkPermissionSetInputValue(AbstractModule moduleChanging, boolean value) {
