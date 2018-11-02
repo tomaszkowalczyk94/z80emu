@@ -43,11 +43,11 @@ public abstract class Pin {
      */
     public void setValueByModule(AbstractModule moduleChanging, boolean value) {
 
-        if(state == STATE.INPUT) {
-            throw new InternalOperationNotPermitted("you cannot change pin with input state");
+        if(state == STATE.INPUT && moduleChanging == owner) {
+            throw new InternalOperationNotPermitted("owner module cannot change pin with input state");
         }
 
-        if(moduleChanging != owner) {
+        if(state == STATE.OUTPUT && moduleChanging != owner) {
             throw new InternalOperationNotPermitted("only owner of pin can change pin value by hand");
         }
 

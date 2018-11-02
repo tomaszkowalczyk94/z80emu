@@ -22,8 +22,4 @@ public class InputPin extends Pin {
         throw new InternalOperationNotPermitted();
     }
 
-    @Override
-    public void setValueByModule(AbstractModule moduleChanging, boolean value) {
-        throw new InternalOperationNotPermitted("module cannot change the pin value by hand");
-    }
 }

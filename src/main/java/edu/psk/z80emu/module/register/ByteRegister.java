@@ -26,9 +26,9 @@ public class ByteRegister extends AbstractModuleWithClock {
     private boolean[] value = new boolean[8];
 
     public ByteRegister() {
+        super();
 
         this.pins.addPin(new InputPin(this, OUTPUT_ENABLE));
-        this.pins.addPin(new InputPin(this, CLOCK));
         this.pins.addPin(new InputPin(this, ENA));
 
         this.pins.addPin(new InOutPin(this, DB_0));
