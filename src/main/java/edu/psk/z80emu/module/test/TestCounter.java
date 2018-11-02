@@ -5,6 +5,7 @@ import edu.psk.z80emu.module.register.ByteRegister;
 import edu.psk.z80emu.pin.InputPin;
 import edu.psk.z80emu.pin.OutputPin;
 import edu.psk.z80emu.pin.Pin;
+import edu.psk.z80emu.pin.PinGroup;
 
 public class TestCounter extends AbstractModuleWithClock {
 
@@ -22,6 +23,8 @@ public class TestCounter extends AbstractModuleWithClock {
 
     ByteRegister byteRegister = new ByteRegister();
 
+    protected PinGroup outputDbPinGroup = new PinGroup();
+
     public TestCounter() {
         byteRegister.setParent(this);
 
@@ -34,6 +37,16 @@ public class TestCounter extends AbstractModuleWithClock {
         this.pins.addPin(new OutputPin(this, OUTPUT_DB_6));
         this.pins.addPin(new OutputPin(this, OUTPUT_DB_7));
 
+        outputDbPinGroup.setPins(
+                pins.get(OUTPUT_DB_1),
+                pins.get(OUTPUT_DB_2),
+                pins.get(OUTPUT_DB_3),
+                pins.get(OUTPUT_DB_4),
+                pins.get(OUTPUT_DB_5),
+                pins.get(OUTPUT_DB_6),
+                pins.get(OUTPUT_DB_7)
+        );
+
         this.pins.addPin(new InputPin(this, COUNT));
 
     }
@@ -45,12 +58,30 @@ public class TestCounter extends AbstractModuleWithClock {
             byteRegister.getPin(ByteRegister.OUTPUT_ENABLE).setValue(this, true);
 
             int intValue = byteRegister.getDbPinGroup().getIntValue(this);
-            System.out.println(intValue);
+
+            intValue++;
+
+            //save new value to byte register
+            byteRegister.getPin(ByteRegister.OUTPUT_ENABLE).setValue(this, false);
+            byteRegister.getDbPinGroup().setIntValue(this, intValue);
+            byteRegister.getPin(ByteRegister.ENA);
+            byteRegister.getPin(CLOCK).ticTok(this);
+
+
+
+            byteRegister.getPin(ByteRegister.OUTPUT_ENABLE).setValue(this, true);
+
+            outputDbPinGroup.setIntValue(
+                    this,
+                    byteRegister.getDbPinGroup().getIntValue(this)
+            );
 
         }
 
         byteRegister.getPin(CLOCK).setValue(this, this.getPin(CLOCK).getValue(this));
     }
 
-
+    public PinGroup getOutputDbPinGroup() {
+        return outputDbPinGroup;
+    }
 }

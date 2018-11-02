@@ -113,6 +113,11 @@ public abstract class Pin {
         return value;
     }
 
+    public void ticTok(AbstractModule moduleChanging) {
+        setValue(moduleChanging, true);
+        setValue(moduleChanging, false);
+    }
+
     public void ticTokByRoot() {
         setValueByRoot(true);
         setValueByRoot(false);
