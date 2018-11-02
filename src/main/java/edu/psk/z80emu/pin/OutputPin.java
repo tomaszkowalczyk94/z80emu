@@ -22,8 +22,4 @@ public class OutputPin extends Pin {
         throw new InternalOperationNotPermitted();
     }
 
-    @Override
-    public void setValueByRoot(boolean value) {
-        throw new InternalOperationNotPermitted("cannot change output value by hand");
-    }
 }

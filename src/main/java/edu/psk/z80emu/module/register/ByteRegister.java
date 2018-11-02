@@ -54,33 +54,33 @@ public class ByteRegister extends AbstractModuleWithClock {
 
 
     private void updateLatch() {
-        if(!getPin(OUTPUT_ENABLE).getValue() && getPin(ENA).getValue()) {
-            value[0] = getPin(DB_0).getValue();
-            value[1] = getPin(DB_1).getValue();
-            value[2] = getPin(DB_2).getValue();
-            value[3] = getPin(DB_3).getValue();
-            value[4] = getPin(DB_4).getValue();
-            value[5] = getPin(DB_5).getValue();
-            value[6] = getPin(DB_6).getValue();
-            value[7] = getPin(DB_7).getValue();
+        if(!getPin(OUTPUT_ENABLE).getValue(this) && getPin(ENA).getValue(this)) {
+            value[0] = getPin(DB_0).getValue(this);
+            value[1] = getPin(DB_1).getValue(this);
+            value[2] = getPin(DB_2).getValue(this);
+            value[3] = getPin(DB_3).getValue(this);
+            value[4] = getPin(DB_4).getValue(this);
+            value[5] = getPin(DB_5).getValue(this);
+            value[6] = getPin(DB_6).getValue(this);
+            value[7] = getPin(DB_7).getValue(this);
         }
     }
 
     private void updateOutput() {
-        if(getPin(OUTPUT_ENABLE).getValue()) {
-            getPin(DB_0).setValueByModule(this, value[0]);
-            getPin(DB_1).setValueByModule(this, value[1]);
-            getPin(DB_2).setValueByModule(this, value[2]);
-            getPin(DB_3).setValueByModule(this, value[3]);
-            getPin(DB_4).setValueByModule(this, value[4]);
-            getPin(DB_5).setValueByModule(this, value[5]);
-            getPin(DB_6).setValueByModule(this, value[6]);
-            getPin(DB_7).setValueByModule(this, value[7]);
+        if(getPin(OUTPUT_ENABLE).getValue(this)) {
+            getPin(DB_0).setValue(this, value[0]);
+            getPin(DB_1).setValue(this, value[1]);
+            getPin(DB_2).setValue(this, value[2]);
+            getPin(DB_3).setValue(this, value[3]);
+            getPin(DB_4).setValue(this, value[4]);
+            getPin(DB_5).setValue(this, value[5]);
+            getPin(DB_6).setValue(this, value[6]);
+            getPin(DB_7).setValue(this, value[7]);
         }
     }
 
     protected void updateStateOfDbByOutputEnable() {
-        boolean outputEnable = getPin(OUTPUT_ENABLE).getValue();
+        boolean outputEnable = getPin(OUTPUT_ENABLE).getValue(this);
         Pin.STATE newState = (outputEnable) ? Pin.STATE.OUTPUT : Pin.STATE.INPUT;
 
         getPin(DB_0).setState(newState);

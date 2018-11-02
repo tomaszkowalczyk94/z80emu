@@ -2,7 +2,6 @@ package edu.psk.z80emu.module.test;
 
 import edu.psk.z80emu.module.AbstractModuleWithClock;
 import edu.psk.z80emu.module.register.ByteRegister;
-import edu.psk.z80emu.pin.InOutPin;
 import edu.psk.z80emu.pin.InputPin;
 import edu.psk.z80emu.pin.OutputPin;
 
@@ -38,12 +37,12 @@ public class TestCounter extends AbstractModuleWithClock {
 
     @Override
     protected void onClockPosedge() {
-        if(getPin(COUNT).getValue()) {
+        if(getPin(COUNT).getValue(this)) {
 
 
 
         }
 
-        byteRegister.getPin(CLOCK).setValueByModule(this, this.getPin(CLOCK).getValue());
+        byteRegister.getPin(CLOCK).setValue(this, this.getPin(CLOCK).getValue(this));
     }
 }

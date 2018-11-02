@@ -5,7 +5,7 @@ import edu.psk.z80emu.pin.PinMap;
 
 public abstract class AbstractModule {
 
-
+    AbstractModule parent;
 
     protected PinMap pins = new PinMap();
 
@@ -19,5 +19,11 @@ public abstract class AbstractModule {
         return getPins().get(name);
     }
 
+    public AbstractModule getParent() {
+        return parent;
+    }
 
+    public void setParent(AbstractModule parent) {
+        this.parent = parent;
+    }
 }

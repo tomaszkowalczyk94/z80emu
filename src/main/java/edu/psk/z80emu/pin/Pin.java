@@ -33,36 +33,83 @@ public abstract class Pin {
      */
     protected AbstractModule owner;
 
-    public boolean getValue() {
+    public boolean getValue(AbstractModule getterModule) {
+
+        switch (state) {
+            case INPUT:
+                checkPermissionGetInputValue(getterModule);
+                break;
+            case OUTPUT:
+                checkPermissionGetOutputValue(getterModule);
+                break;
+            default:
+                throw new InternalOperationNotPermitted("unsupporded state");
+        }
+
         return value;
+    }
+
+    private void checkPermissionGetInputValue(AbstractModule getterModule) {
+        if(getterModule != owner) {
+            throw new InternalOperationNotPermitted("only owner module can get value of input");
+        }
+    }
+
+    private void checkPermissionGetOutputValue(AbstractModule getterModule) {
+        if(getterModule != owner.getParent()) {
+            throw new InternalOperationNotPermitted("only parent module can get value of output");
+        }
     }
 
     /**
      * @param moduleChanging
      * @param value
      */
-    public void setValueByModule(AbstractModule moduleChanging, boolean value) {
+    public void setValue(AbstractModule moduleChanging, boolean value) {
 
-        if(state == STATE.INPUT && moduleChanging == owner) {
-            throw new InternalOperationNotPermitted("owner module cannot change pin with input state");
+        switch (state) {
+            case INPUT:
+                checkPermissionSetInputValue(moduleChanging, value);
+                break;
+            case OUTPUT:
+                checkPermissionSetOutputValue(moduleChanging, value);
+                break;
+            default:
+                throw new InternalOperationNotPermitted("unsupporded state");
         }
 
-        if(state == STATE.OUTPUT && moduleChanging != owner) {
-            throw new InternalOperationNotPermitted("only owner of pin can change pin value by hand");
-        }
-
-        this.value = value;
         notifyConnectedInputPins();
         notifyOwner(value);
+        this.value = value;
+    }
+
+    protected void checkPermissionSetInputValue(AbstractModule moduleChanging, boolean value) {
+        if(moduleChanging != owner.getParent()) {
+            throw new InternalOperationNotPermitted("only parent module can set value of input");
+        }
+    }
+
+    protected void checkPermissionSetOutputValue(AbstractModule moduleChanging, boolean value) {
+        if(moduleChanging != owner) {
+            throw new InternalOperationNotPermitted("only owner module can set value of output");
+        }
     }
 
     public void setValueByRoot(boolean value) {
+        if(state == STATE.OUTPUT) {
+            throw new InternalOperationNotPermitted("cannot change output value by root. Only pin owner (some module) can change output value");
+        }
+
         boolean oldValue = this.value;
 
         this.value = value;
 
         notifyConnectedInputPins();
         notifyOwner(oldValue);
+    }
+
+    public boolean getValueByRoot() {
+        return value;
     }
 
     public void ticTokByRoot() {
