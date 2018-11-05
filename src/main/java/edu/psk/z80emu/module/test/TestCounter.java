@@ -38,6 +38,7 @@ public class TestCounter extends AbstractModuleWithClock {
         this.pins.addPin(new OutputPin(this, OUTPUT_DB_7));
 
         outputDbPinGroup.setPins(
+                pins.get(OUTPUT_DB_0),
                 pins.get(OUTPUT_DB_1),
                 pins.get(OUTPUT_DB_2),
                 pins.get(OUTPUT_DB_3),
