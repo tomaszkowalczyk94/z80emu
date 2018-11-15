@@ -1,5 +1,6 @@
 package edu.psk.z80emu.module.register;
 
+import edu.psk.z80emu.module.AbstractModule;
 import edu.psk.z80emu.module.AbstractModuleWithClock;
 import edu.psk.z80emu.pin.InOutPin;
 import edu.psk.z80emu.pin.InputPin;
@@ -12,7 +13,7 @@ public class ByteRegister extends AbstractModuleWithClock {
 
     public static final String  OUTPUT_ENABLE = "OUTPUT_ENABLE";
 
-    public static final String ENA = "ENA"; // latch enable
+    public static final String ENA = "ENA"; // save value
 
     public static final String DB_0 = "DB_0";
     public static final String DB_1 = "DB_1";
@@ -52,6 +53,27 @@ public class ByteRegister extends AbstractModuleWithClock {
                 pins.get(DB_1),
                 pins.get(DB_0)
         );
+    }
+
+    /**
+     * change inputs and flush
+     */
+    public void setInputs(
+            AbstractModule moduleChanging,
+            boolean outputEnable,
+            boolean ena,
+            boolean clock,
+            Integer db
+    ) {
+        getPin(OUTPUT_ENABLE).setValue(moduleChanging, outputEnable);
+        getPin(ENA).setValue(moduleChanging, ena);
+        getPin(CLOCK).setValue(moduleChanging, clock);
+
+        if(db != null) {
+            dbPinGroup.setIntValue(moduleChanging, db);
+        }
+
+        flush();
     }
 
 

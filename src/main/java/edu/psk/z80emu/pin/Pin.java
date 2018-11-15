@@ -11,6 +11,15 @@ import java.util.List;
  */
 public abstract class Pin {
 
+    /**
+     * alias for boolean false
+     */
+    public static boolean _0 = false;
+
+    /**
+     * alias for boolean true
+     */
+    public static boolean _1 = true;
 
     /**
      * Pin can by in <b>only one STATE</b> at a time.

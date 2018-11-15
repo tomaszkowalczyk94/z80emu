@@ -28,9 +28,9 @@ public abstract class AbstractModuleWithClock extends AbstractModule {
     }
 
     public void ticTocAndFlush(AbstractModule moduleChanging ) {
-        getPin(CLOCK).setValue(moduleChanging, false);
-        flush();
         getPin(CLOCK).setValue(moduleChanging, true);
+        flush();
+        getPin(CLOCK).setValue(moduleChanging, false);
         flush();
     }
 
