@@ -12,16 +12,33 @@ public abstract class AbstractModuleWithClock extends AbstractModule {
     }
 
     @Override
-    public void afterInputPinChanged(Pin pin, boolean oldValue) {
-        if(isClockPosedge(pin, oldValue)) {
+    public void flush() {
+        if(isClockPosedge()) {
             onClockPosedge();
         }
+        lastClockState = getPin(CLOCK).getValue(this);
     }
 
     protected abstract void onClockPosedge();
 
-    protected boolean isClockPosedge(Pin pin, boolean oldValue) {
-        return (pin.getName().equals(CLOCK) && !oldValue && pin.getValue(this));
+    boolean lastClockState = false;
+
+    protected boolean isClockPosedge() {
+        return ( getPin(CLOCK).getValue(this) && !lastClockState);
+    }
+
+    public void ticTocAndFlush(AbstractModule moduleChanging ) {
+        getPin(CLOCK).setValue(moduleChanging, false);
+        flush();
+        getPin(CLOCK).setValue(moduleChanging, true);
+        flush();
+    }
+
+    public void ticTocAndFlushByRoot() {
+        getPin(CLOCK).setValueByRoot(false);
+        flush();
+        getPin(CLOCK).setValueByRoot(true);
+        flush();
     }
 
 }

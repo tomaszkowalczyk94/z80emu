@@ -13,7 +13,7 @@ public abstract class AbstractModule {
         return pins;
     }
 
-    public abstract void afterInputPinChanged(Pin pin, boolean oldValue);
+    public abstract void flush();
 
     public Pin getPin(String name) {
         return getPins().get(name);

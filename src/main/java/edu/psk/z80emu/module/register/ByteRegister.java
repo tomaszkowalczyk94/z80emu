@@ -33,68 +33,58 @@ public class ByteRegister extends AbstractModuleWithClock {
         pins.addPin(new InputPin(this, OUTPUT_ENABLE));
         pins.addPin(new InputPin(this, ENA));
 
-        pins.addPin(new InOutPin(this, DB_0));
-        pins.addPin(new InOutPin(this, DB_1));
-        pins.addPin(new InOutPin(this, DB_2));
-        pins.addPin(new InOutPin(this, DB_3));
-        pins.addPin(new InOutPin(this, DB_4));
-        pins.addPin(new InOutPin(this, DB_5));
-        pins.addPin(new InOutPin(this, DB_6));
         pins.addPin(new InOutPin(this, DB_7));
+        pins.addPin(new InOutPin(this, DB_6));
+        pins.addPin(new InOutPin(this, DB_5));
+        pins.addPin(new InOutPin(this, DB_4));
+        pins.addPin(new InOutPin(this, DB_3));
+        pins.addPin(new InOutPin(this, DB_2));
+        pins.addPin(new InOutPin(this, DB_1));
+        pins.addPin(new InOutPin(this, DB_0));
 
         dbPinGroup.setPins(
-                pins.get(DB_0),
-                pins.get(DB_1),
-                pins.get(DB_2),
-                pins.get(DB_3),
-                pins.get(DB_4),
-                pins.get(DB_5),
+                pins.get(DB_7),
                 pins.get(DB_6),
-                pins.get(DB_7)
+                pins.get(DB_5),
+                pins.get(DB_4),
+                pins.get(DB_3),
+                pins.get(DB_2),
+                pins.get(DB_1),
+                pins.get(DB_0)
         );
-
     }
 
-    @Override
-    public void afterInputPinChanged(Pin pin, boolean oldValue) {
-        super.afterInputPinChanged(pin, oldValue);
-
-        if(pin.getName().equals(OUTPUT_ENABLE)) {
-            updateStateOfDbByOutputEnable();
-        }
-    }
 
     @Override
     protected void onClockPosedge() {
+        updateStateOfDbByOutputEnable();
         updateLatch();
         updateOutput();
     }
 
-
-
-    private void updateLatch() {
+    protected void updateLatch() {
         if(!getPin(OUTPUT_ENABLE).getValue(this) && getPin(ENA).getValue(this)) {
-            value[0] = getPin(DB_0).getValue(this);
-            value[1] = getPin(DB_1).getValue(this);
-            value[2] = getPin(DB_2).getValue(this);
-            value[3] = getPin(DB_3).getValue(this);
-            value[4] = getPin(DB_4).getValue(this);
-            value[5] = getPin(DB_5).getValue(this);
-            value[6] = getPin(DB_6).getValue(this);
-            value[7] = getPin(DB_7).getValue(this);
+            value[0] = getPin(DB_7).getValue(this);
+            value[1] = getPin(DB_6).getValue(this);
+            value[2] = getPin(DB_5).getValue(this);
+            value[3] = getPin(DB_4).getValue(this);
+            value[4] = getPin(DB_3).getValue(this);
+            value[5] = getPin(DB_2).getValue(this);
+            value[6] = getPin(DB_1).getValue(this);
+            value[7] = getPin(DB_0).getValue(this);
         }
     }
 
-    private void updateOutput() {
+    protected void updateOutput() {
         if(getPin(OUTPUT_ENABLE).getValue(this)) {
-            getPin(DB_0).setValue(this, value[0]);
-            getPin(DB_1).setValue(this, value[1]);
-            getPin(DB_2).setValue(this, value[2]);
-            getPin(DB_3).setValue(this, value[3]);
-            getPin(DB_4).setValue(this, value[4]);
-            getPin(DB_5).setValue(this, value[5]);
-            getPin(DB_6).setValue(this, value[6]);
-            getPin(DB_7).setValue(this, value[7]);
+            getPin(DB_7).setValue(this, value[0]);
+            getPin(DB_6).setValue(this, value[1]);
+            getPin(DB_5).setValue(this, value[2]);
+            getPin(DB_4).setValue(this, value[3]);
+            getPin(DB_3).setValue(this, value[4]);
+            getPin(DB_2).setValue(this, value[5]);
+            getPin(DB_1).setValue(this, value[6]);
+            getPin(DB_0).setValue(this, value[7]);
         }
     }
 
@@ -102,14 +92,14 @@ public class ByteRegister extends AbstractModuleWithClock {
         boolean outputEnable = getPin(OUTPUT_ENABLE).getValue(this);
         Pin.STATE newState = (outputEnable) ? Pin.STATE.OUTPUT : Pin.STATE.INPUT;
 
-        getPin(DB_0).setState(newState);
-        getPin(DB_1).setState(newState);
-        getPin(DB_2).setState(newState);
-        getPin(DB_3).setState(newState);
-        getPin(DB_4).setState(newState);
-        getPin(DB_5).setState(newState);
-        getPin(DB_6).setState(newState);
         getPin(DB_7).setState(newState);
+        getPin(DB_6).setState(newState);
+        getPin(DB_5).setState(newState);
+        getPin(DB_4).setState(newState);
+        getPin(DB_3).setState(newState);
+        getPin(DB_2).setState(newState);
+        getPin(DB_1).setState(newState);
+        getPin(DB_0).setState(newState);
     }
 
     public PinGroup getDbPinGroup() {

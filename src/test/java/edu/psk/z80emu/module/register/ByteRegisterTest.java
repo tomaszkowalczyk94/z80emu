@@ -22,13 +22,13 @@ public class ByteRegisterTest {
         byteRegister.getPin(OUTPUT_ENABLE).setValueByRoot(false);
         byteRegister.getPin(DB_7).setValueByRoot(true);
         byteRegister.getPin(ENA).setValueByRoot(true);
+        byteRegister.ticTocAndFlushByRoot();
 
         Assert.assertEquals(Pin.STATE.INPUT, byteRegister.getPin(DB_7).getState());
 
         //step2. output enabled
-        byteRegister.getPin(CLOCK).ticTokByRoot();
         byteRegister.getPin(OUTPUT_ENABLE).setValueByRoot(true);
-        byteRegister.getPin(CLOCK).ticTokByRoot();
+        byteRegister.ticTocAndFlushByRoot();
 
         Assert.assertEquals(Pin.STATE.OUTPUT, byteRegister.getPin(DB_7).getState());
         Assert.assertEquals(true, byteRegister.getPin(DB_7).getValueByRoot());

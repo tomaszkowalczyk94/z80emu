@@ -23,9 +23,8 @@ public class PinTest {
             this.pins.addPin(new InOutPin(this, TEST_INOUT));
         }
 
-
         @Override
-        public void afterInputPinChanged(Pin pin, boolean oldValue) {
+        public void flush() {
             //nothing
         }
     };

@@ -14,9 +14,9 @@ public class TestCounterTest {
 
         TestCounter testCounter = new TestCounter();
         testCounter.getPin(COUNT).setValueByRoot(true);
-        testCounter.getPin(CLOCK).ticTokByRoot();
-        testCounter.getPin(CLOCK).ticTokByRoot();
-        testCounter.getPin(CLOCK).ticTokByRoot();
+//        testCounter.getPin(CLOCK).ticTokByRoot();
+//        testCounter.getPin(CLOCK).ticTokByRoot();
+//        testCounter.getPin(CLOCK).ticTokByRoot();
 
         Assert.assertEquals(3, testCounter.getOutputDbPinGroup().getIntValueByRoot());
     }

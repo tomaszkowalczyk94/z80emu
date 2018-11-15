@@ -66,9 +66,7 @@ public class TestCounter extends AbstractModuleWithClock {
             byteRegister.getPin(ByteRegister.OUTPUT_ENABLE).setValue(this, false);
             byteRegister.getDbPinGroup().setIntValue(this, intValue);
             byteRegister.getPin(ByteRegister.ENA);
-            byteRegister.getPin(CLOCK).ticTok(this);
-
-
+            byteRegister.ticTocAndFlush(this);
 
             byteRegister.getPin(ByteRegister.OUTPUT_ENABLE).setValue(this, true);
 

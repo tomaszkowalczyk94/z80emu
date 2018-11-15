@@ -11,6 +11,7 @@ import java.util.List;
  */
 public abstract class Pin {
 
+
     /**
      * Pin can by in <b>only one STATE</b> at a time.
      * <p>
@@ -79,9 +80,6 @@ public abstract class Pin {
         }
 
         this.value = value;
-
-        notifyConnectedInputPins();
-        notifyOwner(value);
     }
 
     protected void checkPermissionSetInputValue(AbstractModule moduleChanging, boolean value) {
@@ -105,22 +103,10 @@ public abstract class Pin {
 
         this.value = value;
 
-        notifyConnectedInputPins();
-        notifyOwner(oldValue);
     }
 
     public boolean getValueByRoot() {
         return value;
-    }
-
-    public void ticTok(AbstractModule moduleChanging) {
-        setValue(moduleChanging, true);
-        setValue(moduleChanging, false);
-    }
-
-    public void ticTokByRoot() {
-        setValueByRoot(true);
-        setValueByRoot(false);
     }
 
     public STATE getState() {
@@ -141,67 +127,4 @@ public abstract class Pin {
 
     private List<Pin> connectedInputPins = new ArrayList<>();
 
-    /**
-     * Connect output to another input.
-     *
-     * <b>IMPORTANT!! only output can connect pin to yourself, because output value will be
-     * changed by input value. Another way, when we change value of output, we update all connected inputs</b>
-     *
-     * <b>INPUT ---------> OUTPUT</b>
-     *
-     * When value of output will be changed, value of connected input will be updated by
-     * value of output automatically.
-     * @see "observable pattern"
-     * @param pin input to connect. Can be instance of {@link InputPin} or {@link InOutPin}
-     */
-    public void connectInput(Pin pin) {
-        connectedInputPins.add(pin);
-    }
-
-    /**
-     * Disconnect output pin.
-     * @see "observable pattern"
-     * @param pin input to disconnect. Can be instance of {@link InputPin} or {@link InOutPin}
-     */
-    public void disconnectInput(Pin pin) {
-        connectedInputPins.remove(pin);
-    }
-
-    /**
-     * Notify connected inputs pins about changed value of this pin.
-     * @see "observable pattern"
-     */
-    protected void notifyConnectedInputPins() {
-
-        if(this.state == STATE.OUTPUT) {
-            System.out.println("powiadamiam podłączone inputy o zmianie wartości");
-            connectedInputPins.forEach( connectedInputPin -> connectedInputPin.updateByOutput(this));
-        }
-    }
-
-    /**
-     *
-     * @param outputPin
-     */
-    public void updateByOutput(Pin outputPin) {
-        if(outputPin instanceof InputPin ) {
-            throw new InternalOperationNotPermitted();
-        }
-
-        if(this instanceof OutputPin) {
-            throw new InternalOperationNotPermitted();
-        }
-
-        if(outputPin.state == STATE.OUTPUT && this.state == STATE.INPUT) {
-            this.value = outputPin.value;
-            System.out.println("zmieniam wartość na: "+this.value);
-            notifyConnectedInputPins();
-        }
-    }
-
-    public void notifyOwner(boolean oldValue) {
-        if(state == STATE.INPUT) {
-            owner.afterInputPinChanged(this, oldValue);
-        }
-    }
 }
