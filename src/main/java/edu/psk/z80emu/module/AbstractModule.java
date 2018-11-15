@@ -26,4 +26,8 @@ public abstract class AbstractModule {
     public void setParent(AbstractModule parent) {
         this.parent = parent;
     }
+
+    protected boolean getPinVal(String name) {
+        return getPin(name).getValue(this);
+    }
 }

@@ -4,7 +4,6 @@ import edu.psk.z80emu.module.AbstractModuleWithClock;
 import edu.psk.z80emu.module.register.ByteRegister;
 import edu.psk.z80emu.pin.InputPin;
 import edu.psk.z80emu.pin.OutputPin;
-import edu.psk.z80emu.pin.Pin;
 import edu.psk.z80emu.pin.PinGroup;
 
 import static edu.psk.z80emu.pin.Pin._0;
@@ -73,7 +72,7 @@ public class TestCounter extends AbstractModuleWithClock {
             byteRegister.setInputs(this, _0, _1, _0, intValue);
             byteRegister.ticTocAndFlush(this);
 
-            outputDbPinGroup.setIntValue(
+            outputDbPinGroup.setValue(
                     this,
                     intValue
             );

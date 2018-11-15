@@ -70,7 +70,7 @@ public class ByteRegister extends AbstractModuleWithClock {
         getPin(CLOCK).setValue(moduleChanging, clock);
 
         if(db != null) {
-            dbPinGroup.setIntValue(moduleChanging, db);
+            dbPinGroup.setValue(moduleChanging, db);
         }
 
         flush();
