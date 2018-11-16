@@ -12,7 +12,7 @@ public class TestCounterTest {
     @Test
     public void test() {
 
-        TestCounter testCounter = new TestCounter();
+        TestCounter testCounter = new TestCounter(null);
         testCounter.getPin(COUNT).setValueByRoot(true);
         testCounter.ticTocAndFlushByRoot();
         testCounter.ticTocAndFlushByRoot();

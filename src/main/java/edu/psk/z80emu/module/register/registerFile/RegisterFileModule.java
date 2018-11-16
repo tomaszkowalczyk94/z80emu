@@ -1,5 +1,6 @@
 package edu.psk.z80emu.module.register.registerFile;
 
+import edu.psk.z80emu.module.AbstractModule;
 import edu.psk.z80emu.module.AbstractModuleWithClock;
 import edu.psk.z80emu.module.register.ByteRegister;
 import edu.psk.z80emu.pin.InOutPin;
@@ -80,7 +81,8 @@ public class RegisterFileModule extends AbstractModuleWithClock {
     protected PinGroup dbLoAs = new PinGroup();
     protected PinGroup dbLoDs = new PinGroup();
 
-    public RegisterFileModule() {
+    public RegisterFileModule(AbstractModule parent) {
+        super(parent);
         pins.addPin(new InputPin(this, REG_SEL_SYS_LO));
         pins.addPin(new InputPin(this, REG_SEL_GP_LO));
         pins.addPin(new InputPin(this, REG_SEL_SYS_HI));
@@ -192,34 +194,34 @@ public class RegisterFileModule extends AbstractModuleWithClock {
     }
 
 
-    ByteRegister b2v_latch_af2_hi = new ByteRegister();
-    ByteRegister b2v_latch_af2_lo = new ByteRegister();
-    ByteRegister b2v_latch_af_hi = new ByteRegister();
-    ByteRegister b2v_latch_af_lo = new ByteRegister();
-    ByteRegister b2v_latch_bc2_hi = new ByteRegister();
-    ByteRegister b2v_latch_bc2_lo = new ByteRegister();
-    ByteRegister b2v_latch_bc_hi = new ByteRegister();
-    ByteRegister b2v_latch_bc_lo = new ByteRegister();
-    ByteRegister b2v_latch_de2_hi = new ByteRegister();
-    ByteRegister b2v_latch_de2_lo = new ByteRegister();
-    ByteRegister b2v_latch_de_hi = new ByteRegister();
-    ByteRegister b2v_latch_de_lo = new ByteRegister();
-    ByteRegister b2v_latch_hl2_hi = new ByteRegister();
-    ByteRegister b2v_latch_hl2_lo = new ByteRegister();
-    ByteRegister b2v_latch_hl_hi = new ByteRegister();
-    ByteRegister b2v_latch_hl_lo = new ByteRegister();
-    ByteRegister b2v_latch_ir_hi = new ByteRegister();
-    ByteRegister b2v_latch_ir_lo = new ByteRegister();
-    ByteRegister b2v_latch_ix_hi = new ByteRegister();
-    ByteRegister b2v_latch_ix_lo = new ByteRegister();
-    ByteRegister b2v_latch_iy_hi = new ByteRegister();
-    ByteRegister b2v_latch_iy_lo = new ByteRegister();
-    ByteRegister b2v_latch_pc_hi = new ByteRegister();
-    ByteRegister b2v_latch_pc_lo = new ByteRegister();
-    ByteRegister b2v_latch_sp_hi = new ByteRegister();
-    ByteRegister b2v_latch_sp_lo = new ByteRegister();
-    ByteRegister b2v_latch_wz_hi = new ByteRegister();
-    ByteRegister b2v_latch_wz_lo = new ByteRegister();
+    ByteRegister b2v_latch_af2_hi = new ByteRegister(this);
+    ByteRegister b2v_latch_af2_lo = new ByteRegister(this);
+    ByteRegister b2v_latch_af_hi = new ByteRegister(this);
+    ByteRegister b2v_latch_af_lo = new ByteRegister(this);
+    ByteRegister b2v_latch_bc2_hi = new ByteRegister(this);
+    ByteRegister b2v_latch_bc2_lo = new ByteRegister(this);
+    ByteRegister b2v_latch_bc_hi = new ByteRegister(this);
+    ByteRegister b2v_latch_bc_lo = new ByteRegister(this);
+    ByteRegister b2v_latch_de2_hi = new ByteRegister(this);
+    ByteRegister b2v_latch_de2_lo = new ByteRegister(this);
+    ByteRegister b2v_latch_de_hi = new ByteRegister(this);
+    ByteRegister b2v_latch_de_lo = new ByteRegister(this);
+    ByteRegister b2v_latch_hl2_hi = new ByteRegister(this);
+    ByteRegister b2v_latch_hl2_lo = new ByteRegister(this);
+    ByteRegister b2v_latch_hl_hi = new ByteRegister(this);
+    ByteRegister b2v_latch_hl_lo = new ByteRegister(this);
+    ByteRegister b2v_latch_ir_hi = new ByteRegister(this);
+    ByteRegister b2v_latch_ir_lo = new ByteRegister(this);
+    ByteRegister b2v_latch_ix_hi = new ByteRegister(this);
+    ByteRegister b2v_latch_ix_lo = new ByteRegister(this);
+    ByteRegister b2v_latch_iy_hi = new ByteRegister(this);
+    ByteRegister b2v_latch_iy_lo = new ByteRegister(this);
+    ByteRegister b2v_latch_pc_hi = new ByteRegister(this);
+    ByteRegister b2v_latch_pc_lo = new ByteRegister(this);
+    ByteRegister b2v_latch_sp_hi = new ByteRegister(this);
+    ByteRegister b2v_latch_sp_lo = new ByteRegister(this);
+    ByteRegister b2v_latch_wz_hi = new ByteRegister(this);
+    ByteRegister b2v_latch_wz_lo = new ByteRegister(this);
 
 
 
@@ -301,6 +303,226 @@ public class RegisterFileModule extends AbstractModuleWithClock {
         boolean SYNTHESIZED_WIRE_60 = getPinVal(REG_SEL_IR) && getPinVal(REG_SEL_SYS_HI) && SYNTHESIZED_WIRE_85;
         boolean SYNTHESIZED_WIRE_79 = getPinVal(REG_SEL_GP_LO) && getPinVal(REG_GP_WE) && getPinVal(REG_SEL_SP);
 
+
+
+        b2v_latch_af2_hi.setInputs(this, SYNTHESIZED_WIRE_28,SYNTHESIZED_WIRE_29, clk, gdfx_temp1);
+
+//
+//
+//        reg_latch	b2v_latch_af2_lo(
+//                .oe(SYNTHESIZED_WIRE_30),
+//	.we(SYNTHESIZED_WIRE_31),
+//	.clk(clk),
+//	.db(gdfx_temp0)
+//	);
+//
+//
+//        reg_latch	b2v_latch_af_hi(
+//                .oe(SYNTHESIZED_WIRE_32),
+//	.we(SYNTHESIZED_WIRE_33),
+//	.clk(clk),
+//	.db(gdfx_temp1)
+//	);
+//
+//
+//        reg_latch	b2v_latch_af_lo(
+//                .oe(SYNTHESIZED_WIRE_34),
+//	.we(SYNTHESIZED_WIRE_35),
+//	.clk(clk),
+//	.db(gdfx_temp0)
+//	);
+//
+//
+//        reg_latch	b2v_latch_bc2_hi(
+//                .oe(SYNTHESIZED_WIRE_36),
+//	.we(SYNTHESIZED_WIRE_37),
+//	.clk(clk),
+//	.db(gdfx_temp1)
+//	);
+//
+//
+//        reg_latch	b2v_latch_bc2_lo(
+//                .oe(SYNTHESIZED_WIRE_38),
+//	.we(SYNTHESIZED_WIRE_39),
+//	.clk(clk),
+//	.db(gdfx_temp0)
+//	);
+//
+//
+//        reg_latch	b2v_latch_bc_hi(
+//                .oe(SYNTHESIZED_WIRE_40),
+//	.we(SYNTHESIZED_WIRE_41),
+//	.clk(clk),
+//	.db(gdfx_temp1)
+//	);
+//
+//
+//        reg_latch	b2v_latch_bc_lo(
+//                .oe(SYNTHESIZED_WIRE_42),
+//	.we(SYNTHESIZED_WIRE_43),
+//	.clk(clk),
+//	.db(gdfx_temp0)
+//	);
+//
+//
+//        reg_latch	b2v_latch_de2_hi(
+//                .oe(SYNTHESIZED_WIRE_44),
+//	.we(SYNTHESIZED_WIRE_45),
+//	.clk(clk),
+//	.db(gdfx_temp1)
+//	);
+//
+//
+//        reg_latch	b2v_latch_de2_lo(
+//                .oe(SYNTHESIZED_WIRE_46),
+//	.we(SYNTHESIZED_WIRE_47),
+//	.clk(clk),
+//	.db(gdfx_temp0)
+//	);
+//
+//
+//        reg_latch	b2v_latch_de_hi(
+//                .oe(SYNTHESIZED_WIRE_48),
+//	.we(SYNTHESIZED_WIRE_49),
+//	.clk(clk),
+//	.db(gdfx_temp1)
+//	);
+//
+//
+//        reg_latch	b2v_latch_de_lo(
+//                .oe(SYNTHESIZED_WIRE_50),
+//	.we(SYNTHESIZED_WIRE_51),
+//	.clk(clk),
+//	.db(gdfx_temp0)
+//	);
+//
+//
+//        reg_latch	b2v_latch_hl2_hi(
+//                .oe(SYNTHESIZED_WIRE_52),
+//	.we(SYNTHESIZED_WIRE_53),
+//	.clk(clk),
+//	.db(gdfx_temp1)
+//	);
+//
+//
+//        reg_latch	b2v_latch_hl2_lo(
+//                .oe(SYNTHESIZED_WIRE_54),
+//	.we(SYNTHESIZED_WIRE_55),
+//	.clk(clk),
+//	.db(gdfx_temp0)
+//	);
+//
+//
+//        reg_latch	b2v_latch_hl_hi(
+//                .oe(SYNTHESIZED_WIRE_56),
+//	.we(SYNTHESIZED_WIRE_57),
+//	.clk(clk),
+//	.db(gdfx_temp1)
+//	);
+//
+//
+//        reg_latch	b2v_latch_hl_lo(
+//                .oe(SYNTHESIZED_WIRE_58),
+//	.we(SYNTHESIZED_WIRE_59),
+//	.clk(clk),
+//	.db(gdfx_temp0)
+//	);
+//
+//
+//        reg_latch	b2v_latch_ir_hi(
+//                .oe(SYNTHESIZED_WIRE_60),
+//	.we(SYNTHESIZED_WIRE_61),
+//	.clk(clk),
+//	.db(db_hi_as)
+//	);
+//
+//
+//        reg_latch	b2v_latch_ir_lo(
+//                .oe(SYNTHESIZED_WIRE_62),
+//	.we(SYNTHESIZED_WIRE_63),
+//	.clk(clk),
+//	.db(db_lo_as)
+//	);
+//
+//
+//        reg_latch	b2v_latch_ix_hi(
+//                .oe(SYNTHESIZED_WIRE_64),
+//	.we(SYNTHESIZED_WIRE_65),
+//	.clk(clk),
+//	.db(gdfx_temp1)
+//	);
+//
+//
+//        reg_latch	b2v_latch_ix_lo(
+//                .oe(SYNTHESIZED_WIRE_66),
+//	.we(SYNTHESIZED_WIRE_67),
+//	.clk(clk),
+//	.db(gdfx_temp0)
+//	);
+//
+//
+//        reg_latch	b2v_latch_iy_hi(
+//                .oe(SYNTHESIZED_WIRE_68),
+//	.we(SYNTHESIZED_WIRE_69),
+//	.clk(clk),
+//	.db(gdfx_temp1)
+//	);
+//
+//
+//        reg_latch	b2v_latch_iy_lo(
+//                .oe(SYNTHESIZED_WIRE_70),
+//	.we(SYNTHESIZED_WIRE_71),
+//	.clk(clk),
+//	.db(gdfx_temp0)
+//	);
+//
+//
+//        reg_latch	b2v_latch_pc_hi(
+//                .oe(SYNTHESIZED_WIRE_72),
+//	.we(SYNTHESIZED_WIRE_73),
+//	.clk(clk),
+//	.db(db_hi_as)
+//	);
+//
+//
+//        reg_latch	b2v_latch_pc_lo(
+//                .oe(SYNTHESIZED_WIRE_74),
+//	.we(SYNTHESIZED_WIRE_75),
+//	.clk(clk),
+//	.db(db_lo_as)
+//	);
+//
+//
+//        reg_latch	b2v_latch_sp_hi(
+//                .oe(SYNTHESIZED_WIRE_76),
+//	.we(SYNTHESIZED_WIRE_77),
+//	.clk(clk),
+//	.db(gdfx_temp1)
+//	);
+//
+//
+//        reg_latch	b2v_latch_sp_lo(
+//                .oe(SYNTHESIZED_WIRE_78),
+//	.we(SYNTHESIZED_WIRE_79),
+//	.clk(clk),
+//	.db(gdfx_temp0)
+//	);
+//
+//
+//        reg_latch	b2v_latch_wz_hi(
+//                .oe(SYNTHESIZED_WIRE_80),
+//	.we(SYNTHESIZED_WIRE_81),
+//	.clk(clk),
+//	.db(gdfx_temp1)
+//	);
+//
+//
+//        reg_latch	b2v_latch_wz_lo(
+//                .oe(SYNTHESIZED_WIRE_82),
+//	.we(SYNTHESIZED_WIRE_83),
+//	.clk(clk),
+//	.db(gdfx_temp0)
+//	);
 
 
 

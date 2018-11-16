@@ -6,6 +6,10 @@ import edu.psk.z80emu.waveJson.WaveJsonGenerator;
 
 public abstract class AbstractModule {
 
+    public AbstractModule(AbstractModule parent) {
+        this.parent = parent;
+    }
+
     WaveJsonGenerator waveJsonGenerator = null;
 
     AbstractModule parent;

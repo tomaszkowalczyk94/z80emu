@@ -2,6 +2,7 @@ package edu.psk.z80emu.pin;
 
 import edu.psk.z80emu.exception.InternalLogicError;
 import edu.psk.z80emu.module.AbstractModule;
+import edu.psk.z80emu.util.Helper;
 
 import static edu.psk.z80emu.pin.Pin._0;
 import static edu.psk.z80emu.pin.Pin._1;
@@ -22,12 +23,12 @@ public class PinGroup {
 
     public int getIntValue(AbstractModule getterModule) {
         boolean[] values = getBooleanArray(getterModule);
-        return booleansToInt(values);
+        return Helper.booleansToInt(values);
     }
 
     public int getIntValueByRoot() {
         boolean[] values = getBooleanArrayByRoot();
-        return booleansToInt(values);
+        return Helper.booleansToInt(values);
     }
 
     public boolean[] getBooleanArray(AbstractModule getterModule) {
@@ -52,7 +53,7 @@ public class PinGroup {
 
     public void setValue(AbstractModule moduleChanging, int value) {
 
-        boolean[] values = intToBooleans(value, pins.length);
+        boolean[] values = Helper.intToBooleans(value, pins.length);
 
         setValue(moduleChanging, values);
     }
@@ -63,18 +64,5 @@ public class PinGroup {
         }
     }
 
-    private int booleansToInt(boolean[] arr){
-        int n = 0;
-        for (boolean b : arr)
-            n = (n << 1) | (b ? 1 : 0);
-        return n;
-    }
 
-    private boolean[] intToBooleans(int number, int base) {
-        final boolean[] ret = new boolean[base];
-        for (int i = 0; i < base; i++) {
-            ret[base - 1 - i] = (1 << i & number) != 0;
-        }
-        return ret;
-    }
 }

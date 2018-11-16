@@ -50,7 +50,7 @@ public class AppTest extends TestCase
 //        assertTrue(inputPinFirst.getValue());
 //        assertTrue(inputPinSecond.getValue());
 
-        ByteRegister byteRegister = new ByteRegister();
+        ByteRegister byteRegister = new ByteRegister(null);
 
         byteRegister.getPin(OUTPUT_ENABLE).setValueByRoot(false);
 

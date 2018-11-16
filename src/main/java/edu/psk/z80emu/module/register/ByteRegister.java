@@ -6,6 +6,7 @@ import edu.psk.z80emu.pin.InOutPin;
 import edu.psk.z80emu.pin.InputPin;
 import edu.psk.z80emu.pin.Pin;
 import edu.psk.z80emu.pin.PinGroup;
+import edu.psk.z80emu.util.Helper;
 import edu.psk.z80emu.waveJson.WaveJsonGenerator;
 
 
@@ -29,8 +30,8 @@ public class ByteRegister extends AbstractModuleWithClock {
 
     private boolean[] value = new boolean[8];
 
-    public ByteRegister() {
-        super();
+    public ByteRegister(AbstractModule parent) {
+        super(parent);
 
         pins.addPin(new InputPin(this, OUTPUT_ENABLE));
         pins.addPin(new InputPin(this, ENA));
@@ -54,6 +55,25 @@ public class ByteRegister extends AbstractModuleWithClock {
                 pins.get(DB_1),
                 pins.get(DB_0)
         );
+    }
+
+    public void setInputs(
+            AbstractModule moduleChanging,
+            boolean outputEnable,
+            boolean ena,
+            boolean clock
+    ) {
+        setInputs(moduleChanging, outputEnable, ena, clock, (Integer) null);
+    }
+
+    public void setInputs(
+            AbstractModule moduleChanging,
+            boolean outputEnable,
+            boolean ena,
+            boolean clock,
+            boolean[] db
+    ) {
+        setInputs(moduleChanging, outputEnable, ena, clock, Helper.booleansToInt(db));
     }
 
     /**

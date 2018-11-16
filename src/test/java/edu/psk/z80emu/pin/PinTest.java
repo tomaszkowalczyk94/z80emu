@@ -17,7 +17,8 @@ public class PinTest {
         public static final String TEST_OUTPUT = "TEST_OUTPUT";
         public static final String TEST_INOUT = "TEST_INOUT";
 
-        TestModule() {
+        TestModule(AbstractModule parent) {
+            super(parent);
             this.pins.addPin(new InputPin(this, TEST_INPUT));
             this.pins.addPin(new OutputPin(this, TEST_OUTPUT));
             this.pins.addPin(new InOutPin(this, TEST_INOUT));
@@ -34,8 +35,8 @@ public class PinTest {
     @Test
     public void setInputValueByOwner() {
         //given
-        TestModule parentTestModule = new TestModule();
-        TestModule testModule = new TestModule();
+        TestModule parentTestModule = new TestModule(null);
+        TestModule testModule = new TestModule(null);
         testModule.setParent(parentTestModule);
 
         //when
@@ -51,8 +52,8 @@ public class PinTest {
     @Test
     public void setInputValueByParent() {
         //given
-        TestModule parentTestModule = new TestModule();
-        TestModule testModule = new TestModule();
+        TestModule parentTestModule = new TestModule(null);
+        TestModule testModule = new TestModule(null);
         testModule.setParent(parentTestModule);
 
         //when
@@ -65,8 +66,8 @@ public class PinTest {
     @Test
     public void setOutputValueByOwner() {
         //given
-        TestModule parentTestModule = new TestModule();
-        TestModule testModule = new TestModule();
+        TestModule parentTestModule = new TestModule(null);
+        TestModule testModule = new TestModule(null);
         testModule.setParent(parentTestModule);
 
         //when
@@ -79,8 +80,8 @@ public class PinTest {
     @Test
     public void setOutputValueByParent() {
         //given
-        TestModule parentTestModule = new TestModule();
-        TestModule testModule = new TestModule();
+        TestModule parentTestModule = new TestModule(null);
+        TestModule testModule = new TestModule(null);
         testModule.setParent(parentTestModule);
 
         //when
@@ -101,8 +102,8 @@ public class PinTest {
     @Test
     public void getInputValueByOwner() {
         //given
-        TestModule parentTestModule = new TestModule();
-        TestModule testModule = new TestModule();
+        TestModule parentTestModule = new TestModule(null);
+        TestModule testModule = new TestModule(null);
         testModule.setParent(parentTestModule);
 
         //when
@@ -115,8 +116,8 @@ public class PinTest {
     @Test
     public void getInputValueByParent() {
         //given
-        TestModule parentTestModule = new TestModule();
-        TestModule testModule = new TestModule();
+        TestModule parentTestModule = new TestModule(null);
+        TestModule testModule = new TestModule(null);
         testModule.setParent(parentTestModule);
 
         //when
@@ -132,8 +133,8 @@ public class PinTest {
     @Test
     public void getOutputValueByOwner() {
         //given
-        TestModule parentTestModule = new TestModule();
-        TestModule testModule = new TestModule();
+        TestModule parentTestModule = new TestModule(null);
+        TestModule testModule = new TestModule(null);
         testModule.setParent(parentTestModule);
 
         //when
@@ -149,8 +150,8 @@ public class PinTest {
     @Test
     public void getOutputValueByParent() {
         //given
-        TestModule parentTestModule = new TestModule();
-        TestModule testModule = new TestModule();
+        TestModule parentTestModule = new TestModule(null);
+        TestModule testModule = new TestModule(null);
         testModule.setParent(parentTestModule);
 
         //when

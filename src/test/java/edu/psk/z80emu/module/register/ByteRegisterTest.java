@@ -16,7 +16,7 @@ public class ByteRegisterTest {
     @Test
     public void test() {
         WaveJsonGenerator waveJsonGenerator = new WaveJsonGenerator();
-        ByteRegister byteRegister = new ByteRegister();
+        ByteRegister byteRegister = new ByteRegister(null);
         byteRegister.setWaveJsonGenerator(waveJsonGenerator);
 
         //step 1. set input value to 1

@@ -1,5 +1,6 @@
 package edu.psk.z80emu.module.test;
 
+import edu.psk.z80emu.module.AbstractModule;
 import edu.psk.z80emu.module.AbstractModuleWithClock;
 import edu.psk.z80emu.module.register.ByteRegister;
 import edu.psk.z80emu.pin.InputPin;
@@ -23,12 +24,12 @@ public class TestCounter extends AbstractModuleWithClock {
 
     public static final String COUNT = "COUNT";
 
-    ByteRegister byteRegister = new ByteRegister();
+    ByteRegister byteRegister = new ByteRegister(this);
 
     protected PinGroup outputDbPinGroup = new PinGroup();
 
-    public TestCounter() {
-        byteRegister.setParent(this);
+    public TestCounter(AbstractModule parent) {
+        super(parent);
 
         this.pins.addPin(new OutputPin(this, OUTPUT_DB_0));
         this.pins.addPin(new OutputPin(this, OUTPUT_DB_1));
@@ -54,11 +55,12 @@ public class TestCounter extends AbstractModuleWithClock {
 
     }
 
+
     @Override
     protected void onClockPosedge() {
         if(getPin(COUNT).getValue(this)) {
 
-            byteRegister.setInputs(this, _1, _0, _0, null  );
+            byteRegister.setInputs(this, _1, _0, _0  );
             byteRegister.ticTocAndFlush(this);
 
 
@@ -67,7 +69,7 @@ public class TestCounter extends AbstractModuleWithClock {
             intValue++;
 
 //            //save new value to byte register
-            byteRegister.setInputs(this, _0, _1, _0, null);
+            byteRegister.setInputs(this, _0, _1, _0);
             byteRegister.ticTocAndFlush(this);
             byteRegister.setInputs(this, _0, _1, _0, intValue);
             byteRegister.ticTocAndFlush(this);

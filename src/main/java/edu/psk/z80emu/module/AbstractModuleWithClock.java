@@ -8,7 +8,8 @@ public abstract class AbstractModuleWithClock extends AbstractModule {
 
     public static final String CLOCK = "CLOCK";
 
-    public AbstractModuleWithClock() {
+    public AbstractModuleWithClock(AbstractModule parent) {
+        super(parent);
         this.pins.addPin(new InputPin(this, CLOCK));
     }
 
