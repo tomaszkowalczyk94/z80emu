@@ -2,6 +2,7 @@ package edu.psk.z80emu.module;
 
 import edu.psk.z80emu.pin.InputPin;
 import edu.psk.z80emu.pin.Pin;
+import edu.psk.z80emu.waveJson.WaveJsonGenerator;
 
 public abstract class AbstractModuleWithClock extends AbstractModule {
 
@@ -12,7 +13,7 @@ public abstract class AbstractModuleWithClock extends AbstractModule {
     }
 
     @Override
-    public void flush() {
+    public void onFlush() {
         if(isClockPosedge()) {
             onClockPosedge();
         }

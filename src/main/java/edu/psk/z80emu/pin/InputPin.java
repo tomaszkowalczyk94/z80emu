@@ -6,8 +6,7 @@ import edu.psk.z80emu.module.AbstractModule;
 public class InputPin extends Pin {
 
     public InputPin(AbstractModule owner, String name) {
-        this.owner = owner;
-        this.name = name;
+        super(owner, name);
 
         this.state = STATE.INPUT;
     }

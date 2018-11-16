@@ -6,6 +6,7 @@ import edu.psk.z80emu.pin.InOutPin;
 import edu.psk.z80emu.pin.InputPin;
 import edu.psk.z80emu.pin.Pin;
 import edu.psk.z80emu.pin.PinGroup;
+import edu.psk.z80emu.waveJson.WaveJsonGenerator;
 
 
 public class ByteRegister extends AbstractModuleWithClock {

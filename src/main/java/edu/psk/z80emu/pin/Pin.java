@@ -5,11 +5,12 @@ import edu.psk.z80emu.module.AbstractModule;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 /**
  * can be observable and observe
  */
-public abstract class Pin {
+public abstract class Pin extends Observable {
 
     /**
      * alias for boolean false
@@ -42,6 +43,11 @@ public abstract class Pin {
      * Module which is a owner of Pin. Each pin can has only one owner.
      */
     protected AbstractModule owner;
+
+    public Pin(AbstractModule owner, String name) {
+        this.owner = owner;
+        this.name = name;
+    }
 
     public boolean getValue(AbstractModule getterModule) {
 
@@ -89,6 +95,9 @@ public abstract class Pin {
         }
 
         this.value = value;
+
+        setChanged();
+        notifyObservers();
     }
 
     protected void checkPermissionSetInputValue(AbstractModule moduleChanging, boolean value) {
@@ -108,10 +117,10 @@ public abstract class Pin {
             throw new InternalOperationNotPermitted("cannot change output value by root. Only pin owner (some module) can change output value");
         }
 
-        boolean oldValue = this.value;
-
         this.value = value;
 
+        setChanged();
+        notifyObservers();
     }
 
     public boolean getValueByRoot() {
@@ -133,7 +142,5 @@ public abstract class Pin {
     public AbstractModule getOwner() {
         return owner;
     }
-
-    private List<Pin> connectedInputPins = new ArrayList<>();
 
 }

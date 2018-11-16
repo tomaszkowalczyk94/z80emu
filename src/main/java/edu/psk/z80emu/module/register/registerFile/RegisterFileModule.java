@@ -225,8 +225,8 @@ public class RegisterFileModule extends AbstractModuleWithClock {
 
 
     @Override
-    public void flush() {
-        super.flush();
+    public void onFlush() {
+        super.onFlush();
 
         boolean clk = getPinVal(CLOCK);
 

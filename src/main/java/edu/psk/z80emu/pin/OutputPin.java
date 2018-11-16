@@ -6,8 +6,7 @@ import edu.psk.z80emu.module.AbstractModule;
 public class OutputPin extends Pin {
 
     public OutputPin(AbstractModule owner, String name) {
-        this.owner = owner;
-        this.name = name;
+        super(owner, name);
 
         this.state = STATE.OUTPUT;
     }

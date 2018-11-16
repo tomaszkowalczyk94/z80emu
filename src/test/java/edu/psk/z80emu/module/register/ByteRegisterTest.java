@@ -1,6 +1,7 @@
 package edu.psk.z80emu.module.register;
 
 import edu.psk.z80emu.pin.Pin;
+import edu.psk.z80emu.waveJson.WaveJsonGenerator;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -14,9 +15,9 @@ public class ByteRegisterTest {
 
     @Test
     public void test() {
-
+        WaveJsonGenerator waveJsonGenerator = new WaveJsonGenerator();
         ByteRegister byteRegister = new ByteRegister();
-
+        byteRegister.setWaveJsonGenerator(waveJsonGenerator);
 
         //step 1. set input value to 1
         byteRegister.getPin(OUTPUT_ENABLE).setValueByRoot(false);
@@ -33,6 +34,6 @@ public class ByteRegisterTest {
         Assert.assertEquals(Pin.STATE.OUTPUT, byteRegister.getPin(DB_7).getState());
         Assert.assertEquals(true, byteRegister.getPin(DB_7).getValueByRoot());
 
-
+        System.out.println(waveJsonGenerator.generateJson());
     }
 }

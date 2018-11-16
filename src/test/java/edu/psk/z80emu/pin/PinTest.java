@@ -24,7 +24,7 @@ public class PinTest {
         }
 
         @Override
-        public void flush() {
+        public void onFlush() {
             //nothing
         }
     };
