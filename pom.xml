@@ -32,7 +32,7 @@
       <dependency>
           <groupId>com.github.tomaszkowalczyk94</groupId>
           <artifactId>xbit</artifactId>
-          <version>0c87e3e</version>
+          <version>964e834</version>
       </dependency>
   </dependencies>
 
