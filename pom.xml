@@ -23,5 +23,17 @@
           <version>4.11</version>
           <scope>test</scope>
       </dependency>
+      <dependency>
+          <groupId>com.github.tomaszkowalczyk94</groupId>
+          <artifactId>xbit</artifactId>
+          <version>0c87e3e</version>
+      </dependency>
   </dependencies>
+
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
 </project>
