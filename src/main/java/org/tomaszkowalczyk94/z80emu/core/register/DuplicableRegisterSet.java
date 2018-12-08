@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NonNull;
 import org.tomaszkowalczyk94.xbit.XBit16;
 import org.tomaszkowalczyk94.xbit.XBit8;
+import org.tomaszkowalczyk94.z80emu.core.register.exception.UnsupportedGeneralPurposeRegisterIdException;
 
 /**
  * The registers include two sets of six general-purpose (and W,Z,A,F register)
@@ -56,5 +57,47 @@ public class DuplicableRegisterSet {
     public void setHL(XBit16 value) {
         registerH = value.getHighByte();
         registerL = value.getLowByte();
+    }
+
+    /**
+     * @param id id of registers:<br>
+     * 0b000 - B <br>
+     * 0b001 - C <br>
+     * 0b010 - D <br>
+     * 0b011 - E <br>
+     * 0b100 - H <br>
+     * 0b101 - L <br>
+     * 0b110 - unused <br>
+     * 0b111 - A <br>
+     * <br>
+     * @param value new register value
+     */
+    public void set8BitRegisterById(byte id, XBit8 value) throws UnsupportedGeneralPurposeRegisterIdException {
+
+        switch (id) {
+            case 0b000:
+                registerB = value;
+                break;
+            case 0b001:
+                registerC = value;
+                break;
+            case 0b010:
+                registerD = value;
+                break;
+            case 0b011:
+                registerE = value;
+                break;
+            case 0b100:
+                registerH = value;
+                break;
+            case 0b101:
+                registerL = value;
+                break;
+            case 0b111:
+                registerA = value;
+                break;
+            default:
+                throw new UnsupportedGeneralPurposeRegisterIdException(id);
+        }
     }
 }
