@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.tomaszkowalczyk94.xbit.XBit16;
 import org.tomaszkowalczyk94.xbit.XBit8;
+import org.tomaszkowalczyk94.xbit.XBitUtils;
 
 /**
  * <img src="http://www.users.globalnet.co.uk/~jg27paw4/yr18/yr18_51b.gif" />
@@ -40,6 +41,13 @@ public class RegisterBank {
         registerSet= registerSetB;
     }
 
+    public void incrementPc() {
+        incrementPc(1);
+    }
+    public void incrementPc(int incrementer) {
+        XBit16 incrementedPc = XBitUtils.incrementBy(getRegisterPC(), incrementer);
+        setRegisterPC(incrementedPc);
+    }
 
 
 }

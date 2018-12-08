@@ -2,12 +2,13 @@ package org.tomaszkowalczyk94.z80emu.core.instruction;
 
 import org.tomaszkowalczyk94.xbit.XBit8;
 import org.tomaszkowalczyk94.z80emu.core.Z80;
+import org.tomaszkowalczyk94.z80emu.core.Z80Exception;
 
 /**
  * Representation of one cpu instruction
  */
 public interface Instruction {
-    void execute(XBit8 instruction, Z80 cpu);
+    void execute(XBit8 opcode, Z80 z80) throws Z80Exception;
 
     /**
      * Total machine cycles
@@ -24,4 +25,9 @@ public interface Instruction {
      * 4 MHz clock.
      */
     float getExecutionTime();
+
+    /**
+     * @return Instruction size in bytes
+     */
+    int getSize();
 }

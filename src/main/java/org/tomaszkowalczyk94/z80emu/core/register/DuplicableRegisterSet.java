@@ -100,4 +100,36 @@ public class DuplicableRegisterSet {
                 throw new UnsupportedGeneralPurposeRegisterIdException(id);
         }
     }
+
+    /**
+     * @param id id of registers:<br>
+     * 0b000 - B <br>
+     * 0b001 - C <br>
+     * 0b010 - D <br>
+     * 0b011 - E <br>
+     * 0b100 - H <br>
+     * 0b101 - L <br>
+     * 0b110 - unused <br>
+     * 0b111 - A <br>
+     */
+    public XBit8 get8BitRegisterById(byte id) throws UnsupportedGeneralPurposeRegisterIdException {
+        switch (id) {
+            case 0b000:
+                return registerB;
+            case 0b001:
+                return registerC;
+            case 0b010:
+                return registerD;
+            case 0b011:
+                return registerE;
+            case 0b100:
+                return registerH;
+            case 0b101:
+                return registerL;
+            case 0b111:
+                return registerA;
+            default:
+                throw new UnsupportedGeneralPurposeRegisterIdException(id);
+        }
+    }
 }

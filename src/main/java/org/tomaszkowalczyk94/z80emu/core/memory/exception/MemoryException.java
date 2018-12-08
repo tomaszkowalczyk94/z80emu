@@ -1,10 +1,12 @@
 package org.tomaszkowalczyk94.z80emu.core.memory.exception;
 
+import org.tomaszkowalczyk94.z80emu.core.Z80Exception;
+
 /**
  * Oznacza problem z pamięcią, najczęściej wyrzucany gdy próbujemy odwołać się do adresu
  * pamięci który nie istnieje.
  */
-public class MemoryException extends Exception{
+public class MemoryException extends Z80Exception{
 
     public MemoryException() {
     }

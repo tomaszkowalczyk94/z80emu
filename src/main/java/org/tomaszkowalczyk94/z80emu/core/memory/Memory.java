@@ -25,6 +25,10 @@ public class Memory {
         return XBit8.valueOfSigned(memoryArray[addressInt]);
     }
 
+    public void write(int address, XBit8 value) throws MemoryException {
+        write(XBit16.valueOfUnsigned(address), value);
+    }
+
     public void write(XBit16 address, XBit8 value) throws MemoryException {
 
         int addressInt = address.getUnsignedValue();
