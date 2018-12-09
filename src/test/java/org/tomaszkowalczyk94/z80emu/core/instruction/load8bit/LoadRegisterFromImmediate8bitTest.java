@@ -6,7 +6,6 @@ import org.junit.Test;
 import org.tomaszkowalczyk94.xbit.XBit8;
 import org.tomaszkowalczyk94.z80emu.core.Z80;
 
-import static org.junit.Assert.*;
 
 public class LoadRegisterFromImmediate8bitTest {
 

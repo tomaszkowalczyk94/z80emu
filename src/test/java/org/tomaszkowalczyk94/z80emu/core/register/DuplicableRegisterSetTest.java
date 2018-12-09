@@ -8,10 +8,10 @@ import org.tomaszkowalczyk94.z80emu.core.register.exception.UnsupportedGeneralPu
 import static org.junit.Assert.*;
 
 public class DuplicableRegisterSetTest {
-    DuplicableRegisterSet duplicableRegisterSet;
+    private DuplicableRegisterSet duplicableRegisterSet;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         duplicableRegisterSet = new DuplicableRegisterSet();
     }
 

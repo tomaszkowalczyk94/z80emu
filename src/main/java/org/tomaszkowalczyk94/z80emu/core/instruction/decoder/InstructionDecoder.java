@@ -6,7 +6,7 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.decoder.exception.Unsupport
 
 public class InstructionDecoder {
 
-    private InstructionsContainer instructionsContainer = new InstructionsContainer();
+    private final InstructionsContainer instructionsContainer = new InstructionsContainer();
 
     public Instruction decode(XBit8 opcode) throws UnsupportedInstructionException {
 

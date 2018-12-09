@@ -9,7 +9,7 @@ public class Memory {
 
     public static final int MEMORY_SIZE = 65536;
 
-    private byte[] memoryArray;
+    private final byte[] memoryArray;
 
     public Memory() {
         memoryArray = new byte[MEMORY_SIZE];

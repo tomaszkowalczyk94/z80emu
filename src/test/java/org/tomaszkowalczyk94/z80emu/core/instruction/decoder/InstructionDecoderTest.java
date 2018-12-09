@@ -16,7 +16,7 @@ import static org.junit.Assert.assertEquals;
 @RunWith(Parameterized.class)
 public class InstructionDecoderTest {
 
-    private InstructionDecoder instructionDecoder = new InstructionDecoder();
+    private final InstructionDecoder instructionDecoder = new InstructionDecoder();
 
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
@@ -25,8 +25,8 @@ public class InstructionDecoderTest {
         });
     }
 
-    private XBit8 opcode;
-    private Class expectedClass;
+    private final XBit8 opcode;
+    private final Class expectedClass;
 
     public InstructionDecoderTest(XBit8 opcode, Class expectedClass) {
         this.opcode = opcode;

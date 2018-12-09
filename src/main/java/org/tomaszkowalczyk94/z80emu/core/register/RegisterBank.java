@@ -11,8 +11,8 @@ import org.tomaszkowalczyk94.xbit.XBitUtils;
  */
 public class RegisterBank {
 
-    private DuplicableRegisterSet registerSetA = new DuplicableRegisterSet();
-    private DuplicableRegisterSet registerSetB = new DuplicableRegisterSet();
+    private final DuplicableRegisterSet registerSetA = new DuplicableRegisterSet();
+    private final DuplicableRegisterSet registerSetB = new DuplicableRegisterSet();
 
     @Getter
     private DuplicableRegisterSet registerSet;
