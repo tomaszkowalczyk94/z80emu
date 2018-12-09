@@ -1,4 +1,4 @@
-package org.tomaszkowalczyk94.z80emu.core.instruction;
+package org.tomaszkowalczyk94.z80emu.core.instruction.load8bit;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -8,7 +8,7 @@ import org.tomaszkowalczyk94.xbit.XBit8;
 import org.tomaszkowalczyk94.z80emu.core.Z80;
 import org.tomaszkowalczyk94.z80emu.core.memory.exception.MemoryException;
 
-public class LoadRegisterToRegisterTest {
+public class LoadRegisterFromRegisterTest {
 
     private Z80 z80;
 

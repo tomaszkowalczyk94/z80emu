@@ -5,7 +5,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.tomaszkowalczyk94.xbit.XBit8;
 import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
-import org.tomaszkowalczyk94.z80emu.core.instruction.LoadRegisterToRegister;
+import org.tomaszkowalczyk94.z80emu.core.instruction.load8bit.LoadRegisterFromRegister;
 import org.tomaszkowalczyk94.z80emu.core.instruction.decoder.exception.UnsupportedInstructionException;
 
 import java.util.Arrays;
@@ -21,7 +21,7 @@ public class InstructionDecoderTest {
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][] {
-                { XBit8.valueOfUnsigned(0b01111000), LoadRegisterToRegister.class},
+                { XBit8.valueOfUnsigned(0b01111000), LoadRegisterFromRegister.class},
         });
     }
 

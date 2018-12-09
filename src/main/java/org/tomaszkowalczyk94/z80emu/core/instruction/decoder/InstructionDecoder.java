@@ -13,13 +13,15 @@ public class InstructionDecoder {
 
         switch (getFirst2Bits(opcode)) {
             case 0b01:
-                return instructionsContainer.loadRegisterToRegister;
+                return instructionsContainer.loadRegisterFromRegister;
+            case 0b00:
+                return instructionsContainer.loadRegisterFromImmediate8bit;
             default:
                 throw new UnsupportedInstructionException(opcode);
         }
     }
 
-    private byte getFirst2Bits(XBit8 opcode) {
-        return (byte)((opcode.getUnsignedValue() & 0b11000000) >> 6);
+    private int getFirst2Bits(XBit8 opcode) {
+        return opcode.getValueOfBits(7,6);
     }
 }

@@ -1,8 +1,9 @@
-package org.tomaszkowalczyk94.z80emu.core.instruction;
+package org.tomaszkowalczyk94.z80emu.core.instruction.load8bit;
 
 import org.tomaszkowalczyk94.xbit.XBit8;
 import org.tomaszkowalczyk94.z80emu.core.Z80;
 import org.tomaszkowalczyk94.z80emu.core.Z80Exception;
+import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
 
 /**
  * <h2>LD r, r'</h2>
@@ -33,7 +34,7 @@ import org.tomaszkowalczyk94.z80emu.core.Z80Exception;
  * H 100<br>
  * L 101<br>
  */
-public class LoadRegisterToRegister implements Instruction {
+public class LoadRegisterFromRegister implements Instruction {
 
     @Override
     public void execute(XBit8 opcode, Z80 z80) throws Z80Exception {
