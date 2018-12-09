@@ -31,7 +31,11 @@ public class InstructionDecoder {
 
     private Instruction decode01bits(XBit8 opcode) {
         if(opcode.getValueOfBits(2,0) == 0b110) {
-            return instructionsContainer.loadIndirectHlToRegister;
+            return instructionsContainer.loadRegisterFromMemoryAddressingByHl;
+        }
+
+        if(opcode.getValueOfBits(5, 3) == 0b110) {
+            return instructionsContainer.loadMemoryAddressingByHlFromRegister;
         }
 
         return instructionsContainer.loadRegisterFromRegister;

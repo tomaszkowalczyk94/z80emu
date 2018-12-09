@@ -1,6 +1,5 @@
 package org.tomaszkowalczyk94.z80emu.core.instruction.load8bit;
 
-import org.tomaszkowalczyk94.xbit.XBit;
 import org.tomaszkowalczyk94.xbit.XBit16;
 import org.tomaszkowalczyk94.xbit.XBit8;
 import org.tomaszkowalczyk94.xbit.XBitUtils;
