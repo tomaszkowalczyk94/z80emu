@@ -9,7 +9,15 @@ public class InstructionDecoder {
     private final InstructionsContainer instructionsContainer = new InstructionsContainer();
 
     public Instruction decode(XBit8 opcode) throws UnsupportedInstructionException {
+        short opcodeUnsignedValue = opcode.getUnsignedValue();
 
+        switch (opcodeUnsignedValue) {
+            case 0xDD:
+                return instructionsContainer.loadRegisterFromIndexAddressingIx;
+            case 0xFD:
+                return instructionsContainer.loadRegisterFromIndexAddressingIy;
+            default: //nothing, going to next switch
+        }
 
         switch (getFirst2Bits(opcode)) {
             case 0b01:
@@ -21,9 +29,9 @@ public class InstructionDecoder {
         }
     }
 
-    public Instruction decode01bits(XBit8 opcode) {
+    private Instruction decode01bits(XBit8 opcode) {
         if(opcode.getValueOfBits(2,0) == 0b110) {
-            return instructionsContainer.ldIndirectHlToRegister;
+            return instructionsContainer.loadIndirectHlToRegister;
         }
 
         return instructionsContainer.loadRegisterFromRegister;
