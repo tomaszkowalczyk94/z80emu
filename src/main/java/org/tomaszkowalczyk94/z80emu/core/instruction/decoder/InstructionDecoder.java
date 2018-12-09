@@ -13,12 +13,20 @@ public class InstructionDecoder {
 
         switch (getFirst2Bits(opcode)) {
             case 0b01:
-                return instructionsContainer.loadRegisterFromRegister;
+                return decode01bits(opcode);
             case 0b00:
                 return instructionsContainer.loadRegisterFromImmediate8bit;
             default:
                 throw new UnsupportedInstructionException(opcode);
         }
+    }
+
+    public Instruction decode01bits(XBit8 opcode) {
+        if(opcode.getValueOfBits(2,0) == 0b110) {
+            return instructionsContainer.ldIndirectHlToRegister;
+        }
+
+        return instructionsContainer.loadRegisterFromRegister;
     }
 
     private int getFirst2Bits(XBit8 opcode) {

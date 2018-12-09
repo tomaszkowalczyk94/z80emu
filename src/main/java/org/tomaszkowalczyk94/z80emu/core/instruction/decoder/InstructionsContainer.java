@@ -1,5 +1,6 @@
 package org.tomaszkowalczyk94.z80emu.core.instruction.decoder;
 
+import org.tomaszkowalczyk94.z80emu.core.instruction.load8bit.LdIndirectHlToRegister;
 import org.tomaszkowalczyk94.z80emu.core.instruction.load8bit.LoadRegisterFromImmediate8bit;
 import org.tomaszkowalczyk94.z80emu.core.instruction.load8bit.LoadRegisterFromRegister;
 
@@ -9,6 +10,6 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.load8bit.LoadRegisterFromRe
 public class InstructionsContainer {
     LoadRegisterFromRegister loadRegisterFromRegister = new LoadRegisterFromRegister();
     LoadRegisterFromImmediate8bit loadRegisterFromImmediate8bit = new LoadRegisterFromImmediate8bit();
-
+    LdIndirectHlToRegister ldIndirectHlToRegister = new LdIndirectHlToRegister();
 
 }
