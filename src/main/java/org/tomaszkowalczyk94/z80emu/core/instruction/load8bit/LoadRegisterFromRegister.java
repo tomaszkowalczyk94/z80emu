@@ -42,8 +42,8 @@ public class LoadRegisterFromRegister implements Instruction {
         byte firstRegisterId = (byte)opcode.getValueOfBits(5, 3);
         byte secondRegisterId = (byte)opcode.getValueOfBits(2, 0);
 
-        XBit8 secondRegisterValue = z80.getRegisterBank().getRegisterSet().get8BitRegisterById(secondRegisterId);
-        z80.getRegisterBank().getRegisterSet().set8BitRegisterById(firstRegisterId, secondRegisterValue);
+        XBit8 secondRegisterValue = z80.getRegs().get8BitRegisterById(secondRegisterId);
+        z80.getRegs().set8BitRegisterById(firstRegisterId, secondRegisterValue);
     }
 
     @Override

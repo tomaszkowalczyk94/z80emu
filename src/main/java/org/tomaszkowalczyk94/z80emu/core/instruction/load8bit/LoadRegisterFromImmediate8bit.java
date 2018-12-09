@@ -35,15 +35,16 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
  * L 101<br>
  */
 public class LoadRegisterFromImmediate8bit implements Instruction {
+
     @Override
     public void execute(XBit8 opcode, Z80 z80) throws Z80Exception {
-        XBit8 immediate8bit = z80.getMemory().read(
-                XBitUtils.incrementBy(z80.getRegisterBank().getRegisterPC(), 1)
+        XBit8 immediate8bit = z80.getMem().read(
+                XBitUtils.incrementBy(z80.getRegs().getPc(), 1)
         );
 
         byte registerId = (byte)opcode.getValueOfBits(5, 3);
 
-        z80.getRegisterBank().getRegisterSet().set8BitRegisterById(registerId, immediate8bit);
+        z80.getRegs().set8BitRegisterById(registerId, immediate8bit);
     }
 
     @Override

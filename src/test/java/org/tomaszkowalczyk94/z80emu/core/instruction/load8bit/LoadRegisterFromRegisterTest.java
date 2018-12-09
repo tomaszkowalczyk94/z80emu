@@ -17,13 +17,13 @@ public class LoadRegisterFromRegisterTest {
 
     @Test
     public void execute() throws Exception {
-        z80.getRegisterBank().getRegisterSet().setRegisterB(XBit8.valueOfUnsigned(0xFF));
+        z80.getRegisterBank().getRegSet().setB(XBit8.valueOfUnsigned(0xFF));
 
         z80.getMemory().write(0, XBit8.valueOfUnsigned(0x78)); //LD a,b
         z80.runOneInstruction();
 
-        Assert.assertEquals(0xFF, z80.getRegisterBank().getRegisterSet().getRegisterA().getUnsignedValue());
-        Assert.assertEquals(1, z80.getRegisterBank().getRegisterPC().getUnsignedValue());
+        Assert.assertEquals(0xFF, z80.getRegisterBank().getRegSet().getA().getUnsignedValue());
+        Assert.assertEquals(1, z80.getRegisterBank().getPc().getUnsignedValue());
         Assert.assertEquals(4, z80.getClockCyclesCounter());
         Assert.assertEquals(1, z80.getInstructionCounter());
     }

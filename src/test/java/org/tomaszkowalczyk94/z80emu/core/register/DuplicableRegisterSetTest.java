@@ -25,13 +25,13 @@ public class DuplicableRegisterSetTest {
         duplicableRegisterSet.set8BitRegisterById((byte)0b101, XBit8.valueOfUnsigned(6));
         duplicableRegisterSet.set8BitRegisterById((byte)0b111, XBit8.valueOfUnsigned(7));
 
-        assertEquals(1, duplicableRegisterSet.getRegisterB().getUnsignedValue());
-        assertEquals(2, duplicableRegisterSet.getRegisterC().getUnsignedValue());
-        assertEquals(3, duplicableRegisterSet.getRegisterD().getUnsignedValue());
-        assertEquals(4, duplicableRegisterSet.getRegisterE().getUnsignedValue());
-        assertEquals(5, duplicableRegisterSet.getRegisterH().getUnsignedValue());
-        assertEquals(6, duplicableRegisterSet.getRegisterL().getUnsignedValue());
-        assertEquals(7, duplicableRegisterSet.getRegisterA().getUnsignedValue());
+        assertEquals(1, duplicableRegisterSet.getB().getUnsignedValue());
+        assertEquals(2, duplicableRegisterSet.getC().getUnsignedValue());
+        assertEquals(3, duplicableRegisterSet.getD().getUnsignedValue());
+        assertEquals(4, duplicableRegisterSet.getE().getUnsignedValue());
+        assertEquals(5, duplicableRegisterSet.getH().getUnsignedValue());
+        assertEquals(6, duplicableRegisterSet.getL().getUnsignedValue());
+        assertEquals(7, duplicableRegisterSet.getA().getUnsignedValue());
     }
 
     @Test

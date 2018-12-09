@@ -11,6 +11,7 @@ import org.tomaszkowalczyk94.z80emu.core.register.RegisterBank;
 public class Z80 {
 
     Memory memory = new Memory();
+
     RegisterBank registerBank = new RegisterBank();
     InstructionDecoder instructionDecoder = new InstructionDecoder();
 
@@ -26,7 +27,7 @@ public class Z80 {
 
     public void runOneInstruction() throws Z80Exception {
 
-        XBit8 opcode = memory.read(registerBank.getRegisterPC());
+        XBit8 opcode = memory.read(registerBank.getPc());
         Instruction instruction = instructionDecoder.decode(opcode);
         instruction.execute(opcode, this);
 
@@ -36,4 +37,17 @@ public class Z80 {
         registerBank.incrementPc(instruction.getSize());
     }
 
+    /**
+     * alias for {@link Z80#getMemory()}
+     */
+    public Memory getMem() {
+        return getMemory();
+    }
+
+    /**
+     * alias for {@link Z80#getRegisterBank()}
+     */
+    public RegisterBank getRegs() {
+        return getRegisterBank();
+    }
 }

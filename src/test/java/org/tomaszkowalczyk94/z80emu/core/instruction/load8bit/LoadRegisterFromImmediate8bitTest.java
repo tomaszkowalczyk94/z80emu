@@ -23,8 +23,8 @@ public class LoadRegisterFromImmediate8bitTest {
 
         z80.runOneInstruction();
 
-        Assert.assertEquals(201, z80.getRegisterBank().getRegisterSet().getRegisterC().getUnsignedValue());
-        Assert.assertEquals(2, z80.getRegisterBank().getRegisterPC().getUnsignedValue());
+        Assert.assertEquals(201, z80.getRegisterBank().getRegSet().getC().getUnsignedValue());
+        Assert.assertEquals(2, z80.getRegisterBank().getPc().getUnsignedValue());
         Assert.assertEquals(7, z80.getClockCyclesCounter());
         Assert.assertEquals(1, z80.getInstructionCounter());
     }

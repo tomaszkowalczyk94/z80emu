@@ -12,51 +12,43 @@ import org.tomaszkowalczyk94.z80emu.core.register.exception.UnsupportedGeneralPu
  * registers. There are also two sets of accumulator and flag registers and six
  * special-purpose registers. This class represents bank register which can be duplicated.
  * The rest of registers is in {@link RegisterBank}
- *
- * <h2>register WZ</h2>
- * The WZ temporary registers The Z80 (like the 8080 and 8085) has a WZ register pair that is used for temporary
- * storage but is invisible to the programmer. The primary use of WZ is to hold an operand from a two or three byte
- * instruction until it can be used.
- *
  */
 @Data
 public class DuplicableRegisterSet {
-    XBit8 registerA = XBit8.valueOfSigned(0);
-    XBit8 registerF = XBit8.valueOfSigned(0);
-    XBit8 registerB = XBit8.valueOfSigned(0);
-    XBit8 registerC = XBit8.valueOfSigned(0);
-    XBit8 registerD = XBit8.valueOfSigned(0);
-    XBit8 registerE = XBit8.valueOfSigned(0);
-    XBit8 registerH = XBit8.valueOfSigned(0);
-    XBit8 registerL = XBit8.valueOfSigned(0);
-    XBit8 registerW = XBit8.valueOfSigned(0);
-    XBit8 registerZ = XBit8.valueOfSigned(0);
+    private XBit8 a = XBit8.valueOfSigned(0);
+    private XBit8 f = XBit8.valueOfSigned(0);
+    private XBit8 b = XBit8.valueOfSigned(0);
+    private XBit8 c = XBit8.valueOfSigned(0);
+    private XBit8 d = XBit8.valueOfSigned(0);
+    private XBit8 e = XBit8.valueOfSigned(0);
+    private XBit8 h = XBit8.valueOfSigned(0);
+    private XBit8 l = XBit8.valueOfSigned(0);
 
     public XBit16 getBC() {
-        return XBit16.valueOfHighAndLow(registerB, registerC);
+        return XBit16.valueOfHighAndLow(b, c);
     }
 
     public void setBC(@NonNull XBit16 value) {
-        registerB = value.getHighByte();
-        registerC = value.getLowByte();
+        b = value.getHighByte();
+        c = value.getLowByte();
     }
 
     public XBit16 getDE() {
-        return XBit16.valueOfHighAndLow(registerD, registerE);
+        return XBit16.valueOfHighAndLow(d, e);
     }
 
     public void setDE(@NonNull XBit16 value) {
-        registerD = value.getHighByte();
-        registerE = value.getLowByte();
+        d = value.getHighByte();
+        e = value.getLowByte();
     }
 
     public XBit16 getHL() {
-        return XBit16.valueOfHighAndLow(registerH, registerL);
+        return XBit16.valueOfHighAndLow(h, l);
     }
 
     public void setHL(XBit16 value) {
-        registerH = value.getHighByte();
-        registerL = value.getLowByte();
+        h = value.getHighByte();
+        l = value.getLowByte();
     }
 
     /**
@@ -76,25 +68,25 @@ public class DuplicableRegisterSet {
 
         switch (id) {
             case 0b000:
-                registerB = value;
+                b = value;
                 break;
             case 0b001:
-                registerC = value;
+                c = value;
                 break;
             case 0b010:
-                registerD = value;
+                d = value;
                 break;
             case 0b011:
-                registerE = value;
+                e = value;
                 break;
             case 0b100:
-                registerH = value;
+                h = value;
                 break;
             case 0b101:
-                registerL = value;
+                l = value;
                 break;
             case 0b111:
-                registerA = value;
+                a = value;
                 break;
             default:
                 throw new UnsupportedGeneralPurposeRegisterIdException(id);
@@ -115,19 +107,19 @@ public class DuplicableRegisterSet {
     public XBit8 get8BitRegisterById(byte id) throws UnsupportedGeneralPurposeRegisterIdException {
         switch (id) {
             case 0b000:
-                return registerB;
+                return b;
             case 0b001:
-                return registerC;
+                return c;
             case 0b010:
-                return registerD;
+                return d;
             case 0b011:
-                return registerE;
+                return e;
             case 0b100:
-                return registerH;
+                return h;
             case 0b101:
-                return registerL;
+                return l;
             case 0b111:
-                return registerA;
+                return a;
             default:
                 throw new UnsupportedGeneralPurposeRegisterIdException(id);
         }
