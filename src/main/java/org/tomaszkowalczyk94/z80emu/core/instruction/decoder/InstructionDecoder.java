@@ -27,6 +27,8 @@ public class InstructionDecoder {
                 return instructionsContainer.loadMemByHlFrom8Bit;
             case 0x0A:
                 return instructionsContainer.loadAFromMemByBc;
+            case 0x1A:
+                return instructionsContainer.loadAFromMemByDe;
             default: //nothing, going to next switch
         }
 
