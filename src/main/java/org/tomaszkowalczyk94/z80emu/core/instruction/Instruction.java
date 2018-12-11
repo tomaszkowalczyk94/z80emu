@@ -50,4 +50,13 @@ public interface Instruction {
                 XBitUtils.incrementBy(z80.getRegs().getPc(), 2)
         );
     }
+
+    /**
+     * instruction can have more than 1 byte instruction. This method return fourth byte of instruction (third byte operand)
+     */
+    default XBit8 getFourthByte(Z80 z80) throws MemoryException {
+        return z80.getMem().read(
+                XBitUtils.incrementBy(z80.getRegs().getPc(), 3)
+        );
+    }
 }

@@ -57,6 +57,9 @@ public class InstructionDecoder {
     }
 
     private Instruction decodeDdOpcode(XBit8 opcode, XBit8 secondByte) throws UnsupportedInstructionException {
+        if(secondByte.getUnsignedValue() == 0x36) {
+            return instructionsContainer.loadMemByIxAnd8bitFrom8bit;
+        }
         if(secondByte.getValueOfBits(2,0) == 0b110) {
             return instructionsContainer.loadRegFromMemByIxAnd8Bit;
         }
