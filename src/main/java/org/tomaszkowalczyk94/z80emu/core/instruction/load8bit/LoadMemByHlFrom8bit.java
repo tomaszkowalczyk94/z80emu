@@ -26,7 +26,7 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
  * The n integer is loaded to the memory address specified by the contents of the HL register
  * pair.
  */
-public class LoadMemoryAddressingByHlFromImmediate8bit implements Instruction{
+public class LoadMemByHlFrom8bit implements Instruction{
     @Override
     public void execute(XBit8 opcode, Z80 z80) throws Z80Exception {
         XBit8 immediateValue = getSecondByte(z80);

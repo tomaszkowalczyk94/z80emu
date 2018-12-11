@@ -33,7 +33,7 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
  * H 100<br>
  * L 101<br>
  */
-public class LoadRegisterFromImmediate8bit implements Instruction {
+public class LoadRegFrom8bit implements Instruction {
 
     @Override
     public void execute(XBit8 opcode, Z80 z80) throws Z80Exception {

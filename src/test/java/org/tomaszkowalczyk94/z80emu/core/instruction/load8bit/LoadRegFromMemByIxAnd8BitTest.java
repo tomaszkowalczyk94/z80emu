@@ -8,7 +8,7 @@ import org.tomaszkowalczyk94.xbit.XBit8;
 import org.tomaszkowalczyk94.z80emu.core.Z80;
 
 
-public class LoadRegisterFromMemoryAddressingByIxAndImmediate8BitTest {
+public class LoadRegFromMemByIxAnd8BitTest {
     private Z80 z80;
 
     @Before

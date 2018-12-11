@@ -24,7 +24,7 @@ public class InstructionDecoder {
             case 0xFD:
                 return decodeFdOpcode(opcode, secondByte);
             case 0x36:
-                return instructionsContainer.loadMemoryAddressingByHlFromImmediate8bit;
+                return instructionsContainer.loadMemByHlFrom8Bit;
             default: //nothing, going to next switch
         }
 
@@ -32,7 +32,7 @@ public class InstructionDecoder {
             case 0b01:
                 return decode01bits(opcode);
             case 0b00:
-                return instructionsContainer.loadRegisterFromImmediate8bit;
+                return instructionsContainer.loadRegFrom8Bit;
             default:
                 throw new UnsupportedInstructionException(opcode);
         }
@@ -46,22 +46,22 @@ public class InstructionDecoder {
 
     private Instruction decode01bits(XBit8 opcode) {
         if(opcode.getValueOfBits(2,0) == 0b110) {
-            return instructionsContainer.loadRegisterFromMemoryAddressingByHl;
+            return instructionsContainer.loadRegFromMemByHl;
         }
 
         if(opcode.getValueOfBits(5, 3) == 0b110) {
-            return instructionsContainer.loadMemoryAddressingByHlFromRegister;
+            return instructionsContainer.loadMemByHlFromReg;
         }
 
-        return instructionsContainer.loadRegisterFromRegister;
+        return instructionsContainer.loadRegFromReg;
     }
 
     private Instruction decodeDdOpcode(XBit8 opcode, XBit8 secondByte) throws UnsupportedInstructionException {
         if(secondByte.getValueOfBits(2,0) == 0b110) {
-            return instructionsContainer.loadRegisterFromMemoryAddressingByIxAndImmediate8Bit;
+            return instructionsContainer.loadRegFromMemByIxAnd8Bit;
         }
         if(secondByte.getValueOfBits(7,3) == 0b01110) {
-            return instructionsContainer.loadMemoryAddressingByIxAndImmediate8bitFromRegister;
+            return instructionsContainer.loadMemByIxAnd8BitFromReg;
         }
 
         throw new UnsupportedInstructionException(opcode);
@@ -69,11 +69,11 @@ public class InstructionDecoder {
 
     private Instruction decodeFdOpcode(XBit8 opcode, XBit8 secondByte) throws UnsupportedInstructionException {
         if(secondByte.getValueOfBits(2,0) == 0b110) {
-            return instructionsContainer.loadRegisterFromIndexAddressingIy;
+            return instructionsContainer.loadRegFromMemByIyAnd8bit;
         }
 
         if(secondByte.getValueOfBits(7,3) == 0b01110) {
-            return instructionsContainer.loadMemoryAddressingByIyAndImmediate8bitFromRegister;
+            return instructionsContainer.loadMemByIyAnd8BitFromReg;
         }
 
         throw new UnsupportedInstructionException(opcode);

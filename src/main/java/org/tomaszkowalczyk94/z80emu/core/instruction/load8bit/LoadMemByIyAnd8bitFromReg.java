@@ -8,12 +8,12 @@ import org.tomaszkowalczyk94.z80emu.core.Z80Exception;
 import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
 
 /**
- * <h2>LD (IX+d), r</h2>
+ * <h2>LD (IY+d), r</h2>
  *
  * <table border="1" cellspacing="0">
  *     <tr>
  *         <td>Operation</td>
- *         <td>(IX+d) ← r</td>
+ *         <td>(lY+d) ← r</td>
  *     </tr>
  *     <tr>
  *         <td>Op Code:</td>
@@ -21,13 +21,13 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
  *     </tr>
  *     <tr>
  *         <td>Operands</td>
- *         <td>(IX+d), r</td>
+ *         <td>(lY+d), r</td>
  *     </tr>
  * </table>
  * <br>
- * The contents of register r are loaded to the memory address specified by the contents of
- * Index Register IX summed with d, a two’s-complement displacement integer. The r sym
- * bol identifies registers A, B, C, D, E, H, or L, assembled as follows in the object code:
+ * The contents of resister r are loaded to the memory address specified by the sum of the
+ * contents of Index Register IY and d, a two’s-complement displacement integer. The r sym
+ * bol is specified according to the following table.
  * A 111<br>
  * B 000<br>
  * C 001<br>
@@ -36,7 +36,7 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
  * H 100<br>
  * L 101<br>
  */
-public class LoadMemoryAddressingByIxAndImmediate8bitFromRegister implements Instruction {
+public class LoadMemByIyAnd8bitFromReg implements Instruction {
     @Override
     public void execute(XBit8 opcode, Z80 z80) throws Z80Exception {
 
@@ -44,7 +44,7 @@ public class LoadMemoryAddressingByIxAndImmediate8bitFromRegister implements Ins
         XBit8 thirdByte = getThirdByte(z80);
 
         XBit16 memoryAddress = XBitUtils.incrementBy(
-                z80.getRegs().getIx(),
+                z80.getRegs().getIy(),
                 thirdByte.getSignedValue()
         );
 

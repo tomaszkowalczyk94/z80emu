@@ -7,9 +7,8 @@ import org.tomaszkowalczyk94.xbit.XBit16;
 import org.tomaszkowalczyk94.xbit.XBit8;
 import org.tomaszkowalczyk94.z80emu.core.Z80;
 
-import static org.junit.Assert.*;
 
-public class LoadMemoryAddressingByHlFromImmediate8bitTest {
+public class LoadMemByHlFrom8BitTest {
     private Z80 z80;
 
     @Before

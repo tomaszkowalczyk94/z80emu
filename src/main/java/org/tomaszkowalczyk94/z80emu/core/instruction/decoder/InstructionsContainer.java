@@ -6,14 +6,14 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.load8bit.*;
  * Contain all of instruction objects.
  */
 public class InstructionsContainer {
-    LoadRegisterFromRegister loadRegisterFromRegister = new LoadRegisterFromRegister();
-    LoadRegisterFromImmediate8bit loadRegisterFromImmediate8bit = new LoadRegisterFromImmediate8bit();
-    LoadRegisterFromMemoryAddressingByHl loadRegisterFromMemoryAddressingByHl = new LoadRegisterFromMemoryAddressingByHl();
-    LoadRegisterFromMemoryAddressingByIxAndImmediate8bit loadRegisterFromMemoryAddressingByIxAndImmediate8Bit = new LoadRegisterFromMemoryAddressingByIxAndImmediate8bit();
-    LoadRegisterFromIndexAddressingIy loadRegisterFromIndexAddressingIy = new LoadRegisterFromIndexAddressingIy();
-    LoadMemoryAddressingByHlFromRegister loadMemoryAddressingByHlFromRegister = new LoadMemoryAddressingByHlFromRegister();
-    LoadMemoryAddressingByIxAndImmediate8bitFromRegister loadMemoryAddressingByIxAndImmediate8bitFromRegister = new LoadMemoryAddressingByIxAndImmediate8bitFromRegister();
-    LoadMemoryAddressingByIyAndImmediate8bitFromRegister loadMemoryAddressingByIyAndImmediate8bitFromRegister = new LoadMemoryAddressingByIyAndImmediate8bitFromRegister();
-    LoadMemoryAddressingByHlFromImmediate8bit loadMemoryAddressingByHlFromImmediate8bit = new LoadMemoryAddressingByHlFromImmediate8bit();
+    LoadRegFromReg loadRegFromReg = new LoadRegFromReg();
+    LoadRegFrom8bit loadRegFrom8Bit = new LoadRegFrom8bit();
+    LoadRegFromMemByHl loadRegFromMemByHl = new LoadRegFromMemByHl();
+    LoadRegFromMemByIxAnd8bit loadRegFromMemByIxAnd8Bit = new LoadRegFromMemByIxAnd8bit();
+    LoadRegFromMemByIyAnd8bit loadRegFromMemByIyAnd8bit = new LoadRegFromMemByIyAnd8bit();
+    LoadMemByHlFromReg loadMemByHlFromReg = new LoadMemByHlFromReg();
+    LoadMemByIxAnd8bitFromReg loadMemByIxAnd8BitFromReg = new LoadMemByIxAnd8bitFromReg();
+    LoadMemByIyAnd8bitFromReg loadMemByIyAnd8BitFromReg = new LoadMemByIyAnd8bitFromReg();
+    LoadMemByHlFrom8bit loadMemByHlFrom8Bit = new LoadMemByHlFrom8bit();
 
 }

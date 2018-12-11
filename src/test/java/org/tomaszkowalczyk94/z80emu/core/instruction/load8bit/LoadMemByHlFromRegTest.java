@@ -10,7 +10,7 @@ import org.tomaszkowalczyk94.z80emu.core.Z80;
 
 import static org.junit.Assert.*;
 
-public class LoadMemoryAddressingByHlFromRegisterTest {
+public class LoadMemByHlFromRegTest {
     private Z80 z80;
 
     @Before

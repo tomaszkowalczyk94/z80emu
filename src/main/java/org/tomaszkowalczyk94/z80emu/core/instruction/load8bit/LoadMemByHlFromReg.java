@@ -6,12 +6,12 @@ import org.tomaszkowalczyk94.z80emu.core.Z80Exception;
 import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
 
 /**
- * <h2>LD r, (HL)</h2>
+ * <h2>LD (HL), r</h2>
  *
  * <table border="1" cellspacing="0">
  *     <tr>
  *         <td>Operation</td>
- *         <td>r ← (HL)</td>
+ *         <td>(HL) ← r</td>
  *     </tr>
  *     <tr>
  *         <td>Op Code:</td>
@@ -19,12 +19,13 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
  *     </tr>
  *     <tr>
  *         <td>Operands</td>
- *         <td>r, (HL)</td>
+ *         <td>(HL), r</td>
  *     </tr>
  * </table>
  * <br>
- * The 8-bit contents of memory location (HL) are loaded to register r, in which r identifies
- * registers A, B, C, D, E, H, or L, assembled as follows in the object code:
+ * The contents of register r are loaded to the memory location specified by the contents of
+ * the HL register pair. The r symbol identifies registers A, B, C, D, E, H, or L, assembled as
+ * follows in the object code:
  * A 111<br>
  * B 000<br>
  * C 001<br>
@@ -33,16 +34,16 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
  * H 100<br>
  * L 101<br>
  */
-public class LoadRegisterFromMemoryAddressingByHl implements Instruction {
+public class LoadMemByHlFromReg implements Instruction {
     @Override
     public void execute(XBit8 opcode, Z80 z80) throws Z80Exception {
-        XBit8 value = z80.getMem().read(
-                z80.getRegs().getHL()
+        int regId = opcode.getValueOfBits(3, 0);
+
+        z80.getMem().write(
+                z80.getRegs().getHL(),
+                z80.getRegs().get8BitRegisterById((byte)regId)
         );
-        z80.getRegs().set8BitRegisterById(
-                (byte)opcode.getValueOfBits(5,3),
-                value
-        );
+
     }
 
     @Override

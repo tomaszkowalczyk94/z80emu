@@ -8,12 +8,12 @@ import org.tomaszkowalczyk94.z80emu.core.Z80Exception;
 import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
 
 /**
- * <h2>LD r, (IX+d)</h2>
+ * <h2>LD (IX+d), r</h2>
  *
  * <table border="1" cellspacing="0">
  *     <tr>
  *         <td>Operation</td>
- *         <td>r ← (IX+d)</td>
+ *         <td>(IX+d) ← r</td>
  *     </tr>
  *     <tr>
  *         <td>Op Code:</td>
@@ -21,13 +21,13 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
  *     </tr>
  *     <tr>
  *         <td>Operands</td>
- *         <td>r, (IX+d)</td>
+ *         <td>(IX+d), r</td>
  *     </tr>
  * </table>
  * <br>
- * The (IX+d) operand (i.e., the contents of Index Register IX summed with two’s-complement displacement
- * integer d) is loaded to register r, in which r identifies registers A, B, C,
- * D, E, H, or L, assembled as follows in the object code:
+ * The contents of register r are loaded to the memory address specified by the contents of
+ * Index Register IX summed with d, a two’s-complement displacement integer. The r sym
+ * bol identifies registers A, B, C, D, E, H, or L, assembled as follows in the object code:
  * A 111<br>
  * B 000<br>
  * C 001<br>
@@ -36,18 +36,23 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
  * H 100<br>
  * L 101<br>
  */
-public class LoadRegisterFromMemoryAddressingByIxAndImmediate8bit implements Instruction {
+public class LoadMemByIxAnd8bitFromReg implements Instruction {
     @Override
     public void execute(XBit8 opcode, Z80 z80) throws Z80Exception {
+
         XBit8 secondByte = getSecondByte(z80);
         XBit8 thirdByte = getThirdByte(z80);
 
-        int regId = secondByte.getValueOfBits(5, 3);
+        XBit16 memoryAddress = XBitUtils.incrementBy(
+                z80.getRegs().getIx(),
+                thirdByte.getSignedValue()
+        );
 
-        XBit16 memoryAddress = XBitUtils.incrementBy(z80.getRegs().getIx(), thirdByte.getSignedValue());
-        z80.getRegs().set8BitRegisterById(
-                (byte)regId,
-                z80.getMem().read(memoryAddress)
+        byte regId = (byte)secondByte.getValueOfBits(2, 0);
+
+        z80.getMem().write(
+                memoryAddress,
+                z80.getRegs().get8BitRegisterById(regId)
         );
     }
 
@@ -63,7 +68,7 @@ public class LoadRegisterFromMemoryAddressingByIxAndImmediate8bit implements Ins
 
     @Override
     public float getExecutionTime() {
-        return 2.5f;
+        return 4.75f;
     }
 
     @Override

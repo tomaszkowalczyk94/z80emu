@@ -9,7 +9,7 @@ import org.tomaszkowalczyk94.z80emu.core.Z80;
 
 import static org.junit.Assert.*;
 
-public class LoadMemoryAddressingByIxAndImmediate8bitFromRegisterTest {
+public class LoadMemByIxAnd8bitFromRegTest {
     private Z80 z80;
 
     @Before
