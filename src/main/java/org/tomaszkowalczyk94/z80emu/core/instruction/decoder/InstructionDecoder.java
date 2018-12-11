@@ -71,10 +71,13 @@ public class InstructionDecoder {
     }
 
     private Instruction decodeFdOpcode(XBit8 opcode, XBit8 secondByte) throws UnsupportedInstructionException {
+
+        if(secondByte.getUnsignedValue() == 0x36) {
+            return instructionsContainer.loadMemByIyAnd8bitFrom8bit;
+        }
         if(secondByte.getValueOfBits(2,0) == 0b110) {
             return instructionsContainer.loadRegFromMemByIyAnd8bit;
         }
-
         if(secondByte.getValueOfBits(7,3) == 0b01110) {
             return instructionsContainer.loadMemByIyAnd8BitFromReg;
         }
