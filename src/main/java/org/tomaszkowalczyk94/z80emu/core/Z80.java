@@ -1,7 +1,6 @@
 package org.tomaszkowalczyk94.z80emu.core;
 
 import lombok.Data;
-import org.tomaszkowalczyk94.xbit.XBit8;
 import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
 import org.tomaszkowalczyk94.z80emu.core.instruction.decoder.InstructionDecoder;
 import org.tomaszkowalczyk94.z80emu.core.memory.Memory;
@@ -27,9 +26,12 @@ public class Z80 {
 
     public void runOneInstruction() throws Z80Exception {
 
-        XBit8 opcode = memory.read(registerBank.getPc());
-        Instruction instruction = instructionDecoder.decode(opcode);
-        instruction.execute(opcode, this);
+        Instruction instruction = instructionDecoder.decode(memory, registerBank.getPc());
+
+        instruction.execute(
+                memory.read(registerBank.getPc()),
+                this
+        );
 
         clockCyclesCounter += instruction.getClocks();
         instructionCounter++;
