@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.tomaszkowalczyk94.xbit.XBit8;
 import org.tomaszkowalczyk94.z80emu.core.Z80;
 
-public class LoadRegisterFromRegisterTest {
+public class LoadRegFromRegTest {
 
     private Z80 z80;
 

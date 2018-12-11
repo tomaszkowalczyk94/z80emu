@@ -34,7 +34,7 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
  * H 100<br>
  * L 101<br>
  */
-public class LoadRegisterFromRegister implements Instruction {
+public class LoadRegFromReg implements Instruction {
 
     @Override
     public void execute(XBit8 opcode, Z80 z80) throws Z80Exception {
