@@ -23,6 +23,8 @@ public class InstructionDecoder {
                 return decodeDdOpcode(opcode, secondByte);
             case 0xFD:
                 return decodeFdOpcode(opcode, secondByte);
+            case 0x36:
+                return instructionsContainer.loadMemoryAddressingByHlFromImmediate8bit;
             default: //nothing, going to next switch
         }
 

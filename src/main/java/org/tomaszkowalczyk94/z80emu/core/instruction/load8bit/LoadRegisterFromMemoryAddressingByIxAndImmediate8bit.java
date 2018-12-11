@@ -39,12 +39,8 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
 public class LoadRegisterFromMemoryAddressingByIxAndImmediate8bit implements Instruction {
     @Override
     public void execute(XBit8 opcode, Z80 z80) throws Z80Exception {
-        XBit8 secondByte = z80.getMem().read(
-                XBitUtils.incrementBy(z80.getRegs().getPc(), 1)
-        );
-        XBit8 thirdByte = z80.getMem().read(
-                XBitUtils.incrementBy(z80.getRegs().getPc(), 2)
-        );
+        XBit8 secondByte = getSecondByte(z80);
+        XBit8 thirdByte = getThirdByte(z80);
 
         int regId = secondByte.getValueOfBits(5, 3);
 

@@ -40,12 +40,8 @@ public class LoadMemoryAddressingByIxAndImmediate8bitFromRegister implements Ins
     @Override
     public void execute(XBit8 opcode, Z80 z80) throws Z80Exception {
 
-        XBit8 secondByte = z80.getMem().read(
-                XBitUtils.incrementBy(z80.getRegs().getPc(), 1)
-        );
-        XBit8 thirdByte = z80.getMem().read(
-                XBitUtils.incrementBy(z80.getRegs().getPc(), 2)
-        );
+        XBit8 secondByte = getSecondByte(z80);
+        XBit8 thirdByte = getThirdByte(z80);
 
         XBit16 memoryAddress = XBitUtils.incrementBy(
                 z80.getRegs().getIx(),
