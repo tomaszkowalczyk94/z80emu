@@ -17,5 +17,5 @@ public class InstructionsContainer {
     LoadMemByHlFrom8bit loadMemByHlFrom8Bit = new LoadMemByHlFrom8bit();
     LoadMemByIxAnd8bitFrom8bit loadMemByIxAnd8bitFrom8bit = new LoadMemByIxAnd8bitFrom8bit();
     LoadMemByIyAnd8bitFrom8bit loadMemByIyAnd8bitFrom8bit = new LoadMemByIyAnd8bitFrom8bit();
-
+    LoadAFromMemByBc loadAFromMemByBc = new LoadAFromMemByBc();
 }

@@ -25,6 +25,8 @@ public class InstructionDecoder {
                 return decodeFdOpcode(opcode, secondByte);
             case 0x36:
                 return instructionsContainer.loadMemByHlFrom8Bit;
+            case 0x0A:
+                return instructionsContainer.loadAFromMemByBc;
             default: //nothing, going to next switch
         }
 
