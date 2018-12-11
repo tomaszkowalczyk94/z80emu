@@ -16,13 +16,13 @@ public class InstructionDecoder {
         XBit8 opcode = memory.read(pc);
 
         short opcodeUnsignedValue = opcode.getUnsignedValue();
+        XBit8 secondByte = readSecondByte(memory, pc);
 
         switch (opcodeUnsignedValue) {
             case 0xDD:
-                XBit8 secondByte = readSecondByte(memory, pc);
                 return decodeDdOpcode(opcode, secondByte);
             case 0xFD:
-                return instructionsContainer.loadRegisterFromIndexAddressingIy;
+                return decodeFdOpcode(opcode, secondByte);
             default: //nothing, going to next switch
         }
 
@@ -35,6 +35,8 @@ public class InstructionDecoder {
                 throw new UnsupportedInstructionException(opcode);
         }
     }
+
+
 
     private XBit8 readSecondByte(Memory memory, XBit16 pc) throws MemoryException {
         return memory.read(XBitUtils.incrementBy(pc,1));
@@ -58,6 +60,18 @@ public class InstructionDecoder {
         }
         if(secondByte.getValueOfBits(7,3) == 0b01110) {
             return instructionsContainer.loadMemoryAddressingByIxAndImmediate8bitFromRegister;
+        }
+
+        throw new UnsupportedInstructionException(opcode);
+    }
+
+    private Instruction decodeFdOpcode(XBit8 opcode, XBit8 secondByte) throws UnsupportedInstructionException {
+        if(secondByte.getValueOfBits(2,0) == 0b110) {
+            return instructionsContainer.loadRegisterFromIndexAddressingIy;
+        }
+
+        if(secondByte.getValueOfBits(7,3) == 0b01110) {
+            return instructionsContainer.loadMemoryAddressingByIyAndImmediate8bitFromRegister;
         }
 
         throw new UnsupportedInstructionException(opcode);

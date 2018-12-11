@@ -13,4 +13,7 @@ public class InstructionsContainer {
     LoadRegisterFromIndexAddressingIy loadRegisterFromIndexAddressingIy = new LoadRegisterFromIndexAddressingIy();
     LoadMemoryAddressingByHlFromRegister loadMemoryAddressingByHlFromRegister = new LoadMemoryAddressingByHlFromRegister();
     LoadMemoryAddressingByIxAndImmediate8bitFromRegister loadMemoryAddressingByIxAndImmediate8bitFromRegister = new LoadMemoryAddressingByIxAndImmediate8bitFromRegister();
+    LoadMemoryAddressingByIyAndImmediate8bitFromRegister loadMemoryAddressingByIyAndImmediate8bitFromRegister = new LoadMemoryAddressingByIyAndImmediate8bitFromRegister();
+
+
 }
