@@ -23,6 +23,8 @@ public class InstructionDecoder {
                 return decodeDdOpcode(opcode, secondByte);
             case 0xFD:
                 return decodeFdOpcode(opcode, secondByte);
+            case 0xED:
+                return decodeEdOpcode(opcode, secondByte);
             case 0x36:
                 return instructionsContainer.loadMemByHlFrom8Bit;
             case 0x0A:
@@ -49,6 +51,7 @@ public class InstructionDecoder {
                 throw new UnsupportedInstructionException(opcode);
         }
     }
+
 
 
 
@@ -95,6 +98,15 @@ public class InstructionDecoder {
         }
 
         throw new UnsupportedInstructionException(opcode);
+    }
+
+    private Instruction decodeEdOpcode(XBit8 opcode, XBit8 secondByte) throws UnsupportedInstructionException {
+        switch (secondByte.getUnsignedValue()) {
+            case 0x47:
+                return instructionsContainer.loadIFromA;
+            default:
+                throw new UnsupportedInstructionException(opcode, secondByte);
+        }
     }
 
     private int getFirst2Bits(XBit8 opcode) {

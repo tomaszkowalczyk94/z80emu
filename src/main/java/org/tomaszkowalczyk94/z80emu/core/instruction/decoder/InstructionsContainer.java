@@ -23,4 +23,5 @@ public class InstructionsContainer {
     LoadMemoryByBcFromA loadMemoryByBcFromA = new LoadMemoryByBcFromA();
     LoadMemoryByDeFromA loadMemoryByDeFromA = new LoadMemoryByDeFromA();
     LoadMemoryBy16BitFromA loadMemoryBy16BitFromA = new LoadMemoryBy16BitFromA();
+    LoadIFromA loadIFromA = new LoadIFromA();
 }
