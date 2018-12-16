@@ -6,6 +6,7 @@ import org.tomaszkowalczyk94.xbit.XBitUtils;
 import org.tomaszkowalczyk94.z80emu.core.Z80;
 import org.tomaszkowalczyk94.z80emu.core.Z80Exception;
 import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
+import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
 
 /**
  * <h2>LD r, (IX+d)</h2>
@@ -38,7 +39,7 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
  */
 public class LoadRegFromMemByIxAnd8bit implements Instruction {
     @Override
-    public void execute(XBit8 opcode, Z80 z80) throws Z80Exception {
+    public InstructionResult execute(XBit8 opcode, Z80 z80) throws Z80Exception {
         XBit8 secondByte = getSecondByte(z80);
         XBit8 thirdByte = getThirdByte(z80);
 
@@ -49,25 +50,13 @@ public class LoadRegFromMemByIxAnd8bit implements Instruction {
                 (byte)regId,
                 z80.getMem().read(memoryAddress)
         );
+
+        return InstructionResult.builder()
+                .machineCycles(5)
+                .clocks(19)
+                .executionTime(2.5f)
+                .size(3)
+                .build();
     }
 
-    @Override
-    public int getMachineCycles() {
-        return 5;
-    }
-
-    @Override
-    public int getClocks() {
-        return 19;
-    }
-
-    @Override
-    public float getExecutionTime() {
-        return 2.5f;
-    }
-
-    @Override
-    public int getSize() {
-        return 3;
-    }
 }

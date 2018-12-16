@@ -4,6 +4,7 @@ import org.tomaszkowalczyk94.xbit.XBit8;
 import org.tomaszkowalczyk94.z80emu.core.Z80;
 import org.tomaszkowalczyk94.z80emu.core.Z80Exception;
 import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
+import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
 
 /**
  * <h2>LD (HL), n</h2>
@@ -28,32 +29,19 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
  */
 public class LoadMemByHlFrom8bit implements Instruction{
     @Override
-    public void execute(XBit8 opcode, Z80 z80) throws Z80Exception {
+    public InstructionResult execute(XBit8 opcode, Z80 z80) throws Z80Exception {
         XBit8 immediateValue = getSecondByte(z80);
 
         z80.getMem().write(
                 z80.getRegs().getHL(),
                 immediateValue
         );
-    }
 
-    @Override
-    public int getMachineCycles() {
-        return 3;
-    }
-
-    @Override
-    public int getClocks() {
-        return 10;
-    }
-
-    @Override
-    public float getExecutionTime() {
-        return 2/5f;
-    }
-
-    @Override
-    public int getSize() {
-        return 2;
+        return InstructionResult.builder()
+                .machineCycles(3)
+                .clocks(10)
+                .executionTime(2.5f)
+                .size(2)
+                .build();
     }
 }

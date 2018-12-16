@@ -10,28 +10,7 @@ import org.tomaszkowalczyk94.z80emu.core.memory.exception.MemoryException;
  * Representation of one cpu instruction
  */
 public interface Instruction {
-    void execute(XBit8 opcode, Z80 z80) throws Z80Exception;
-
-    /**
-     * Total machine cycles
-     */
-    int getMachineCycles();
-
-    /**
-     * Count of clocks processor for instruction
-     */
-    int getClocks();
-
-    /**
-     * Execution time (E.T.) for each instruction is provided in microseconds for an assumed
-     * 4 MHz clock.
-     */
-    float getExecutionTime();
-
-    /**
-     * @return Instruction size in bytes
-     */
-    int getSize();
+    InstructionResult execute(XBit8 opcode, Z80 z80) throws Z80Exception;
 
     /**
      * instruction can have more than 1 byte instruction. This method return second byte of instruction (first byte operand)

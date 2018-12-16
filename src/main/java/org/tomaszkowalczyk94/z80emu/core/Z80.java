@@ -2,6 +2,7 @@ package org.tomaszkowalczyk94.z80emu.core;
 
 import lombok.Data;
 import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
+import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
 import org.tomaszkowalczyk94.z80emu.core.instruction.decoder.InstructionDecoder;
 import org.tomaszkowalczyk94.z80emu.core.memory.Memory;
 import org.tomaszkowalczyk94.z80emu.core.register.RegisterBank;
@@ -29,15 +30,15 @@ public class Z80 {
 
         Instruction instruction = instructionDecoder.decode(memory, registerBank.getPc());
 
-        instruction.execute(
+        InstructionResult result = instruction.execute(
                 memory.read(registerBank.getPc()),
                 this
         );
 
-        clockCyclesCounter += instruction.getClocks();
+        clockCyclesCounter += result.getClocks();
         instructionCounter++;
 
-        registerBank.incrementPc(instruction.getSize());
+        registerBank.incrementPc(result.getSize());
     }
 
     /**

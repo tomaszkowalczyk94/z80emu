@@ -5,6 +5,7 @@ import org.tomaszkowalczyk94.xbit.XBit8;
 import org.tomaszkowalczyk94.z80emu.core.Z80;
 import org.tomaszkowalczyk94.z80emu.core.Z80Exception;
 import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
+import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
 
 /**
  * <h2>LD (nn), A</h2>
@@ -29,7 +30,7 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
  */
 public class LoadMemoryBy16BitFromA implements Instruction{
     @Override
-    public void execute(XBit8 opcode, Z80 z80) throws Z80Exception {
+    public InstructionResult execute(XBit8 opcode, Z80 z80) throws Z80Exception {
 
         XBit16 address = XBit16.valueOfHighAndLow(
                 getThirdByte(z80),
@@ -40,25 +41,12 @@ public class LoadMemoryBy16BitFromA implements Instruction{
                 address,
                 z80.getRegs().getA()
         );
-    }
 
-    @Override
-    public int getMachineCycles() {
-        return 4;
-    }
-
-    @Override
-    public int getClocks() {
-        return 13;
-    }
-
-    @Override
-    public float getExecutionTime() {
-        return 3.25f;
-    }
-
-    @Override
-    public int getSize() {
-        return 3;
+        return InstructionResult.builder()
+                .machineCycles(4)
+                .clocks(13)
+                .executionTime(3.25f)
+                .size(3)
+                .build();
     }
 }

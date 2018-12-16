@@ -4,6 +4,7 @@ import org.tomaszkowalczyk94.xbit.XBit8;
 import org.tomaszkowalczyk94.z80emu.core.Z80;
 import org.tomaszkowalczyk94.z80emu.core.Z80Exception;
 import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
+import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
 
 /**
  * <h2>LD r,n</h2>
@@ -36,31 +37,18 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
 public class LoadRegFrom8bit implements Instruction {
 
     @Override
-    public void execute(XBit8 opcode, Z80 z80) throws Z80Exception {
+    public InstructionResult execute(XBit8 opcode, Z80 z80) throws Z80Exception {
         XBit8 immediate8bit = getSecondByte(z80);
 
         byte registerId = (byte)opcode.getValueOfBits(5, 3);
 
         z80.getRegs().set8BitRegisterById(registerId, immediate8bit);
-    }
 
-    @Override
-    public int getMachineCycles() {
-        return 2;
-    }
-
-    @Override
-    public int getClocks() {
-        return 7;
-    }
-
-    @Override
-    public float getExecutionTime() {
-        return 1.75f;
-    }
-
-    @Override
-    public int getSize() {
-        return 2;
+        return InstructionResult.builder()
+                .machineCycles(2)
+                .clocks(7)
+                .executionTime(1.75f)
+                .size(2)
+                .build();
     }
 }

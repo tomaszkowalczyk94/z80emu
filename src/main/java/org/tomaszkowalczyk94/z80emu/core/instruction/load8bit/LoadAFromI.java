@@ -6,6 +6,7 @@ import org.tomaszkowalczyk94.z80emu.core.Z80;
 import org.tomaszkowalczyk94.z80emu.core.Z80Exception;
 import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
 import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionHelper;
+import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
 import org.tomaszkowalczyk94.z80emu.core.register.FlagRegManager.Flag;
 
 /**
@@ -64,7 +65,7 @@ public class LoadAFromI implements Instruction {
     final InstructionHelper instructionHelper;
 
     @Override
-    public void execute(XBit8 opcode, Z80 z80) {
+    public InstructionResult execute(XBit8 opcode, Z80 z80) {
         z80.getRegs().setA(
                 z80.getRegs().getI()
         );
@@ -75,25 +76,12 @@ public class LoadAFromI implements Instruction {
 
         z80.getRegs().setFlag(Flag.H, false);
         z80.getRegs().setFlag(Flag.N, false);
-    }
 
-    @Override
-    public int getMachineCycles() {
-        return 2;
-    }
-
-    @Override
-    public int getClocks() {
-        return 9;
-    }
-
-    @Override
-    public float getExecutionTime() {
-        return 2.25f;
-    }
-
-    @Override
-    public int getSize() {
-        return 2;
+        return InstructionResult.builder()
+                .machineCycles(2)
+                .clocks(9)
+                .executionTime(2.25f)
+                .size(2)
+                .build();
     }
 }
