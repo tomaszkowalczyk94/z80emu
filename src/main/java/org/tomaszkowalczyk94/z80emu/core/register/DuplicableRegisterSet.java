@@ -124,4 +124,5 @@ public class DuplicableRegisterSet {
                 throw new UnsupportedGeneralPurposeRegisterIdException(id);
         }
     }
+
 }

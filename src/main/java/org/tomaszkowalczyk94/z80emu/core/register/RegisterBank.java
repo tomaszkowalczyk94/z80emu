@@ -17,6 +17,8 @@ public class RegisterBank {
 
     @Getter private DuplicableRegisterSet regSet;
 
+    private final FlagRegManager flagRegManager = new FlagRegManager();
+
     @Getter @Setter private XBit8 i = XBit8.valueOfSigned(0);
     @Getter @Setter private XBit8 r = XBit8.valueOfSigned(0);
     @Getter @Setter private XBit16 ix = XBit16.valueOfSigned(0);
@@ -216,6 +218,14 @@ public class RegisterBank {
      */
     public XBit8 get8BitRegisterById(byte id) throws UnsupportedGeneralPurposeRegisterIdException {
         return regSet.get8BitRegisterById(id);
+    }
+
+    public void setFlag(FlagRegManager.Flag flag, boolean value) {
+        flagRegManager.setFlag(getRegSet(), flag, value);
+    }
+
+    public boolean getFlag(FlagRegManager.Flag flag) {
+        return flagRegManager.getFlag(getRegSet(), flag);
     }
 
 }

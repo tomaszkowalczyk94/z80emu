@@ -16,7 +16,8 @@ public class Z80 {
 
     int clockCyclesCounter = 0;
     int instructionCounter = 0;
-
+    boolean iff1 = false;
+    boolean iff2 = false;
 
     public void run() throws Z80Exception {
         while (true) {

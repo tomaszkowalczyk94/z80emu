@@ -104,8 +104,10 @@ public class InstructionDecoder {
         switch (secondByte.getUnsignedValue()) {
             case 0x47:
                 return instructionsContainer.loadIFromA;
-            case 0x4f:
+            case 0x4F:
                 return instructionsContainer.loadRFromA;
+            case 0x57:
+                return instructionsContainer.loadAFromI;
             default:
                 throw new UnsupportedInstructionException(opcode, secondByte);
         }
