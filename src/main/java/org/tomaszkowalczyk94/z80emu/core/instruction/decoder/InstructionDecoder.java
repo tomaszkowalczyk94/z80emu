@@ -39,6 +39,8 @@ public class InstructionDecoder {
                 return instructionsContainer.loadMemoryByDeFromA;
             case 0x32:
                 return instructionsContainer.loadMemoryBy16BitFromA;
+            case 0x2A:
+                return instructionsContainer.loadHlFromMemBy16bit;
             default: //nothing, going to next switch
         }
 

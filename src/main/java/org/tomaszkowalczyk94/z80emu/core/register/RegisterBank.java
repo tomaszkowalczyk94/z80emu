@@ -199,7 +199,7 @@ public class RegisterBank {
      * alias for {@link DuplicableRegisterSet#setH(XBit8 h)}
      */
     public void setH(XBit8 h) {
-        regSet.setA(h);
+        regSet.setH(h);
     }
 
     /**
