@@ -1,6 +1,7 @@
 package org.tomaszkowalczyk94.z80emu.core.instruction.decoder;
 
 import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionHelper;
+import org.tomaszkowalczyk94.z80emu.core.instruction.load16bit.LoadIxFrom16bit;
 import org.tomaszkowalczyk94.z80emu.core.instruction.load16bit.LoadRegFrom16bit;
 import org.tomaszkowalczyk94.z80emu.core.instruction.load8bit.*;
 
@@ -33,4 +34,5 @@ public class InstructionsContainer {
     LoadAFromR loadAFromR = new LoadAFromR(instructionHelper);
 
     LoadRegFrom16bit loadRegFrom16bit = new LoadRegFrom16bit();
+    LoadIxFrom16bit loadIxFrom16bit = new LoadIxFrom16bit();
 }
