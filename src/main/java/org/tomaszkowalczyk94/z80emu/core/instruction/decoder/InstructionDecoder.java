@@ -101,6 +101,9 @@ public class InstructionDecoder {
 
     private Instruction decodeFdOpcode(XBit8 opcode, XBit8 secondByte) throws UnsupportedInstructionException {
 
+        if(secondByte.getUnsignedValue() == 0x21) {
+            return instructionsContainer.loadIyFrom16bit;
+        }
         if(secondByte.getUnsignedValue() == 0x36) {
             return instructionsContainer.loadMemByIyAnd8bitFrom8bit;
         }
