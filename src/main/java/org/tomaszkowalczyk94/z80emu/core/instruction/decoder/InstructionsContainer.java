@@ -29,4 +29,5 @@ public class InstructionsContainer {
     LoadIFromA loadIFromA = new LoadIFromA();
     LoadRFromA loadRFromA = new LoadRFromA();
     LoadAFromI loadAFromI = new LoadAFromI(instructionHelper);
+    LoadAFromR loadAFromR = new LoadAFromR(instructionHelper);
 }

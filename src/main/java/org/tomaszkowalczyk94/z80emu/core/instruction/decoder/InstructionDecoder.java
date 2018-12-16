@@ -108,6 +108,8 @@ public class InstructionDecoder {
                 return instructionsContainer.loadRFromA;
             case 0x57:
                 return instructionsContainer.loadAFromI;
+            case 0x5F:
+                return instructionsContainer.loadAFromR;
             default:
                 throw new UnsupportedInstructionException(opcode, secondByte);
         }
