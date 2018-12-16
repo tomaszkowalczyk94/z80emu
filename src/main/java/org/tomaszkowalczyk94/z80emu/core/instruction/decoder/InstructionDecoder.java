@@ -46,7 +46,7 @@ public class InstructionDecoder {
             case 0b01:
                 return decode01bits(opcode);
             case 0b00:
-                return instructionsContainer.loadRegFrom8Bit;
+                return decode00bits(opcode);
             default:
                 throw new UnsupportedInstructionException(opcode);
         }
@@ -69,6 +69,17 @@ public class InstructionDecoder {
         }
 
         return instructionsContainer.loadRegFromReg;
+    }
+
+    private Instruction decode00bits(XBit8 opcode) throws UnsupportedInstructionException {
+        switch (opcode.getValueOfBits(2,0)) {
+            case 0b110:
+                return instructionsContainer.loadRegFrom8Bit;
+            case 0b001:
+                return instructionsContainer.loadRegFrom16bit;
+            default:
+                throw new UnsupportedInstructionException(opcode);
+        }
     }
 
     private Instruction decodeDdOpcode(XBit8 opcode, XBit8 secondByte) throws UnsupportedInstructionException {

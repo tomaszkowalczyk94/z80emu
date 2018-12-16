@@ -53,6 +53,58 @@ public class RegisterBank {
     }
 
     /**
+     * @param id id of registers:<br>
+     * BC 00
+     * DE 01
+     * HL 10
+     * SP 11
+     * @throws UnsupportedGeneralPurposeRegisterIdException
+     */
+    public void set16BitRegisterById(byte id, XBit16 value) throws UnsupportedGeneralPurposeRegisterIdException {
+        switch (id) {
+            case 0b00:
+                setBC(value);
+                break;
+            case 0b01:
+                setDE(value);
+                break;
+            case 0b10:
+                setHL(value);
+                break;
+            case 0b11:
+                setSp(value);
+                break;
+            default:
+                throw new UnsupportedGeneralPurposeRegisterIdException(id);
+        }
+    }
+
+    /**
+     * @param id id of registers:<br>
+     * 0b000 - B <br>
+     * 0b001 - C <br>
+     * 0b010 - D <br>
+     * 0b011 - E <br>
+     * 0b100 - H <br>
+     * 0b101 - L <br>
+     * 0b110 - unused <br>
+     * 0b111 - A <br>
+     */
+    public XBit16 get16BitRegisterById(byte id) throws UnsupportedGeneralPurposeRegisterIdException {
+        switch (id) {
+            case 0b00:
+                return getBC();
+            case 0b01:
+                return getDE();
+            case 0b10:
+                return getHL();
+            case 0b11:
+                return getSp();
+            default:
+                throw new UnsupportedGeneralPurposeRegisterIdException(id);
+        }
+    }
+    /**
      * alias for {@link DuplicableRegisterSet#getA()}
      */
     public XBit8 getA() {
