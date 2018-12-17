@@ -43,4 +43,5 @@ public class InstructionsContainer {
     LoadMemBy16bitFromIx loadMemBy16bitFromIx = new LoadMemBy16bitFromIx(instructionHelper);
     LoadMemBy16bitFromIy loadMemBy16bitFromIy = new LoadMemBy16bitFromIy(instructionHelper);
     LoadMemBy16bitFromReg loadMemBy16bitFromReg = new LoadMemBy16bitFromReg(instructionHelper);
+    LoadSpFromHl loadSpFromHl = new LoadSpFromHl();
 }
