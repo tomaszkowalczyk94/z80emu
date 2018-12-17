@@ -120,6 +120,10 @@ public class InstructionDecoder {
     }
 
     private Instruction decodeEdOpcode(XBit8 opcode, XBit8 secondByte) throws UnsupportedInstructionException {
+        if(secondByte.getValueOfBits(3,0) == 0b1011) {
+            return instructionsContainer.loadRegFromMemoryBy16bit;
+        }
+
         switch (secondByte.getUnsignedValue()) {
             case 0x47:
                 return instructionsContainer.loadIFromA;
