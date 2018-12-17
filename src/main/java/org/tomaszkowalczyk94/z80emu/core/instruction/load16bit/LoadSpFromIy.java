@@ -8,12 +8,12 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionHelper;
 import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
 
 /**
- * <h2>LD SP, IX</h2>
+ * <h2>LD SP, IY</h2>
  *
  * <table border="1" cellspacing="0">
  *     <tr>
  *         <td>Operation</td>
- *         <td>SP ← IX</td>
+ *         <td>SP ← IY</td>
  *     </tr>
  *     <tr>
  *         <td>Op Code:</td>
@@ -21,24 +21,23 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
  *     </tr>
  *     <tr>
  *         <td>Operands</td>
- *         <td>SP, IX</td>
+ *         <td>SP, IY</td>
  *     </tr>
  * </table>
  * <br>
- * The 2-byte contents of Index Register IX are loaded to the Stack Pointer (SP)
+ * The 2-byte contents of Index Register IY are loaded to the Stack Pointer SP
  *
  */
-public class LoadSpFromIx extends Instruction {
+public class LoadSpFromIy extends Instruction {
 
-    public LoadSpFromIx(InstructionHelper helper) {
+    public LoadSpFromIy(InstructionHelper helper) {
         super(helper);
     }
 
     @Override
     public InstructionResult execute(XBit8 opcode, Z80 z80) throws Z80Exception {
-
         z80.getRegs().setSp(
-                z80.getRegs().getIx()
+                z80.getRegs().getIy()
         );
 
         return InstructionResult.builder()

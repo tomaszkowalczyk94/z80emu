@@ -9,7 +9,7 @@ import org.tomaszkowalczyk94.z80emu.core.Z80;
 
 import static org.junit.Assert.*;
 
-public class LoadSpFromIxTest {
+public class LoadSpFromIyTest {
     private Z80 z80;
 
     @Before
@@ -19,10 +19,10 @@ public class LoadSpFromIxTest {
 
     @Test
     public void execute() throws Exception {
-        z80.getMemory().write(0, XBit8.valueOfUnsigned(0xDD));
-        z80.getMemory().write(1, XBit8.valueOfUnsigned(0xF9));//ld sp, hl
+        z80.getMemory().write(0, XBit8.valueOfUnsigned(0xFD));
+        z80.getMemory().write(1, XBit8.valueOfUnsigned(0xF9));//ld sp, iy
 
-        z80.getRegs().setIx(XBit16.valueOfUnsigned(0x1234));
+        z80.getRegs().setIy(XBit16.valueOfUnsigned(0x1234));
 
         z80.runOneInstruction();
 
