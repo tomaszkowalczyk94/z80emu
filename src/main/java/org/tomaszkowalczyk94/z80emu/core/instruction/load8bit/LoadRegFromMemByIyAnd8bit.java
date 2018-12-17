@@ -6,6 +6,7 @@ import org.tomaszkowalczyk94.xbit.XBitUtils;
 import org.tomaszkowalczyk94.z80emu.core.Z80;
 import org.tomaszkowalczyk94.z80emu.core.Z80Exception;
 import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
+import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionHelper;
 import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
 
 /**
@@ -37,11 +38,16 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
  * H 100<br>
  * L 101<br>
  */
-public class LoadRegFromMemByIyAnd8bit implements Instruction {
+public class LoadRegFromMemByIyAnd8bit extends Instruction {
+
+    public LoadRegFromMemByIyAnd8bit(InstructionHelper helper) {
+        super(helper);
+    }
+
     @Override
     public InstructionResult execute(XBit8 opcode, Z80 z80) throws Z80Exception {
-        XBit8 secondByte = getSecondByte(z80);
-        XBit8 thirdByte = getThirdByte(z80);
+        XBit8 secondByte = helper.getSecondByte(z80);
+        XBit8 thirdByte = helper.getThirdByte(z80);
 
         int regId = secondByte.getValueOfBits(5, 3);
 

@@ -5,6 +5,7 @@ import org.tomaszkowalczyk94.xbit.XBit8;
 import org.tomaszkowalczyk94.z80emu.core.Z80;
 import org.tomaszkowalczyk94.z80emu.core.Z80Exception;
 import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
+import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionHelper;
 import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
 
 /**
@@ -29,11 +30,16 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
  * low-order byte.
  *
  */
-public class LoadIyFrom16bit implements Instruction {
+public class LoadIyFrom16bit extends Instruction {
+
+    public LoadIyFrom16bit(InstructionHelper helper) {
+        super(helper);
+    }
+
     @Override
     public InstructionResult execute(XBit8 opcode, Z80 z80) throws Z80Exception {
         z80.getRegs().setIy(
-                XBit16.valueOfHighAndLow(getFourthByte(z80), getThirdByte(z80))
+                XBit16.valueOfHighAndLow(helper.getFourthByte(z80), helper.getThirdByte(z80))
         );
 
         return InstructionResult.builder()

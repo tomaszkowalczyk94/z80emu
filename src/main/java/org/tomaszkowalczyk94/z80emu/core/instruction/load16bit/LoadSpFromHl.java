@@ -4,6 +4,7 @@ import org.tomaszkowalczyk94.xbit.XBit8;
 import org.tomaszkowalczyk94.z80emu.core.Z80;
 import org.tomaszkowalczyk94.z80emu.core.Z80Exception;
 import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
+import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionHelper;
 import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
 
 /**
@@ -27,7 +28,12 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
  * The contents of the register pair HL are loaded to the Stack Pointer (SP).
  *
  */
-public class LoadSpFromHl implements Instruction {
+public class LoadSpFromHl extends Instruction {
+
+    public LoadSpFromHl(InstructionHelper helper) {
+        super(helper);
+    }
+
     @Override
     public InstructionResult execute(XBit8 opcode, Z80 z80) throws Z80Exception {
 

@@ -1,6 +1,7 @@
 package org.tomaszkowalczyk94.z80emu.core.instruction;
 
 import org.tomaszkowalczyk94.xbit.XBit16;
+import org.tomaszkowalczyk94.xbit.XBit8;
 import org.tomaszkowalczyk94.xbit.XBitUtils;
 import org.tomaszkowalczyk94.z80emu.core.Z80;
 import org.tomaszkowalczyk94.z80emu.core.memory.exception.MemoryException;
@@ -10,6 +11,33 @@ import static org.tomaszkowalczyk94.z80emu.core.register.FlagRegManager.Flag.S;
 import static org.tomaszkowalczyk94.z80emu.core.register.FlagRegManager.Flag.Z;
 
 public class InstructionHelper {
+
+    /**
+     * instruction can have more than 1 byte instruction. This method return second byte of instruction (first byte operand)
+     */
+    public XBit8 getSecondByte(Z80 z80) throws MemoryException {
+        return z80.getMem().read(
+                XBitUtils.incrementBy(z80.getRegs().getPc(), 1)
+        );
+    }
+
+    /**
+     * instruction can have more than 1 byte instruction. This method return third byte of instruction (second byte operand)
+     */
+    public XBit8 getThirdByte(Z80 z80) throws MemoryException {
+        return z80.getMem().read(
+                XBitUtils.incrementBy(z80.getRegs().getPc(), 2)
+        );
+    }
+
+    /**
+     * instruction can have more than 1 byte instruction. This method return fourth byte of instruction (third byte operand)
+     */
+    public XBit8 getFourthByte(Z80 z80) throws MemoryException {
+        return z80.getMem().read(
+                XBitUtils.incrementBy(z80.getRegs().getPc(), 3)
+        );
+    }
 
     /**
      * The Sign Flag (S) stores the state of the most-significant bit of the Accumulator (bit 7).

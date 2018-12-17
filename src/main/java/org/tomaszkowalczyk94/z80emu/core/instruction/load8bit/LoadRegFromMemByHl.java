@@ -4,6 +4,7 @@ import org.tomaszkowalczyk94.xbit.XBit8;
 import org.tomaszkowalczyk94.z80emu.core.Z80;
 import org.tomaszkowalczyk94.z80emu.core.Z80Exception;
 import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
+import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionHelper;
 import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
 
 /**
@@ -34,7 +35,13 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
  * H 100<br>
  * L 101<br>
  */
-public class LoadRegFromMemByHl implements Instruction {
+public class LoadRegFromMemByHl extends Instruction {
+
+
+    public LoadRegFromMemByHl(InstructionHelper helper) {
+        super(helper);
+    }
+
     @Override
     public InstructionResult execute(XBit8 opcode, Z80 z80) throws Z80Exception {
         XBit8 value = z80.getMem().read(

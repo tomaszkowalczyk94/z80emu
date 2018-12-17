@@ -6,6 +6,7 @@ import org.tomaszkowalczyk94.xbit.XBitUtils;
 import org.tomaszkowalczyk94.z80emu.core.Z80;
 import org.tomaszkowalczyk94.z80emu.core.Z80Exception;
 import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
+import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionHelper;
 import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
 
 /**
@@ -29,11 +30,16 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
  * The n operand is loaded to the memory address specified by the sum of Index Register IX
  * and the two’s complement displacement operand d.
  */
-public class LoadMemByIxAnd8bitFrom8bit implements Instruction {
+public class LoadMemByIxAnd8bitFrom8bit extends Instruction {
+
+    public LoadMemByIxAnd8bitFrom8bit(InstructionHelper helper) {
+        super(helper);
+    }
+
     @Override
     public InstructionResult execute(XBit8 opcode, Z80 z80) throws Z80Exception {
-        XBit8 offset = getThirdByte(z80);
-        XBit8 immediateValue = getFourthByte(z80);
+        XBit8 offset = helper.getThirdByte(z80);
+        XBit8 immediateValue = helper.getFourthByte(z80);
 
         XBit16 memAddress = XBitUtils.incrementBy(
                 z80.getRegs().getIx(),

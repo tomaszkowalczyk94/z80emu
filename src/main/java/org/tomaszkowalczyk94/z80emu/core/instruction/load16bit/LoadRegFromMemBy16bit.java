@@ -6,6 +6,7 @@ import org.tomaszkowalczyk94.xbit.XBitUtils;
 import org.tomaszkowalczyk94.z80emu.core.Z80;
 import org.tomaszkowalczyk94.z80emu.core.Z80Exception;
 import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
+import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionHelper;
 import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
 
 /**
@@ -36,10 +37,15 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
  * SP 11<br/>
  *
  */
-public class LoadRegFromMemBy16bit implements Instruction {
+public class LoadRegFromMemBy16bit extends Instruction {
+
+    public LoadRegFromMemBy16bit(InstructionHelper helper) {
+        super(helper);
+    }
+
     @Override
     public InstructionResult execute(XBit8 opcode, Z80 z80) throws Z80Exception {
-        XBit16 addressOfL = XBit16.valueOfHighAndLow(getFourthByte(z80), getThirdByte(z80));
+        XBit16 addressOfL = XBit16.valueOfHighAndLow(helper.getFourthByte(z80), helper.getThirdByte(z80));
         XBit16 addressOfH = XBitUtils.incrementBy(addressOfL, 1);
 
         XBit16 newValue = XBit16.valueOfHighAndLow(
@@ -48,7 +54,7 @@ public class LoadRegFromMemBy16bit implements Instruction {
         );
 
         z80.getRegs().set16BitRegisterById(
-                (byte)getSecondByte(z80).getValueOfBits(5,4),
+                (byte)helper.getSecondByte(z80).getValueOfBits(5,4),
                 newValue
         );
 

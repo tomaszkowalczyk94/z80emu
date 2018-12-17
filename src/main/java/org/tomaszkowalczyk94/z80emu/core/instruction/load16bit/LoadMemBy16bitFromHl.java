@@ -1,6 +1,5 @@
 package org.tomaszkowalczyk94.z80emu.core.instruction.load16bit;
 
-import lombok.RequiredArgsConstructor;
 import org.tomaszkowalczyk94.xbit.XBit16;
 import org.tomaszkowalczyk94.xbit.XBit8;
 import org.tomaszkowalczyk94.z80emu.core.Z80;
@@ -33,20 +32,21 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
  * low-order byte of nn.
  *
  */
-@RequiredArgsConstructor
-public class LoadMemBy16bitFromHl implements Instruction {
+public class LoadMemBy16bitFromHl extends Instruction {
 
-    final InstructionHelper instructionHelper;
+    public LoadMemBy16bitFromHl(InstructionHelper helper) {
+        super(helper);
+    }
 
     @Override
     public InstructionResult execute(XBit8 opcode, Z80 z80) throws Z80Exception {
 
         XBit16 address = XBit16.valueOfHighAndLow(
-                getThirdByte(z80),
-                getSecondByte(z80)
+                helper.getThirdByte(z80),
+                helper.getSecondByte(z80)
         );
 
-        instructionHelper.write16bitToMemory(
+        helper.write16bitToMemory(
                 z80,
                 address,
                 z80.getRegs().getHL()

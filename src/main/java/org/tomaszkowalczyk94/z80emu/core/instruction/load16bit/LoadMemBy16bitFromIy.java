@@ -1,6 +1,5 @@
 package org.tomaszkowalczyk94.z80emu.core.instruction.load16bit;
 
-import lombok.RequiredArgsConstructor;
 import org.tomaszkowalczyk94.xbit.XBit16;
 import org.tomaszkowalczyk94.xbit.XBit8;
 import org.tomaszkowalczyk94.z80emu.core.Z80;
@@ -29,21 +28,22 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
  * <br>
  * The low-order byte in Index Register IY is loaded to memory address (nn); the upper order
  * byte is loaded to memory location (nn+ 1). The first n operand after the op code is the loworder byte of nn.
-
  */
-@RequiredArgsConstructor
-public class LoadMemBy16bitFromIy implements Instruction {
-    final InstructionHelper instructionHelper;
+public class LoadMemBy16bitFromIy extends Instruction {
+
+    public LoadMemBy16bitFromIy(InstructionHelper helper) {
+        super(helper);
+    }
 
     @Override
     public InstructionResult execute(XBit8 opcode, Z80 z80) throws Z80Exception {
 
         XBit16 address = XBit16.valueOfHighAndLow(
-                getFourthByte(z80),
-                getThirdByte(z80)
+                helper.getFourthByte(z80),
+                helper.getThirdByte(z80)
         );
 
-        instructionHelper.write16bitToMemory(
+        helper.write16bitToMemory(
                 z80,
                 address,
                 z80.getRegs().getIy()

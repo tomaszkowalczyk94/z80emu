@@ -1,6 +1,5 @@
 package org.tomaszkowalczyk94.z80emu.core.instruction.load8bit;
 
-import lombok.RequiredArgsConstructor;
 import org.tomaszkowalczyk94.xbit.XBit8;
 import org.tomaszkowalczyk94.z80emu.core.Z80;
 import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
@@ -58,10 +57,12 @@ import org.tomaszkowalczyk94.z80emu.core.register.FlagRegManager;
  * If an interrupt occurs during execution of this instruction, the Parity flag contains a 0
  *
  */
-@RequiredArgsConstructor
-public class LoadAFromR implements Instruction {
+public class LoadAFromR extends Instruction {
 
-    final InstructionHelper instructionHelper;
+
+    public LoadAFromR(InstructionHelper helper) {
+        super(helper);
+    }
 
     @Override
     public InstructionResult execute(XBit8 opcode, Z80 z80) {
@@ -69,9 +70,9 @@ public class LoadAFromR implements Instruction {
                 z80.getRegs().getI()
         );
 
-        instructionHelper.setSignFlagByA(z80);
-        instructionHelper.setZeroFlagByA(z80);
-        instructionHelper.setPvFlagByIff2(z80);
+        helper.setSignFlagByA(z80);
+        helper.setZeroFlagByA(z80);
+        helper.setPvFlagByIff2(z80);
 
         z80.getRegs().setFlag(FlagRegManager.Flag.H, false);
         z80.getRegs().setFlag(FlagRegManager.Flag.N, false);

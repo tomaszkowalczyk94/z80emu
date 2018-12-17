@@ -5,6 +5,7 @@ import org.tomaszkowalczyk94.xbit.XBit8;
 import org.tomaszkowalczyk94.z80emu.core.Z80;
 import org.tomaszkowalczyk94.z80emu.core.Z80Exception;
 import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
+import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionHelper;
 import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
 
 /**
@@ -33,11 +34,19 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
  * SP 11<br/>
  *
  */
-public class LoadRegFrom16bit implements Instruction {
+public class LoadRegFrom16bit extends Instruction {
+
+    public LoadRegFrom16bit(InstructionHelper helper) {
+        super(helper);
+    }
+
     @Override
     public InstructionResult execute(XBit8 opcode, Z80 z80) throws Z80Exception {
 
-        XBit16 newValue = XBit16.valueOfHighAndLow(getThirdByte(z80), getSecondByte(z80));
+        XBit16 newValue = XBit16.valueOfHighAndLow(
+                helper.getThirdByte(z80),
+                helper.getSecondByte(z80)
+        );
 
         z80.getRegs().set16BitRegisterById(
                 (byte)opcode.getValueOfBits(5,4),

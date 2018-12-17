@@ -5,6 +5,7 @@ import org.tomaszkowalczyk94.xbit.XBit8;
 import org.tomaszkowalczyk94.z80emu.core.Z80;
 import org.tomaszkowalczyk94.z80emu.core.Z80Exception;
 import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
+import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionHelper;
 import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
 
 /**
@@ -29,12 +30,18 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
  * The first n operand after the op code is the low-order byte of a 2-byte memory
  * address.
  */
-public class LoadAFromMemBy16bit implements Instruction {
+public class LoadAFromMemBy16bit extends Instruction {
+
+
+    public LoadAFromMemBy16bit(InstructionHelper helper) {
+        super(helper);
+    }
+
     @Override
     public InstructionResult execute(XBit8 opcode, Z80 z80) throws Z80Exception {
         XBit16 address = XBit16.valueOfHighAndLow(
-                getThirdByte(z80),
-                getSecondByte(z80)
+                helper.getThirdByte(z80),
+                helper.getSecondByte(z80)
         );
 
         z80.getRegs().setA(
