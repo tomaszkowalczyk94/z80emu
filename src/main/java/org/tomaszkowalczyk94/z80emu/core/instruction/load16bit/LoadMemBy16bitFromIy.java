@@ -10,12 +10,12 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionHelper;
 import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
 
 /**
- * <h2>LD (nn), HL</h2>
+ * <h2>LD (nn), IY</h2>
  *
  * <table border="1" cellspacing="0">
  *     <tr>
  *         <td>Operation</td>
- *         <td>(nn + 1) ← H, (nn) ← L</td>
+ *         <td>(nn + 1) ← IYh, (nn) ← IYI</td>
  *     </tr>
  *     <tr>
  *         <td>Op Code:</td>
@@ -23,40 +23,38 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
  *     </tr>
  *     <tr>
  *         <td>Operands</td>
- *         <td>(nn), HL</td>
+ *         <td>(nn), IY</td>
  *     </tr>
  * </table>
  * <br>
- * The contents of the low-order portion of register pair HL (Register L) are loaded to mem
- * ory address (nn), and the contents of the high-order portion of HL (Register H) are loaded
- * to the next highest memory address (nn+ 1). The first n operand after the op code is the
- * low-order byte of nn.
- *
+ * The low-order byte in Index Register IY is loaded to memory address (nn); the upper order
+ * byte is loaded to memory location (nn+ 1). The first n operand after the op code is the loworder byte of nn.
+
  */
 @RequiredArgsConstructor
-public class LoadMemBy16bitFromHl implements Instruction {
-
+public class LoadMemBy16bitFromIy implements Instruction {
     final InstructionHelper instructionHelper;
 
     @Override
     public InstructionResult execute(XBit8 opcode, Z80 z80) throws Z80Exception {
 
         XBit16 address = XBit16.valueOfHighAndLow(
-                getThirdByte(z80),
-                getSecondByte(z80)
+                getFourthByte(z80),
+                getThirdByte(z80)
         );
 
         instructionHelper.write16bitToMemory(
                 z80,
                 address,
-                z80.getRegs().getHL()
+                z80.getRegs().getIy()
         );
 
         return InstructionResult.builder()
-                .machineCycles(5)
-                .clocks(16)
-                .executionTime(4.00f)
-                .size(3)
+                .machineCycles(6)
+                .clocks(20)
+                .executionTime(5.00f)
+                .size(4)
                 .build();
+
     }
 }
