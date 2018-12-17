@@ -15,6 +15,10 @@ public class Memory {
         memoryArray = new byte[MEMORY_SIZE];
     }
 
+    public XBit8 read(int address) throws MemoryException {
+        return read(XBit16.valueOfUnsigned(address));
+    }
+
     public XBit8 read(XBit16 address) throws MemoryException {
         int addressInt = address.getUnsignedValue();
 

@@ -1,6 +1,9 @@
 package org.tomaszkowalczyk94.z80emu.core.instruction;
 
+import org.tomaszkowalczyk94.xbit.XBit16;
+import org.tomaszkowalczyk94.xbit.XBitUtils;
 import org.tomaszkowalczyk94.z80emu.core.Z80;
+import org.tomaszkowalczyk94.z80emu.core.memory.exception.MemoryException;
 
 import static org.tomaszkowalczyk94.z80emu.core.register.FlagRegManager.Flag.PV;
 import static org.tomaszkowalczyk94.z80emu.core.register.FlagRegManager.Flag.S;
@@ -32,5 +35,24 @@ public class InstructionHelper {
      */
     public void setPvFlagByIff2(Z80 z80) {
         z80.getRegs().setFlag(PV, z80.isIff2());
+    }
+
+    /**
+     * Write 16bit value to memory in little endian mode
+     */
+    public void write16bitToMemory(Z80 z80, XBit16 address, XBit16 value) throws MemoryException {
+
+        XBit16 addressOfHigh = XBitUtils.incrementBy(address, 1);
+
+        z80.getMem().write(
+                address,
+                value.getLowByte()
+        );
+
+        z80.getMem().write(
+                addressOfHigh,
+                value.getHighByte()
+        );
+
     }
 }

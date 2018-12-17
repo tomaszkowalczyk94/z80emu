@@ -41,6 +41,8 @@ public class InstructionDecoder {
                 return instructionsContainer.loadMemoryBy16BitFromA;
             case 0x2A:
                 return instructionsContainer.loadHlFromMemBy16bit;
+            case 0x22:
+                return instructionsContainer.loadMemBy16bitFromHl;
             default: //nothing, going to next switch
         }
 
@@ -53,9 +55,6 @@ public class InstructionDecoder {
                 throw new UnsupportedInstructionException(opcode);
         }
     }
-
-
-
 
     private XBit8 readSecondByte(Memory memory, XBit16 pc) throws MemoryException {
         return memory.read(XBitUtils.incrementBy(pc,1));
