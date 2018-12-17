@@ -8,7 +8,7 @@ import org.tomaszkowalczyk94.z80emu.core.Z80;
 
 import static org.junit.Assert.*;
 
-public class LoadRegFromMemoryBy16bitTest {
+public class LoadIxFromMemBy16bitTest {
     private Z80 z80;
 
     @Before
@@ -18,17 +18,17 @@ public class LoadRegFromMemoryBy16bitTest {
 
     @Test
     public void execute() throws Exception {
-        z80.getMemory().write(0, XBit8.valueOfUnsigned(0xED));
-        z80.getMemory().write(1, XBit8.valueOfUnsigned(0x4B));
+        z80.getMemory().write(0, XBit8.valueOfUnsigned(0xDD));
+        z80.getMemory().write(1, XBit8.valueOfUnsigned(0x2A));
         z80.getMemory().write(2, XBit8.valueOfUnsigned(0x00));
-        z80.getMemory().write(3, XBit8.valueOfUnsigned(0x01)); // ld BC, (100h)
+        z80.getMemory().write(3, XBit8.valueOfUnsigned(0x01)); // ld IX, (100h)
 
         z80.getMem().write(0x100, XBit8.valueOfUnsigned(0xBB));
         z80.getMem().write(0x101, XBit8.valueOfUnsigned(0xAA));
 
         z80.runOneInstruction();
 
-        Assert.assertEquals(0xAABB, z80.getRegs().getBC().getUnsignedValue());
+        Assert.assertEquals(0xAABB, z80.getRegs().getIx().getUnsignedValue());
 
         Assert.assertEquals(4, z80.getRegisterBank().getPc().getUnsignedValue());
         Assert.assertEquals(20, z80.getClockCyclesCounter());

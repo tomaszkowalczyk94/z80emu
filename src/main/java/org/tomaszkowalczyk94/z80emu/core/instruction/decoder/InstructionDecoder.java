@@ -91,6 +91,9 @@ public class InstructionDecoder {
         if(secondByte.getUnsignedValue() == 0x36) {
             return instructionsContainer.loadMemByIxAnd8bitFrom8bit;
         }
+        if(secondByte.getUnsignedValue() == 0x2A) {
+            return instructionsContainer.loadIxFromMemBy16bit;
+        }
         if(secondByte.getValueOfBits(2,0) == 0b110) {
             return instructionsContainer.loadRegFromMemByIxAnd8Bit;
         }
@@ -121,7 +124,7 @@ public class InstructionDecoder {
 
     private Instruction decodeEdOpcode(XBit8 opcode, XBit8 secondByte) throws UnsupportedInstructionException {
         if(secondByte.getValueOfBits(3,0) == 0b1011) {
-            return instructionsContainer.loadRegFromMemoryBy16bit;
+            return instructionsContainer.loadRegFromMemBy16Bit;
         }
 
         switch (secondByte.getUnsignedValue()) {

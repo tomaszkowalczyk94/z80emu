@@ -36,7 +36,7 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
  * SP 11<br/>
  *
  */
-public class LoadRegFromMemoryBy16bit implements Instruction {
+public class LoadRegFromMemBy16bit implements Instruction {
     @Override
     public InstructionResult execute(XBit8 opcode, Z80 z80) throws Z80Exception {
         XBit16 addressOfL = XBit16.valueOfHighAndLow(getFourthByte(z80), getThirdByte(z80));
