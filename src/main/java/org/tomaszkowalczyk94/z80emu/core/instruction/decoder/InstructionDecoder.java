@@ -47,6 +47,8 @@ public class InstructionDecoder {
                 return instructionsContainer.loadSpFromHl;
             case 0xCD:
                 return instructionsContainer.call16bit;
+            case 0xC9:
+                return instructionsContainer.ret;
             default: //nothing, going to next switch
         }
 

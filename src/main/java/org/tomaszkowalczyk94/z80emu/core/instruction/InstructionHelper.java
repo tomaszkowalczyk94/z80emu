@@ -83,4 +83,16 @@ public class InstructionHelper {
         );
 
     }
+
+    /**
+     * read 16bit value to from memory in little endian mode
+     */
+    public XBit16 read16bitFromMemory(Z80 z80, XBit16 address) throws MemoryException {
+        return XBit16.valueOfHighAndLow(
+                z80.getMem().read(
+                        XBitUtils.incrementBy(address,1)
+                ) ,
+                z80.getMem().read(address)
+        );
+    }
 }
