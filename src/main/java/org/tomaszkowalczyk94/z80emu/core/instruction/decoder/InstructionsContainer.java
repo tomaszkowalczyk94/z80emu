@@ -1,6 +1,7 @@
 package org.tomaszkowalczyk94.z80emu.core.instruction.decoder;
 
 import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionHelper;
+import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.Call16bit;
 import org.tomaszkowalczyk94.z80emu.core.instruction.load16bit.*;
 import org.tomaszkowalczyk94.z80emu.core.instruction.load8bit.*;
 
@@ -46,4 +47,7 @@ public class InstructionsContainer {
     LoadSpFromHl loadSpFromHl = new LoadSpFromHl(instructionHelper);
     LoadSpFromIx loadSpFromIx = new LoadSpFromIx(instructionHelper);
     LoadSpFromIy loadSpFromIy = new LoadSpFromIy(instructionHelper);
+
+
+    Call16bit call16bit = new Call16bit(instructionHelper);
 }

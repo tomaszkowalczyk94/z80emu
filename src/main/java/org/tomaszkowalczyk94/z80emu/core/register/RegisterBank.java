@@ -23,7 +23,7 @@ public class RegisterBank {
     @Getter @Setter private XBit8 r = XBit8.valueOfSigned(0);
     @Getter @Setter private XBit16 ix = XBit16.valueOfSigned(0);
     @Getter @Setter private XBit16 iy = XBit16.valueOfSigned(0);
-    @Getter @Setter private XBit16 sp = XBit16.valueOfSigned(0);
+    @Getter @Setter private XBit16 sp = XBit16.valueOfUnsigned(0xFFFF);
     @Getter @Setter private XBit16 pc = XBit16.valueOfSigned(0);
 
 
@@ -58,7 +58,6 @@ public class RegisterBank {
      * DE 01
      * HL 10
      * SP 11
-     * @throws UnsupportedGeneralPurposeRegisterIdException
      */
     public void set16BitRegisterById(byte id, XBit16 value) throws UnsupportedGeneralPurposeRegisterIdException {
         switch (id) {

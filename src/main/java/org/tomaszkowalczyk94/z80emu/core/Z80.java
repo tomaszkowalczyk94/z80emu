@@ -38,7 +38,10 @@ public class Z80 {
         clockCyclesCounter += result.getClocks();
         instructionCounter++;
 
-        registerBank.incrementPc(result.getSize());
+        if(result.isAutoIncrementPc()) {
+            registerBank.incrementPc(result.getSize());
+        }
+
     }
 
     /**

@@ -27,4 +27,6 @@ public class InstructionResult {
      * Instruction size in bytes
      */
     int size;
+
+    @Builder.Default boolean autoIncrementPc = true;
 }
