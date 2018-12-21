@@ -12,6 +12,10 @@ import org.tomaszkowalczyk94.z80emu.core.register.exception.UnsupportedGeneralPu
  */
 public class RegisterBank {
 
+    public enum Reg16bit {
+        BC, DE, HL, SP, AF,
+    }
+
     private final DuplicableRegisterSet regSetA = new DuplicableRegisterSet();
     private final DuplicableRegisterSet regSetB = new DuplicableRegisterSet();
 
@@ -54,12 +58,13 @@ public class RegisterBank {
 
     /**
      * @param id id of registers:<br>
-     * BC 00
-     * DE 01
-     * HL 10
-     * SP 11
+     * BC    00<br>
+     * DE    01<br>
+     * HL    10<br>
+     * SP/AF 11 its depends of lastReg param<br>
+     * @param lastReg the 0b11 id of register can be register SP or AF. Its depends of instruction context.
      */
-    public void set16BitRegisterById(byte id, XBit16 value) throws UnsupportedGeneralPurposeRegisterIdException {
+    public void set16BitRegisterById(byte id, XBit16 value, Reg16bit lastReg) throws UnsupportedGeneralPurposeRegisterIdException {
         switch (id) {
             case 0b00:
                 setBC(value);
@@ -71,7 +76,13 @@ public class RegisterBank {
                 setHL(value);
                 break;
             case 0b11:
-                setSp(value);
+                if(lastReg == Reg16bit.SP) {
+                    setSp(value);
+                } else if(lastReg == Reg16bit.AF) {
+                    setAf(value);
+                } else {
+                    throw new UnsupportedGeneralPurposeRegisterIdException(id);
+                }
                 break;
             default:
                 throw new UnsupportedGeneralPurposeRegisterIdException(id);
@@ -80,16 +91,13 @@ public class RegisterBank {
 
     /**
      * @param id id of registers:<br>
-     * 0b000 - B <br>
-     * 0b001 - C <br>
-     * 0b010 - D <br>
-     * 0b011 - E <br>
-     * 0b100 - H <br>
-     * 0b101 - L <br>
-     * 0b110 - unused <br>
-     * 0b111 - A <br>
+     * BC    00<br>
+     * DE    01<br>
+     * HL    10<br>
+     * SP/AF 11 its depends of lastReg param<br>
+     * @param lastReg the 0b11 id of register can be register SP or AF. Its depends of instruction context.
      */
-    public XBit16 get16BitRegisterById(byte id) throws UnsupportedGeneralPurposeRegisterIdException {
+    public XBit16 get16BitRegisterById(byte id, Reg16bit lastReg) throws UnsupportedGeneralPurposeRegisterIdException {
         switch (id) {
             case 0b00:
                 return getBC();
@@ -98,7 +106,13 @@ public class RegisterBank {
             case 0b10:
                 return getHL();
             case 0b11:
-                return getSp();
+                if(lastReg == Reg16bit.SP) {
+                    return getSp();
+                } else if(lastReg == Reg16bit.AF) {
+                    return getAf();
+                } else {
+                    throw new UnsupportedGeneralPurposeRegisterIdException(id);
+                }
             default:
                 throw new UnsupportedGeneralPurposeRegisterIdException(id);
         }
@@ -248,6 +262,20 @@ public class RegisterBank {
      */
     public XBit16 getHL() {
         return regSet.getHL();
+    }
+
+    /**
+     * alias for {@link DuplicableRegisterSet#setAf(XBit16)}
+     */
+    public void setAf(XBit16 value) {
+        regSet.setAf(value);
+    }
+
+    /**
+     * alias for {@link DuplicableRegisterSet#getAf()}
+     */
+    public XBit16 getAf() {
+        return regSet.getAf();
     }
 
     /**

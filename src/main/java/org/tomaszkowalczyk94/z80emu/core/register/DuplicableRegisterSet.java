@@ -51,6 +51,15 @@ public class DuplicableRegisterSet {
         l = value.getLowByte();
     }
 
+    public XBit16 getAf() {
+        return XBit16.valueOfHighAndLow(a, f);
+    }
+
+    public void setAf(XBit16 value) {
+        a = value.getHighByte();
+        f = value.getLowByte();
+    }
+
     /**
      * @param id id of registers:<br>
      * 0b000 - B <br>

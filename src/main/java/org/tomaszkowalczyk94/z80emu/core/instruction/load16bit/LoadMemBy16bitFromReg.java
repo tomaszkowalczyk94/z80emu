@@ -8,6 +8,8 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
 import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionHelper;
 import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
 
+import static org.tomaszkowalczyk94.z80emu.core.register.RegisterBank.Reg16bit.SP;
+
 /**
  * <h2>LD (nn), dd</h2>
  *
@@ -53,7 +55,7 @@ public class LoadMemBy16bitFromReg extends Instruction {
         helper.write16bitToMemory(
                 z80,
                 address,
-                z80.getRegs().get16BitRegisterById(regId)
+                z80.getRegs().get16BitRegisterById(regId, SP)
         );
 
         return InstructionResult.builder()

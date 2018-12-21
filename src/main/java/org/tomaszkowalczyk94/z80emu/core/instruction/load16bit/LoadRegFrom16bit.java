@@ -8,6 +8,8 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
 import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionHelper;
 import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
 
+import static org.tomaszkowalczyk94.z80emu.core.register.RegisterBank.Reg16bit.SP;
+
 /**
  * <h2>LD dd, nn</h2>
  *
@@ -50,7 +52,8 @@ public class LoadRegFrom16bit extends Instruction {
 
         z80.getRegs().set16BitRegisterById(
                 (byte)opcode.getValueOfBits(5,4),
-                newValue
+                newValue,
+                SP
         );
 
 

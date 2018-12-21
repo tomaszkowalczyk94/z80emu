@@ -51,6 +51,9 @@ public class InstructionsContainer {
     PushReg pushReg = new PushReg(instructionHelper);
     PushIx pushIx = new PushIx(instructionHelper);
     PushIy pushIy = new PushIy(instructionHelper);
+    PopReg popReg = new PopReg(instructionHelper);
+
+
 
     Call16bit call16bit = new Call16bit(instructionHelper);
     Ret ret = new Ret(instructionHelper);

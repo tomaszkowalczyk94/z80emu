@@ -97,6 +97,8 @@ public class InstructionDecoder {
         switch (opcode.getValueOfBits(3,0)) {
             case 0b0101:
                 return instructionsContainer.pushReg;
+            case 0b0001:
+                return instructionsContainer.popReg;
             default:
                 throw new UnsupportedInstructionException(opcode);
         }
