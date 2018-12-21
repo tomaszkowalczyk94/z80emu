@@ -1,6 +1,7 @@
 package org.tomaszkowalczyk94.z80emu.core.instruction.decoder;
 
 import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.Call16bitIfCondition;
+import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.RetIfCondition;
 import org.tomaszkowalczyk94.z80emu.core.instruction.helper.InstructionHelper;
 import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.Call16bit;
 import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.Ret;
@@ -59,4 +60,5 @@ public class InstructionsContainer {
     Call16bit call16bit = new Call16bit(instructionHelper);
     Call16bitIfCondition call16bitIfCondition = new Call16bitIfCondition(instructionHelper);
     Ret ret = new Ret(instructionHelper);
+    RetIfCondition retIfCondition = new RetIfCondition(instructionHelper);
 }

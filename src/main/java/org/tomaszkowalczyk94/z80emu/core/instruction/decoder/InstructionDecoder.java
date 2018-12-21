@@ -101,6 +101,8 @@ public class InstructionDecoder {
                 return instructionsContainer.popReg;
             case 0b100:
                 return instructionsContainer.call16bitIfCondition;
+            case 0b000:
+                return instructionsContainer.retIfCondition;
             default:
                 throw new UnsupportedInstructionException(opcode);
         }
