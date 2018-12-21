@@ -48,7 +48,7 @@ public class InstructionsContainer {
     LoadSpFromHl loadSpFromHl = new LoadSpFromHl(instructionHelper);
     LoadSpFromIx loadSpFromIx = new LoadSpFromIx(instructionHelper);
     LoadSpFromIy loadSpFromIy = new LoadSpFromIy(instructionHelper);
-
+    PushReg pushReg = new PushReg(instructionHelper);
 
     Call16bit call16bit = new Call16bit(instructionHelper);
     Ret ret = new Ret(instructionHelper);

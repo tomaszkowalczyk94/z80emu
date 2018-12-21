@@ -57,10 +57,14 @@ public class InstructionDecoder {
                 return decode01bits(opcode);
             case 0b00:
                 return decode00bits(opcode);
+            case 0b11:
+                return decode11bits(opcode);
             default:
                 throw new UnsupportedInstructionException(opcode);
         }
     }
+
+
 
     private XBit8 readSecondByte(Memory memory, XBit16 pc) throws MemoryException {
         return memory.read(XBitUtils.incrementBy(pc,1));
@@ -84,6 +88,15 @@ public class InstructionDecoder {
                 return instructionsContainer.loadRegFrom8Bit;
             case 0b001:
                 return instructionsContainer.loadRegFrom16bit;
+            default:
+                throw new UnsupportedInstructionException(opcode);
+        }
+    }
+
+    private Instruction decode11bits(XBit8 opcode) throws UnsupportedInstructionException {
+        switch (opcode.getValueOfBits(3,0)) {
+            case 0b0101:
+                return instructionsContainer.pushReg;
             default:
                 throw new UnsupportedInstructionException(opcode);
         }
