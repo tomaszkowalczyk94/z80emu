@@ -49,7 +49,7 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.helper.InstructionHelper;
  * 100 Parity Odd (PO) P/V <br />
  * 101 Parity Even (PE) P/V <br />
  * 110 Sign Positive (P) S <br />
- * Sign Negative (M) S <br />
+ * 111 Sign Negative (M) S <br />
  */
 public class Call16bitIfCondition extends Instruction {
     public Call16bitIfCondition(InstructionHelper helper) {

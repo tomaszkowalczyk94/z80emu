@@ -6,6 +6,7 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.helper.InstructionHelper;
 import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.Call16bit;
 import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.Ret;
 import org.tomaszkowalczyk94.z80emu.core.instruction.jump.Jp16bit;
+import org.tomaszkowalczyk94.z80emu.core.instruction.jump.Jp16bitIfCondition;
 import org.tomaszkowalczyk94.z80emu.core.instruction.load16bit.*;
 import org.tomaszkowalczyk94.z80emu.core.instruction.load8bit.*;
 
@@ -68,4 +69,5 @@ public class InstructionsContainer {
 
     //jump group
     Jp16bit jp16bit = new Jp16bit(instructionHelper);
+    Jp16bitIfCondition jp16bitIfCondition = new Jp16bitIfCondition(instructionHelper);
 }
