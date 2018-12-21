@@ -123,6 +123,9 @@ public class InstructionDecoder {
         if(secondByte.getUnsignedValue() == 0xE5) {
             return instructionsContainer.pushIx;
         }
+        if(secondByte.getUnsignedValue() == 0xE1) {
+            return instructionsContainer.popIx;
+        }
         if(secondByte.getValueOfBits(2,0) == 0b110) {
             return instructionsContainer.loadRegFromMemByIxAnd8Bit;
         }

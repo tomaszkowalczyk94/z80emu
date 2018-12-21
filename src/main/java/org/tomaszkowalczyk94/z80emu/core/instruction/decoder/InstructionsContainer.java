@@ -52,7 +52,7 @@ public class InstructionsContainer {
     PushIx pushIx = new PushIx(instructionHelper);
     PushIy pushIy = new PushIy(instructionHelper);
     PopReg popReg = new PopReg(instructionHelper);
-
+    PopIx popIx = new PopIx(instructionHelper);
 
 
     Call16bit call16bit = new Call16bit(instructionHelper);
