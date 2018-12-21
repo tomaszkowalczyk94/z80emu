@@ -6,7 +6,7 @@ import org.tomaszkowalczyk94.xbit.XBitUtils;
 import org.tomaszkowalczyk94.z80emu.core.Z80;
 import org.tomaszkowalczyk94.z80emu.core.Z80Exception;
 import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
-import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionHelper;
+import org.tomaszkowalczyk94.z80emu.core.instruction.helper.InstructionHelper;
 import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
 
 import static org.tomaszkowalczyk94.z80emu.core.register.RegisterBank.Reg16bit.SP;

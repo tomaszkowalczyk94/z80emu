@@ -1,6 +1,6 @@
 package org.tomaszkowalczyk94.z80emu.core.instruction.decoder;
 
-import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionHelper;
+import org.tomaszkowalczyk94.z80emu.core.instruction.helper.InstructionHelper;
 import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.Call16bit;
 import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.Ret;
 import org.tomaszkowalczyk94.z80emu.core.instruction.load16bit.*;

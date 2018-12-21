@@ -1,4 +1,4 @@
-package org.tomaszkowalczyk94.z80emu.core.instruction;
+package org.tomaszkowalczyk94.z80emu.core.instruction.helper;
 
 import org.tomaszkowalczyk94.xbit.XBit16;
 import org.tomaszkowalczyk94.xbit.XBit8;
