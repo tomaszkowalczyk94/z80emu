@@ -148,6 +148,9 @@ public class InstructionDecoder {
         if(secondByte.getUnsignedValue() == 0xF9) {
             return instructionsContainer.loadSpFromIy;
         }
+        if(secondByte.getUnsignedValue() == 0xE5) {
+            return instructionsContainer.pushIy;
+        }
         if(secondByte.getValueOfBits(2,0) == 0b110) {
             return instructionsContainer.loadRegFromMemByIyAnd8bit;
         }
