@@ -95,4 +95,23 @@ public class InstructionHelper {
                 z80.getMem().read(address)
         );
     }
+
+    public void pushToStack(Z80 z80, XBit16 value) throws MemoryException {
+
+        //write value to stack
+        z80.getMem().write(
+                XBitUtils.incrementBy(z80.getRegs().getSp(), -1),
+                value.getHighByte()
+        );
+
+        z80.getMem().write(
+                XBitUtils.incrementBy(z80.getRegs().getSp(), -2),
+                value.getLowByte()
+        );
+
+        //set stack pointer
+        z80.getRegs().setSp(
+                XBitUtils.incrementBy(z80.getRegs().getSp(), -2)
+        );
+    }
 }

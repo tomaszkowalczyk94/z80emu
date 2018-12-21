@@ -2,7 +2,6 @@ package org.tomaszkowalczyk94.z80emu.core.instruction.load16bit;
 
 import org.tomaszkowalczyk94.xbit.XBit16;
 import org.tomaszkowalczyk94.xbit.XBit8;
-import org.tomaszkowalczyk94.xbit.XBitUtils;
 import org.tomaszkowalczyk94.z80emu.core.Z80;
 import org.tomaszkowalczyk94.z80emu.core.Z80Exception;
 import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
@@ -50,21 +49,7 @@ public class PushReg extends Instruction {
 
         XBit16 valueToPush = z80.getRegs().get16BitRegisterById((byte) opcode.getValueOfBits(5, 4));
 
-        //write value to stack
-        z80.getMem().write(
-                XBitUtils.incrementBy(z80.getRegs().getSp(), -1),
-                valueToPush.getHighByte()
-        );
-
-        z80.getMem().write(
-                XBitUtils.incrementBy(z80.getRegs().getSp(), -2),
-                valueToPush.getLowByte()
-        );
-
-        //set stack pointer
-        z80.getRegs().setSp(
-                XBitUtils.incrementBy(z80.getRegs().getSp(), -2)
-        );
+        helper.pushToStack(z80, valueToPush);
 
         return InstructionResult.builder()
                 .machineCycles(3)
