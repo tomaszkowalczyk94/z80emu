@@ -5,6 +5,7 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.RetIfConditio
 import org.tomaszkowalczyk94.z80emu.core.instruction.helper.InstructionHelper;
 import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.Call16bit;
 import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.Ret;
+import org.tomaszkowalczyk94.z80emu.core.instruction.jump.Jp16bit;
 import org.tomaszkowalczyk94.z80emu.core.instruction.load16bit.*;
 import org.tomaszkowalczyk94.z80emu.core.instruction.load8bit.*;
 
@@ -14,6 +15,7 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.load8bit.*;
 public class InstructionsContainer {
     private InstructionHelper instructionHelper = new InstructionHelper();
 
+    //8bit load group
     LoadRegFromReg loadRegFromReg = new LoadRegFromReg(instructionHelper);
     LoadRegFrom8bit loadRegFrom8Bit = new LoadRegFrom8bit(instructionHelper);
     LoadRegFromMemByHl loadRegFromMemByHl = new LoadRegFromMemByHl(instructionHelper);
@@ -36,6 +38,7 @@ public class InstructionsContainer {
     LoadAFromI loadAFromI = new LoadAFromI(instructionHelper);
     LoadAFromR loadAFromR = new LoadAFromR(instructionHelper);
 
+    //16bit load group
     LoadRegFrom16bit loadRegFrom16bit = new LoadRegFrom16bit(instructionHelper);
     LoadIxFrom16bit loadIxFrom16bit = new LoadIxFrom16bit(instructionHelper);
     LoadIyFrom16bit loadIyFrom16bit = new LoadIyFrom16bit(instructionHelper);
@@ -57,8 +60,12 @@ public class InstructionsContainer {
     PopIx popIx = new PopIx(instructionHelper);
     PopIy popIy = new PopIy(instructionHelper);
 
+    //call and return group
     Call16bit call16bit = new Call16bit(instructionHelper);
     Call16bitIfCondition call16bitIfCondition = new Call16bitIfCondition(instructionHelper);
     Ret ret = new Ret(instructionHelper);
     RetIfCondition retIfCondition = new RetIfCondition(instructionHelper);
+
+    //jump group
+    Jp16bit jp16bit = new Jp16bit(instructionHelper);
 }
