@@ -156,7 +156,7 @@ public class RegisterBank {
      * alias for {@link DuplicableRegisterSet#setF(XBit8 f)}
      */
     public void setF(XBit8 f) {
-        regSet.setA(f);
+        regSet.setF(f);
     }
 
     /**

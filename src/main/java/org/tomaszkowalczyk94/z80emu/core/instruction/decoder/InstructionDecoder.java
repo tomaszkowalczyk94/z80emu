@@ -94,11 +94,13 @@ public class InstructionDecoder {
     }
 
     private Instruction decode11bits(XBit8 opcode) throws UnsupportedInstructionException {
-        switch (opcode.getValueOfBits(3,0)) {
-            case 0b0101:
+        switch (opcode.getValueOfBits(2,0)) {
+            case 0b101:
                 return instructionsContainer.pushReg;
-            case 0b0001:
+            case 0b001:
                 return instructionsContainer.popReg;
+            case 0b100:
+                return instructionsContainer.call16bitIfCondition;
             default:
                 throw new UnsupportedInstructionException(opcode);
         }

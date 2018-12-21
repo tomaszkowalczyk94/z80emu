@@ -52,20 +52,9 @@ public class Call16bit extends Instruction {
 
         XBit16 incrementedPc = XBitUtils.incrementBy(z80.getRegs().getPc(), 3);
 
-        //write value to stack
-        z80.getMem().write(
-                XBitUtils.incrementBy(z80.getRegs().getSp(), -1),
-                incrementedPc.getHighByte()
-        );
-
-        z80.getMem().write(
-                XBitUtils.incrementBy(z80.getRegs().getSp(), -2),
-                incrementedPc.getLowByte()
-        );
-
-        //set stack pointer
-        z80.getRegs().setSp(
-                XBitUtils.incrementBy(z80.getRegs().getSp(), -2)
+        helper.pushToStack(
+                z80,
+                incrementedPc
         );
 
         //set pc to new call address
@@ -75,7 +64,6 @@ public class Call16bit extends Instruction {
                         helper.getSecondByte(z80)
                 )
         );
-
 
         return InstructionResult.builder()
                 .machineCycles(5)

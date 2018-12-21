@@ -1,5 +1,14 @@
 package org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn;
 
+import org.tomaszkowalczyk94.xbit.XBit16;
+import org.tomaszkowalczyk94.xbit.XBit8;
+import org.tomaszkowalczyk94.xbit.XBitUtils;
+import org.tomaszkowalczyk94.z80emu.core.Z80;
+import org.tomaszkowalczyk94.z80emu.core.Z80Exception;
+import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
+import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
+import org.tomaszkowalczyk94.z80emu.core.instruction.helper.InstructionHelper;
+
 /**
  * <h2>CALL cc, nn</h2>
  *
@@ -33,7 +42,61 @@ package org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn;
  * Condition cc is programmed as one of eight statuses that corresponds to condition bits in
  * the Flag Register (Register F). These eight statuses are defined in the following table,
  * which also specifies the corresponding cc bit fields in the assembled object code.
- *
+ * 000 Non-Zero (NZ) Z <br />
+ * 001 Zero (Z) Z <br />
+ * 010 Non Carry (NC) C <br />
+ * 011 Carry (C) Z <br />
+ * 100 Parity Odd (PO) P/V <br />
+ * 101 Parity Even (PE) P/V <br />
+ * 110 Sign Positive (P) S <br />
+ * Sign Negative (M) S <br />
  */
-public class Call16bitIfCondition {
+public class Call16bitIfCondition extends Instruction {
+    public Call16bitIfCondition(InstructionHelper helper) {
+        super(helper);
+    }
+
+    @Override
+    public InstructionResult execute(XBit8 opcode, Z80 z80) throws Z80Exception {
+
+        boolean conditionResult = helper.getConditionHelper().checkCondition(
+                opcode.getValueOfBits(5, 3),
+                z80
+        );
+
+        if(conditionResult) {
+
+            XBit16 incrementedPc = XBitUtils.incrementBy(z80.getRegs().getPc(), 3);
+
+            helper.pushToStack(
+                    z80,
+                    incrementedPc
+            );
+
+            //set pc to new call address
+            z80.getRegs().setPc(
+                    XBit16.valueOfHighAndLow(
+                            helper.getThirdByte(z80),
+                            helper.getSecondByte(z80)
+                    )
+            );
+
+            return InstructionResult.builder()
+                    .machineCycles(5)
+                    .clocks(17)
+                    .executionTime(4.25f)
+                    .size(3)
+                    .autoIncrementPc(false)
+                    .build();
+        } else {
+            return InstructionResult.builder()
+                    .machineCycles(3)
+                    .clocks(10)
+                    .executionTime(2.50f)
+                    .size(3)
+                    .build();
+        }
+
+
+    }
 }

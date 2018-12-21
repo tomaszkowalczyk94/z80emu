@@ -1,5 +1,6 @@
 package org.tomaszkowalczyk94.z80emu.core.instruction.helper;
 
+import lombok.Data;
 import org.tomaszkowalczyk94.xbit.XBit16;
 import org.tomaszkowalczyk94.xbit.XBit8;
 import org.tomaszkowalczyk94.xbit.XBitUtils;
@@ -10,7 +11,10 @@ import static org.tomaszkowalczyk94.z80emu.core.register.FlagRegManager.Flag.PV;
 import static org.tomaszkowalczyk94.z80emu.core.register.FlagRegManager.Flag.S;
 import static org.tomaszkowalczyk94.z80emu.core.register.FlagRegManager.Flag.Z;
 
+@Data
 public class InstructionHelper {
+    ConditionHelper conditionHelper = new ConditionHelper();
+
 
     /**
      * instruction can have more than 1 byte instruction. This method return second byte of instruction (first byte operand)
