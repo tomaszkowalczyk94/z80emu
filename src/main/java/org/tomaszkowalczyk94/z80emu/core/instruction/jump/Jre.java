@@ -1,12 +1,12 @@
 package org.tomaszkowalczyk94.z80emu.core.instruction.jump;
 
 import org.tomaszkowalczyk94.xbit.XBit8;
-import org.tomaszkowalczyk94.xbit.XBitUtils;
 import org.tomaszkowalczyk94.z80emu.core.Z80;
 import org.tomaszkowalczyk94.z80emu.core.Z80Exception;
 import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
 import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
 import org.tomaszkowalczyk94.z80emu.core.instruction.helper.InstructionHelper;
+import org.tomaszkowalczyk94.z80emu.core.instruction.helper.JumpHelper;
 
 /**
  * <h2>JR e</h2>
@@ -33,14 +33,18 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.helper.InstructionHelper;
  * bytes. The assembler automatically adjusts for the twice incremented PC.
  */
 public class Jre extends Instruction {
-    public Jre(InstructionHelper helper) {
+
+    private JumpHelper jumpHelper;
+
+    public Jre(InstructionHelper helper, JumpHelper jumpHelper) {
         super(helper);
+        this.jumpHelper = jumpHelper;
     }
 
     @Override
     public InstructionResult execute(XBit8 opcode, Z80 z80) throws Z80Exception {
 
-        helper.jumpRelative(z80, helper.getSecondByte(z80).getSignedValue());
+        jumpHelper.jumpRelative(z80, helper.getSecondByte(z80).getSignedValue());
 
         return InstructionResult.builder()
                 .machineCycles(3)

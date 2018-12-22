@@ -2,13 +2,12 @@ package org.tomaszkowalczyk94.z80emu.core.instruction.decoder;
 
 import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.Call16bitIfCondition;
 import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.RetIfCondition;
+import org.tomaszkowalczyk94.z80emu.core.instruction.helper.ConditionHelper;
 import org.tomaszkowalczyk94.z80emu.core.instruction.helper.InstructionHelper;
 import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.Call16bit;
 import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.Ret;
-import org.tomaszkowalczyk94.z80emu.core.instruction.jump.Jp16bit;
-import org.tomaszkowalczyk94.z80emu.core.instruction.jump.Jp16bitIfCondition;
-import org.tomaszkowalczyk94.z80emu.core.instruction.jump.Jre;
-import org.tomaszkowalczyk94.z80emu.core.instruction.jump.JreIfCarryFlag;
+import org.tomaszkowalczyk94.z80emu.core.instruction.helper.JumpHelper;
+import org.tomaszkowalczyk94.z80emu.core.instruction.jump.*;
 import org.tomaszkowalczyk94.z80emu.core.instruction.load16bit.*;
 import org.tomaszkowalczyk94.z80emu.core.instruction.load8bit.*;
 
@@ -17,6 +16,8 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.load8bit.*;
  */
 public class InstructionsContainer {
     private InstructionHelper instructionHelper = new InstructionHelper();
+    private ConditionHelper conditionHelper = new ConditionHelper();
+    private JumpHelper jumpHelper = new JumpHelper(instructionHelper, conditionHelper);
 
     //8bit load group
     LoadRegFromReg loadRegFromReg = new LoadRegFromReg(instructionHelper);
@@ -65,16 +66,16 @@ public class InstructionsContainer {
 
     //call and return group
     Call16bit call16bit = new Call16bit(instructionHelper);
-    Call16bitIfCondition call16bitIfCondition = new Call16bitIfCondition(instructionHelper);
+    Call16bitIfCondition call16bitIfCondition = new Call16bitIfCondition(instructionHelper, conditionHelper);
     Ret ret = new Ret(instructionHelper);
-    RetIfCondition retIfCondition = new RetIfCondition(instructionHelper);
+    RetIfCondition retIfCondition = new RetIfCondition(instructionHelper, conditionHelper);
 
     //jump group
     Jp16bit jp16bit = new Jp16bit(instructionHelper);
-    Jp16bitIfCondition jp16bitIfCondition = new Jp16bitIfCondition(instructionHelper);
-    Jre jre = new Jre(instructionHelper);
-    JreIfCarryFlag jreIfCarryFlag = new JreIfCarryFlag(instructionHelper);
-
+    Jp16bitIfCondition jp16bitIfCondition = new Jp16bitIfCondition(instructionHelper, conditionHelper);
+    Jre jre = new Jre(instructionHelper, jumpHelper);
+    JreIfCarryFlag jreIfCarryFlag = new JreIfCarryFlag(instructionHelper, jumpHelper);
+    JreIfNonCarryFlag jreIfNonCarryFlag = new JreIfNonCarryFlag(instructionHelper, jumpHelper);
 
 
 }

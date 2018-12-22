@@ -7,6 +7,7 @@ import org.tomaszkowalczyk94.z80emu.core.Z80;
 import org.tomaszkowalczyk94.z80emu.core.Z80Exception;
 import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
 import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
+import org.tomaszkowalczyk94.z80emu.core.instruction.helper.ConditionHelper;
 import org.tomaszkowalczyk94.z80emu.core.instruction.helper.InstructionHelper;
 
 /**
@@ -52,14 +53,18 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.helper.InstructionHelper;
  * 111 Sign Negative (M) S <br />
  */
 public class Call16bitIfCondition extends Instruction {
-    public Call16bitIfCondition(InstructionHelper helper) {
+
+    private ConditionHelper conditionHelper;
+
+    public Call16bitIfCondition(InstructionHelper helper, ConditionHelper conditionHelper) {
         super(helper);
+        this.conditionHelper = conditionHelper;
     }
 
     @Override
     public InstructionResult execute(XBit8 opcode, Z80 z80) throws Z80Exception {
 
-        boolean conditionResult = helper.getConditionHelper().checkCondition(
+        boolean conditionResult = conditionHelper.checkCondition(
                 opcode.getValueOfBits(5, 3),
                 z80
         );

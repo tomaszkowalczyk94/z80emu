@@ -6,6 +6,7 @@ import org.tomaszkowalczyk94.z80emu.core.Z80;
 import org.tomaszkowalczyk94.z80emu.core.Z80Exception;
 import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
 import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
+import org.tomaszkowalczyk94.z80emu.core.instruction.helper.ConditionHelper;
 import org.tomaszkowalczyk94.z80emu.core.instruction.helper.InstructionHelper;
 
 /**
@@ -46,14 +47,17 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.helper.InstructionHelper;
  * Sign Negative (M) S <br />
  */
 public class RetIfCondition extends Instruction {
-    public RetIfCondition(InstructionHelper helper) {
+    private ConditionHelper conditionHelper;
+
+    public RetIfCondition(InstructionHelper helper, ConditionHelper conditionHelper) {
         super(helper);
+        this.conditionHelper = conditionHelper;
     }
 
     @Override
     public InstructionResult execute(XBit8 opcode, Z80 z80) throws Z80Exception {
 
-        boolean conditionResult = helper.getConditionHelper().checkCondition(
+        boolean conditionResult = conditionHelper.checkCondition(
                 opcode.getValueOfBits(5, 3),
                 z80
         );

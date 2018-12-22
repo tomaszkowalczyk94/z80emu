@@ -13,8 +13,6 @@ import static org.tomaszkowalczyk94.z80emu.core.register.FlagRegManager.Flag.Z;
 
 @Data
 public class InstructionHelper {
-    ConditionHelper conditionHelper = new ConditionHelper();
-
 
     /**
      * instruction can have more than 1 byte instruction. This method return second byte of instruction (first byte operand)
@@ -138,9 +136,5 @@ public class InstructionHelper {
         return value;
     }
 
-    public void jumpRelative(Z80 z80, int value) {
-        z80.getRegs().setPc(
-                XBitUtils.incrementBy(z80.getRegs().getPc(), value)
-        );
-    }
+
 }
