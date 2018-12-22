@@ -26,7 +26,7 @@ public class JreTest {
 
         Assert.assertEquals(0x0081, z80.getRegs().getPc().getUnsignedValue());
 
-        Assert.assertEquals(10, z80.getClockCyclesCounter());
+        Assert.assertEquals(12, z80.getClockCyclesCounter());
         Assert.assertEquals(1, z80.getInstructionCounter());
     }
 }

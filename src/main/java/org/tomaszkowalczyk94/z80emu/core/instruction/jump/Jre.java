@@ -46,8 +46,8 @@ public class Jre extends Instruction {
 
         return InstructionResult.builder()
                 .machineCycles(3)
-                .clocks(10)
-                .executionTime(2.50f)
+                .clocks(12)
+                .executionTime(3.0f)
                 .size(3)
                 .autoIncrementPc(false)
                 .build();
