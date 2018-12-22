@@ -19,31 +19,22 @@ public class JreIfCarryFlagTest {
 
     @Test
     public void execute() throws Exception {
-        z80.getMem().write(0, XBit8.valueOfUnsigned(0x38));
-        z80.getMem().write(1, XBit8.valueOfUnsigned(0x7F)); //jr C, 129
+        JumpRelativeInstructionHelper jumpRelativeInstructionHelper = new JumpRelativeInstructionHelper();
 
-        z80.getRegs().setFlag(FlagRegManager.Flag.C, true);
+        jumpRelativeInstructionHelper.makeTest(
+                XBit8.valueOfUnsigned(0x38),
+                FlagRegManager.Flag.C,
+                true,
+                true
+        );
 
-        z80.runOneInstruction();
+        jumpRelativeInstructionHelper.makeTest(
+                XBit8.valueOfUnsigned(0x38),
+                FlagRegManager.Flag.C,
+                false,
+                false
+        );
 
-        Assert.assertEquals(0x0081, z80.getRegs().getPc().getUnsignedValue());
-
-        Assert.assertEquals(12, z80.getClockCyclesCounter());
-        Assert.assertEquals(1, z80.getInstructionCounter());
     }
 
-    @Test
-    public void execute2() throws Exception {
-        z80.getMem().write(0, XBit8.valueOfUnsigned(0x38));
-        z80.getMem().write(1, XBit8.valueOfUnsigned(0x7F)); //jr C, 129
-
-        z80.getRegs().setFlag(FlagRegManager.Flag.C, false);
-
-        z80.runOneInstruction();
-
-        Assert.assertEquals(0x0002, z80.getRegs().getPc().getUnsignedValue());
-
-        Assert.assertEquals(7, z80.getClockCyclesCounter());
-        Assert.assertEquals(1, z80.getInstructionCounter());
-    }
 }
