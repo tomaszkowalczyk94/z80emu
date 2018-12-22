@@ -137,4 +137,10 @@ public class InstructionHelper {
 
         return value;
     }
+
+    public void jumpRelative(Z80 z80, int value) {
+        z80.getRegs().setPc(
+                XBitUtils.incrementBy(z80.getRegs().getPc(), value)
+        );
+    }
 }

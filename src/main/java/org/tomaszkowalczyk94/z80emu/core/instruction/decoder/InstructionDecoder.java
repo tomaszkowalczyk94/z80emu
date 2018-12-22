@@ -53,6 +53,8 @@ public class InstructionDecoder {
                 return instructionsContainer.jp16bit;
             case 0x18:
                 return instructionsContainer.jre;
+            case 0x38:
+                return instructionsContainer.jreIfCarryFlag;
             default: //nothing, going to next switch
         }
 

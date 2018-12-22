@@ -40,16 +40,13 @@ public class Jre extends Instruction {
     @Override
     public InstructionResult execute(XBit8 opcode, Z80 z80) throws Z80Exception {
 
-        z80.getRegs().setPc(
-                XBitUtils.incrementBy(z80.getRegs().getPc(), helper.getSecondByte(z80).getSignedValue()+2)
-        );
+        helper.jumpRelative(z80, helper.getSecondByte(z80).getSignedValue());
 
         return InstructionResult.builder()
                 .machineCycles(3)
                 .clocks(12)
                 .executionTime(3.0f)
-                .size(3)
-                .autoIncrementPc(false)
+                .size(2)
                 .build();
     }
 }
