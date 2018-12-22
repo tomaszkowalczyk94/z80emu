@@ -61,6 +61,8 @@ public class InstructionDecoder {
                 return instructionsContainer.jreIfZeroFlag;
             case 0x20:
                 return instructionsContainer.jreIfNonZeroFlag;
+            case 0xE9:
+                return instructionsContainer.jpByHl;
             default: //nothing, going to next switch
         }
 
@@ -144,6 +146,9 @@ public class InstructionDecoder {
         if(secondByte.getUnsignedValue() == 0xE1) {
             return instructionsContainer.popIx;
         }
+        if(secondByte.getUnsignedValue() == 0xE9) {
+            return instructionsContainer.jpByIx;
+        }
         if(secondByte.getValueOfBits(2,0) == 0b110) {
             return instructionsContainer.loadRegFromMemByIxAnd8Bit;
         }
@@ -176,6 +181,9 @@ public class InstructionDecoder {
         }
         if(secondByte.getUnsignedValue() == 0xE1) {
             return instructionsContainer.popIy;
+        }
+        if(secondByte.getUnsignedValue() == 0xE9) {
+            return instructionsContainer.jpByIy;
         }
         if(secondByte.getValueOfBits(2,0) == 0b110) {
             return instructionsContainer.loadRegFromMemByIyAnd8bit;

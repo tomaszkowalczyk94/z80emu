@@ -78,6 +78,7 @@ public class InstructionsContainer {
     JreIfNonCarryFlag jreIfNonCarryFlag = new JreIfNonCarryFlag(instructionHelper, jumpHelper);
     JreIfZeroFlag jreIfZeroFlag = new JreIfZeroFlag(instructionHelper, jumpHelper);
     JreIfNonZeroFlag jreIfNonZeroFlag = new JreIfNonZeroFlag(instructionHelper, jumpHelper);
-
-
+    JpByHl jpByHl = new JpByHl(instructionHelper);
+    JpByIx jpByIx = new JpByIx(instructionHelper);
+    JpByIy jpByIy = new JpByIy(instructionHelper);
 }
