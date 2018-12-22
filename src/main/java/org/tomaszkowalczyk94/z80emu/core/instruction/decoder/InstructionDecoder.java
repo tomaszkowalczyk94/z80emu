@@ -63,6 +63,8 @@ public class InstructionDecoder {
                 return instructionsContainer.jreIfNonZeroFlag;
             case 0xE9:
                 return instructionsContainer.jpByHl;
+            case 0x10:
+                return instructionsContainer.decrementAndJumpOnNonZero;
             default: //nothing, going to next switch
         }
 

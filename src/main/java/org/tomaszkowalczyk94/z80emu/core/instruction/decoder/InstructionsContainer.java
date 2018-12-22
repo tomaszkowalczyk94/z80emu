@@ -81,4 +81,5 @@ public class InstructionsContainer {
     JpByHl jpByHl = new JpByHl(instructionHelper);
     JpByIx jpByIx = new JpByIx(instructionHelper);
     JpByIy jpByIy = new JpByIy(instructionHelper);
+    DecrementAndJumpOnNonZero decrementAndJumpOnNonZero = new DecrementAndJumpOnNonZero(instructionHelper, jumpHelper);
 }
