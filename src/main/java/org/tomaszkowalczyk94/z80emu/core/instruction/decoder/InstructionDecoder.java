@@ -57,6 +57,8 @@ public class InstructionDecoder {
                 return instructionsContainer.jreIfCarryFlag;
             case 0x30:
                 return instructionsContainer.jreIfNonCarryFlag;
+            case 0x28:
+                return instructionsContainer.jreIfZeroFlag;
             default: //nothing, going to next switch
         }
 

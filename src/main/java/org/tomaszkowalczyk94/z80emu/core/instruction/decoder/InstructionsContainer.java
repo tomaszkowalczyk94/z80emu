@@ -76,6 +76,7 @@ public class InstructionsContainer {
     Jre jre = new Jre(instructionHelper, jumpHelper);
     JreIfCarryFlag jreIfCarryFlag = new JreIfCarryFlag(instructionHelper, jumpHelper);
     JreIfNonCarryFlag jreIfNonCarryFlag = new JreIfNonCarryFlag(instructionHelper, jumpHelper);
+    JreIfZeroFlag jreIfZeroFlag = new JreIfZeroFlag(instructionHelper, jumpHelper);
 
 
 }
