@@ -51,6 +51,8 @@ public class InstructionDecoder {
                 return instructionsContainer.ret;
             case 0xC3:
                 return instructionsContainer.jp16bit;
+            case 0x18:
+                return instructionsContainer.jre;
             default: //nothing, going to next switch
         }
 
