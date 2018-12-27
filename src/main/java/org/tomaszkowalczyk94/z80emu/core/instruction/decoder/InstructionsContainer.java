@@ -1,6 +1,7 @@
 package org.tomaszkowalczyk94.z80emu.core.instruction.decoder;
 
 import org.tomaszkowalczyk94.z80emu.core.instruction.blocktransfer.LoadDataAndDecrement;
+import org.tomaszkowalczyk94.z80emu.core.instruction.blocktransfer.LoadDataAndDecrementAndRepeat;
 import org.tomaszkowalczyk94.z80emu.core.instruction.blocktransfer.LoadDataAndIncrement;
 import org.tomaszkowalczyk94.z80emu.core.instruction.blocktransfer.LoadDataAndIncrementAndRepeat;
 import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.Call16bitIfCondition;
@@ -97,4 +98,5 @@ public class InstructionsContainer {
     LoadDataAndIncrement loadDataAndIncrement = new LoadDataAndIncrement(instructionHelper, loadDataAndIncrementHelper);
     LoadDataAndIncrementAndRepeat loadDataAndIncrementAndRepeat = new LoadDataAndIncrementAndRepeat(instructionHelper, loadDataAndIncrementHelper);
     LoadDataAndDecrement loadDataAndDecrement = new LoadDataAndDecrement(instructionHelper, loadDataAndIncrementHelper);
+    LoadDataAndDecrementAndRepeat loadDataAndDecrementAndRepeat = new LoadDataAndDecrementAndRepeat(instructionHelper, loadDataAndIncrementHelper);
 }
