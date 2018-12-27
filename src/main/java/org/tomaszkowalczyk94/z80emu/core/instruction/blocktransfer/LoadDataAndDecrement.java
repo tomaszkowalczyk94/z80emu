@@ -9,16 +9,16 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.helper.InstructionHelper;
 import org.tomaszkowalczyk94.z80emu.core.instruction.helper.LoadDataAndIncrementHelper;
 
 /**
- * <h2>LDI</h2>
+ * <h2>LDD</h2>
  *
  * <table border="1" cellspacing="0">
  *     <tr>
  *         <td>Operation</td>
- *         <td>(DE) ← (HL), DE ← DE + 1, HL ← HL + 1, BC ← BC – 1</td>
+ *         <td>(DE) ← (HL), DE ← DE – 1, HL ← HL– 1, BC ← BC– 1</td>
  *     </tr>
  *     <tr>
  *         <td>Op Code:</td>
- *         <td>LDI </td>
+ *         <td>LDD </td>
  *     </tr>
  *     <tr>
  *         <td>Operands</td>
@@ -26,10 +26,10 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.helper.LoadDataAndIncrement
  *     </tr>
  * </table>
  * <br>
- * A byte of data is transferred from the memory location addressed, by the contents of the
- * HL register pair to the memory location addressed by the contents of the DE register pair.
- * Then both these register pairs are incremented and the Byte Counter (BC) Register pair is
- * decremented. <br />
+ * This 2-byte instruction transfers a byte of data from the memory location addressed by the
+ * contents of the HL register pair to the memory location addressed by the contents of the
+ * DE register pair. Then both of these register pairs including the Byte Counter (BC) Regis
+ * ter pair are decremented<br />
  * Condition Bits Affected<br />
  * S is not affected.<br />
  * Z is not affected.<br />
@@ -39,11 +39,10 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.helper.LoadDataAndIncrement
  * C is not affected.<br />
  *
  */
-public class LoadDataAndIncrement extends Instruction {
-
+public class LoadDataAndDecrement extends Instruction {
     private LoadDataAndIncrementHelper loadDataAndIncrementHelper;
 
-    public LoadDataAndIncrement(InstructionHelper helper, LoadDataAndIncrementHelper loadDataAndIncrementHelper) {
+    public LoadDataAndDecrement(InstructionHelper helper, LoadDataAndIncrementHelper loadDataAndIncrementHelper) {
         super(helper);
         this.loadDataAndIncrementHelper = loadDataAndIncrementHelper;
     }
@@ -51,7 +50,7 @@ public class LoadDataAndIncrement extends Instruction {
     @Override
     public InstructionResult execute(XBit8 opcode, Z80 z80) throws Z80Exception {
 
-        loadDataAndIncrementHelper.execute(z80, 1);
+        loadDataAndIncrementHelper.execute(z80, -1);
 
         return InstructionResult.builder()
                 .machineCycles(4)
