@@ -4,12 +4,9 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.blocktransfer.LoadDataAndIn
 import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.Call16bitIfCondition;
 import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.RetIfCondition;
 import org.tomaszkowalczyk94.z80emu.core.instruction.exchange.*;
-import org.tomaszkowalczyk94.z80emu.core.instruction.helper.ConditionHelper;
-import org.tomaszkowalczyk94.z80emu.core.instruction.helper.ExchangeRegistersHelper;
-import org.tomaszkowalczyk94.z80emu.core.instruction.helper.InstructionHelper;
+import org.tomaszkowalczyk94.z80emu.core.instruction.helper.*;
 import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.Call16bit;
 import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.Ret;
-import org.tomaszkowalczyk94.z80emu.core.instruction.helper.JumpHelper;
 import org.tomaszkowalczyk94.z80emu.core.instruction.jump.*;
 import org.tomaszkowalczyk94.z80emu.core.instruction.load16bit.*;
 import org.tomaszkowalczyk94.z80emu.core.instruction.load8bit.*;
@@ -22,6 +19,7 @@ public class InstructionsContainer {
     private ConditionHelper conditionHelper = new ConditionHelper();
     private JumpHelper jumpHelper = new JumpHelper(instructionHelper, conditionHelper);
     private ExchangeRegistersHelper exchangeRegistersHelper = new ExchangeRegistersHelper(instructionHelper);
+    private LoadDataAndIncrementHelper loadDataAndIncrementHelper = new LoadDataAndIncrementHelper();
 
     //8bit load group
     LoadRegFromReg loadRegFromReg = new LoadRegFromReg(instructionHelper);
@@ -94,5 +92,5 @@ public class InstructionsContainer {
     ExchangeHlWithStackTop exchangeHlWithStackTop = new ExchangeHlWithStackTop(instructionHelper, exchangeRegistersHelper);
     ExchangeIxWithStackTop exchangeIxWithStackTop = new ExchangeIxWithStackTop(instructionHelper, exchangeRegistersHelper);
     ExchangeIyWithStackTop exchangeIyWithStackTop = new ExchangeIyWithStackTop(instructionHelper, exchangeRegistersHelper);
-    LoadDataAndIncrement loadDataAndIncrement = new LoadDataAndIncrement(instructionHelper);
+    LoadDataAndIncrement loadDataAndIncrement = new LoadDataAndIncrement(instructionHelper, loadDataAndIncrementHelper);
 }

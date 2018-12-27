@@ -6,6 +6,7 @@ import org.tomaszkowalczyk94.z80emu.core.Z80Exception;
 import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
 import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
 import org.tomaszkowalczyk94.z80emu.core.instruction.helper.InstructionHelper;
+import org.tomaszkowalczyk94.z80emu.core.instruction.helper.LoadDataAndIncrementHelper;
 import org.tomaszkowalczyk94.z80emu.core.register.FlagRegManager.Flag;
 
 import static org.tomaszkowalczyk94.z80emu.core.register.RegisterBank.Reg16bit.BC;
@@ -45,30 +46,17 @@ import static org.tomaszkowalczyk94.z80emu.core.register.RegisterBank.Reg16bit.H
  */
 public class LoadDataAndIncrement extends Instruction {
 
-    public LoadDataAndIncrement(InstructionHelper helper) {
+    private LoadDataAndIncrementHelper loadDataAndIncrementHelper;
+
+    public LoadDataAndIncrement(InstructionHelper helper, LoadDataAndIncrementHelper loadDataAndIncrementHelper) {
         super(helper);
+        this.loadDataAndIncrementHelper = loadDataAndIncrementHelper;
     }
 
     @Override
     public InstructionResult execute(XBit8 opcode, Z80 z80) throws Z80Exception {
 
-        z80.getMem().write(
-                z80.getRegs().getDE(),
-                z80.getMem().read(z80.getRegs().getHL())
-        );
-
-        //increment de, hl and decrement bc
-        z80.getRegs().incrementReg16bit(DE);
-        z80.getRegs().incrementReg16bit(HL);
-        z80.getRegs().incrementReg16bit(BC, -1);
-
-        //set flags
-        z80.getRegs().setFlag(Flag.H, false);
-        z80.getRegs().setFlag(Flag.N, false);
-        z80.getRegs().setFlag(
-                Flag.PV,
-                (z80.getRegs().getBC().getUnsignedValue()!=0)
-        );
+        loadDataAndIncrementHelper.execute(z80, 1);
 
         return InstructionResult.builder()
                 .machineCycles(4)
