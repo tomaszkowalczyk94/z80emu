@@ -5,6 +5,7 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.RetIfConditio
 import org.tomaszkowalczyk94.z80emu.core.instruction.exchange.ExchangeAfAf;
 import org.tomaszkowalczyk94.z80emu.core.instruction.exchange.ExchangeDeHl;
 import org.tomaszkowalczyk94.z80emu.core.instruction.exchange.ExchangeExtraRegisters;
+import org.tomaszkowalczyk94.z80emu.core.instruction.exchange.ExchangeHlWithStackTop;
 import org.tomaszkowalczyk94.z80emu.core.instruction.helper.ConditionHelper;
 import org.tomaszkowalczyk94.z80emu.core.instruction.helper.InstructionHelper;
 import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.Call16bit;
@@ -90,4 +91,5 @@ public class InstructionsContainer {
     ExchangeDeHl exchangeDeHl = new ExchangeDeHl(instructionHelper);
     ExchangeAfAf exchangeAfAf = new ExchangeAfAf(instructionHelper);
     ExchangeExtraRegisters exchangeExtraRegisters = new ExchangeExtraRegisters(instructionHelper);
+    ExchangeHlWithStackTop exchangeHlWithStackTop = new ExchangeHlWithStackTop(instructionHelper);
 }

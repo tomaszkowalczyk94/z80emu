@@ -71,6 +71,8 @@ public class InstructionDecoder {
                 return instructionsContainer.exchangeAfAf;
             case 0xD9:
                 return instructionsContainer.exchangeExtraRegisters;
+            case 0xE3:
+                return instructionsContainer.exchangeHlWithStackTop;
             default: //nothing, going to next switch
         }
 
