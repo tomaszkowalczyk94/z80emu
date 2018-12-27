@@ -7,6 +7,8 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.decoder.InstructionDecoder;
 import org.tomaszkowalczyk94.z80emu.core.memory.Memory;
 import org.tomaszkowalczyk94.z80emu.core.register.RegisterBank;
 
+import static org.tomaszkowalczyk94.z80emu.core.register.RegisterBank.Reg16bit.PC;
+
 @Data
 public class Z80 {
 
@@ -39,7 +41,7 @@ public class Z80 {
         instructionCounter++;
 
         if(result.isAutoIncrementPc()) {
-            registerBank.incrementPc(result.getSize());
+            registerBank.incrementReg16bit(PC, result.getSize());
         }
 
     }

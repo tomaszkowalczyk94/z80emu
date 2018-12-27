@@ -14,7 +14,7 @@ import org.tomaszkowalczyk94.z80emu.core.register.exception.UnsupportedGeneralPu
 public class RegisterBank {
 
     public enum Reg16bit {
-        BC, DE, HL, SP, AF, IX, IY
+        BC, DE, HL, SP, AF, IX, IY, PC
     }
 
     private final DuplicableRegisterSet regSetA = new DuplicableRegisterSet();
@@ -52,13 +52,17 @@ public class RegisterBank {
         return  (regSet == regSetA) ? regSetB : regSetA;
     }
 
-    public void incrementPc() {
-        incrementPc(1);
+
+    public void incrementReg16bit(Reg16bit regEnum) throws UnsupportedGeneralPurposeRegisterException {
+        incrementReg16bit(regEnum, 1);
     }
 
-    public void incrementPc(int incrementer) {
-        XBit16 incrementedPc = XBitUtils.incrementBy(getPc(), incrementer);
-        setPc(incrementedPc);
+    public void incrementReg16bit(Reg16bit regEnum, int incrementer) throws UnsupportedGeneralPurposeRegisterException {
+        XBit16 incrementedValue = XBitUtils.incrementBy(
+                get16bitRegister(regEnum), incrementer
+        );
+
+        set16bitRegister(regEnum, incrementedValue);
     }
 
     /**
@@ -132,6 +136,7 @@ public class RegisterBank {
             case AF: return getAf();
             case IX: return getIx();
             case IY: return getIy();
+            case PC: return getPc();
             default:
                 throw new UnsupportedGeneralPurposeRegisterException();
         }
@@ -159,6 +164,9 @@ public class RegisterBank {
                 break;
             case IY:
                 setIy(value);
+                break;
+            case PC:
+                setPc(value);
                 break;
             default:
                 throw new UnsupportedGeneralPurposeRegisterException();

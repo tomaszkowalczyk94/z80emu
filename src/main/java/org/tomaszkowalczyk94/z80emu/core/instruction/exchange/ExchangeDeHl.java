@@ -6,7 +6,6 @@ import org.tomaszkowalczyk94.z80emu.core.Z80;
 import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
 import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
 import org.tomaszkowalczyk94.z80emu.core.instruction.helper.InstructionHelper;
-import org.tomaszkowalczyk94.z80emu.core.register.FlagRegManager;
 
 /**
  * <h2>EX DE, HL</h2>
@@ -28,7 +27,7 @@ import org.tomaszkowalczyk94.z80emu.core.register.FlagRegManager;
  * <br>
  * The 2-byte contents of register pairs DE and HL are exchanged.
  */
-public class ExchangeDeHl  extends Instruction {
+public class ExchangeDeHl extends Instruction {
 
     public ExchangeDeHl(InstructionHelper helper) {
         super(helper);
