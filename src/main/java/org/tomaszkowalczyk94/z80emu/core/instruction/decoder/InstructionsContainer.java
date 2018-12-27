@@ -1,6 +1,7 @@
 package org.tomaszkowalczyk94.z80emu.core.instruction.decoder;
 
 import org.tomaszkowalczyk94.z80emu.core.instruction.blocktransfer.LoadDataAndIncrement;
+import org.tomaszkowalczyk94.z80emu.core.instruction.blocktransfer.LoadDataAndIncrementAndRepeat;
 import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.Call16bitIfCondition;
 import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.RetIfCondition;
 import org.tomaszkowalczyk94.z80emu.core.instruction.exchange.*;
@@ -93,4 +94,5 @@ public class InstructionsContainer {
     ExchangeIxWithStackTop exchangeIxWithStackTop = new ExchangeIxWithStackTop(instructionHelper, exchangeRegistersHelper);
     ExchangeIyWithStackTop exchangeIyWithStackTop = new ExchangeIyWithStackTop(instructionHelper, exchangeRegistersHelper);
     LoadDataAndIncrement loadDataAndIncrement = new LoadDataAndIncrement(instructionHelper, loadDataAndIncrementHelper);
+    LoadDataAndIncrementAndRepeat loadDataAndIncrementAndRepeat = new LoadDataAndIncrementAndRepeat(instructionHelper, loadDataAndIncrementHelper);
 }

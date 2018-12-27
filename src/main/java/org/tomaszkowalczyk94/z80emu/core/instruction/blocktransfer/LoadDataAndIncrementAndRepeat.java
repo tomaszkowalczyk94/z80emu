@@ -6,6 +6,7 @@ import org.tomaszkowalczyk94.z80emu.core.Z80Exception;
 import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
 import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
 import org.tomaszkowalczyk94.z80emu.core.instruction.helper.InstructionHelper;
+import org.tomaszkowalczyk94.z80emu.core.instruction.helper.LoadDataAndIncrementHelper;
 
 /**
  * <h2>LDIR</h2>
@@ -42,12 +43,34 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.helper.InstructionHelper;
  *
  */
 public class LoadDataAndIncrementAndRepeat extends Instruction {
-    public LoadDataAndIncrementAndRepeat(InstructionHelper helper) {
+    private LoadDataAndIncrementHelper loadDataAndIncrementHelper;
+
+    public LoadDataAndIncrementAndRepeat(InstructionHelper helper, LoadDataAndIncrementHelper loadDataAndIncrementHelper) {
         super(helper);
+        this.loadDataAndIncrementHelper = loadDataAndIncrementHelper;
     }
 
     @Override
     public InstructionResult execute(XBit8 opcode, Z80 z80) throws Z80Exception {
-        return null;
+
+        loadDataAndIncrementHelper.execute(z80, 1);
+
+        if(z80.getRegs().getBC().getUnsignedValue() != 0) {
+            return InstructionResult.builder()
+                    .machineCycles(5)
+                    .clocks(21)
+                    .executionTime(5.25f)
+                    .autoIncrementPc(false)
+                    .size(2)
+                    .build();
+        } else {
+            return InstructionResult.builder()
+                    .machineCycles(4)
+                    .clocks(16)
+                    .executionTime(4.00f)
+                    .autoIncrementPc(true)
+                    .size(2)
+                    .build();
+        }
     }
 }
