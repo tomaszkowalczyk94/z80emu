@@ -65,6 +65,8 @@ public class InstructionDecoder {
                 return instructionsContainer.jpByHl;
             case 0x10:
                 return instructionsContainer.decrementAndJumpOnNonZero;
+            case 0xEB:
+                return instructionsContainer.exchangeDeHl;
             default: //nothing, going to next switch
         }
 

@@ -2,6 +2,7 @@ package org.tomaszkowalczyk94.z80emu.core.instruction.decoder;
 
 import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.Call16bitIfCondition;
 import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.RetIfCondition;
+import org.tomaszkowalczyk94.z80emu.core.instruction.exchange.ExchangeDeHl;
 import org.tomaszkowalczyk94.z80emu.core.instruction.helper.ConditionHelper;
 import org.tomaszkowalczyk94.z80emu.core.instruction.helper.InstructionHelper;
 import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.Call16bit;
@@ -82,4 +83,7 @@ public class InstructionsContainer {
     JpByIx jpByIx = new JpByIx(instructionHelper);
     JpByIy jpByIy = new JpByIy(instructionHelper);
     DecrementAndJumpOnNonZero decrementAndJumpOnNonZero = new DecrementAndJumpOnNonZero(instructionHelper, jumpHelper);
+
+    //exchange, block transfer, search group
+    ExchangeDeHl exchangeDeHl = new ExchangeDeHl(instructionHelper);
 }
