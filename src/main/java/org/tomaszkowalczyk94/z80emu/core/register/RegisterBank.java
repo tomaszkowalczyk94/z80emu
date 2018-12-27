@@ -47,6 +47,10 @@ public class RegisterBank {
         regSet = regSetB;
     }
 
+    public DuplicableRegisterSet getAlternativeRegisterSet() {
+        return  (regSet == regSetA) ? regSetB : regSetA;
+    }
+
     public void incrementPc() {
         incrementPc(1);
     }

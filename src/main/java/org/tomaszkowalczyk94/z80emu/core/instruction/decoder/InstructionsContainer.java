@@ -2,6 +2,7 @@ package org.tomaszkowalczyk94.z80emu.core.instruction.decoder;
 
 import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.Call16bitIfCondition;
 import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.RetIfCondition;
+import org.tomaszkowalczyk94.z80emu.core.instruction.exchange.ExchangeAfAf;
 import org.tomaszkowalczyk94.z80emu.core.instruction.exchange.ExchangeDeHl;
 import org.tomaszkowalczyk94.z80emu.core.instruction.helper.ConditionHelper;
 import org.tomaszkowalczyk94.z80emu.core.instruction.helper.InstructionHelper;
@@ -86,4 +87,5 @@ public class InstructionsContainer {
 
     //exchange, block transfer, search group
     ExchangeDeHl exchangeDeHl = new ExchangeDeHl(instructionHelper);
+    ExchangeAfAf exchangeAfAf = new ExchangeAfAf(instructionHelper);
 }
