@@ -14,7 +14,7 @@ import org.tomaszkowalczyk94.z80emu.core.register.exception.UnsupportedGeneralPu
 public class RegisterBank {
 
     public enum Reg16bit {
-        BC, DE, HL, SP, AF,
+        BC, DE, HL, SP, AF, IX, IY
     }
 
     private final DuplicableRegisterSet regSetA = new DuplicableRegisterSet();
@@ -130,6 +130,8 @@ public class RegisterBank {
             case HL: return getHL();
             case SP: return getSp();
             case AF: return getAf();
+            case IX: return getIx();
+            case IY: return getIy();
             default:
                 throw new UnsupportedGeneralPurposeRegisterException();
         }
@@ -151,6 +153,12 @@ public class RegisterBank {
                 break;
             case AF:
                 setAf(value);
+                break;
+            case IX:
+                setIx(value);
+                break;
+            case IY:
+                setIy(value);
                 break;
             default:
                 throw new UnsupportedGeneralPurposeRegisterException();

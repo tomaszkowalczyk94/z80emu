@@ -159,6 +159,9 @@ public class InstructionDecoder {
         if(secondByte.getUnsignedValue() == 0xE9) {
             return instructionsContainer.jpByIx;
         }
+        if(secondByte.getUnsignedValue() == 0xE3) {
+            return instructionsContainer.exchangeIxWithStackTop;
+        }
         if(secondByte.getValueOfBits(2,0) == 0b110) {
             return instructionsContainer.loadRegFromMemByIxAnd8Bit;
         }
@@ -194,6 +197,9 @@ public class InstructionDecoder {
         }
         if(secondByte.getUnsignedValue() == 0xE9) {
             return instructionsContainer.jpByIy;
+        }
+        if(secondByte.getUnsignedValue() == 0xE3) {
+            return instructionsContainer.exchangeIyWithStackTop;
         }
         if(secondByte.getValueOfBits(2,0) == 0b110) {
             return instructionsContainer.loadRegFromMemByIyAnd8bit;
