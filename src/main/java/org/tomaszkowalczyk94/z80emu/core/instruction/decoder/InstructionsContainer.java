@@ -7,6 +7,7 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.exchange.ExchangeDeHl;
 import org.tomaszkowalczyk94.z80emu.core.instruction.exchange.ExchangeExtraRegisters;
 import org.tomaszkowalczyk94.z80emu.core.instruction.exchange.ExchangeHlWithStackTop;
 import org.tomaszkowalczyk94.z80emu.core.instruction.helper.ConditionHelper;
+import org.tomaszkowalczyk94.z80emu.core.instruction.helper.ExchangeRegistersHelper;
 import org.tomaszkowalczyk94.z80emu.core.instruction.helper.InstructionHelper;
 import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.Call16bit;
 import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.Ret;
@@ -22,6 +23,7 @@ public class InstructionsContainer {
     private InstructionHelper instructionHelper = new InstructionHelper();
     private ConditionHelper conditionHelper = new ConditionHelper();
     private JumpHelper jumpHelper = new JumpHelper(instructionHelper, conditionHelper);
+    private ExchangeRegistersHelper exchangeRegistersHelper = new ExchangeRegistersHelper(instructionHelper);
 
     //8bit load group
     LoadRegFromReg loadRegFromReg = new LoadRegFromReg(instructionHelper);
@@ -91,5 +93,5 @@ public class InstructionsContainer {
     ExchangeDeHl exchangeDeHl = new ExchangeDeHl(instructionHelper);
     ExchangeAfAf exchangeAfAf = new ExchangeAfAf(instructionHelper);
     ExchangeExtraRegisters exchangeExtraRegisters = new ExchangeExtraRegisters(instructionHelper);
-    ExchangeHlWithStackTop exchangeHlWithStackTop = new ExchangeHlWithStackTop(instructionHelper);
+    ExchangeHlWithStackTop exchangeHlWithStackTop = new ExchangeHlWithStackTop(instructionHelper, exchangeRegistersHelper);
 }

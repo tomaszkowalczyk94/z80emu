@@ -1,12 +1,13 @@
 package org.tomaszkowalczyk94.z80emu.core.instruction.exchange;
 
-import org.tomaszkowalczyk94.xbit.XBit16;
 import org.tomaszkowalczyk94.xbit.XBit8;
 import org.tomaszkowalczyk94.z80emu.core.Z80;
+import org.tomaszkowalczyk94.z80emu.core.Z80Exception;
 import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
 import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
+import org.tomaszkowalczyk94.z80emu.core.instruction.helper.ExchangeRegistersHelper;
 import org.tomaszkowalczyk94.z80emu.core.instruction.helper.InstructionHelper;
-import org.tomaszkowalczyk94.z80emu.core.memory.exception.MemoryException;
+import org.tomaszkowalczyk94.z80emu.core.register.RegisterBank;
 
 /**
  * <h2>EX (SP), HL</h2>
@@ -32,23 +33,17 @@ import org.tomaszkowalczyk94.z80emu.core.memory.exception.MemoryException;
  */
 public class ExchangeHlWithStackTop extends Instruction {
 
-    public ExchangeHlWithStackTop(InstructionHelper helper) {
+    private ExchangeRegistersHelper exchangeRegistersHelper;
+
+    public ExchangeHlWithStackTop(InstructionHelper helper, ExchangeRegistersHelper exchangeRegistersHelper) {
         super(helper);
+        this.exchangeRegistersHelper = exchangeRegistersHelper;
     }
 
     @Override
-    public InstructionResult execute(XBit8 opcode, Z80 z80) throws MemoryException {
+    public InstructionResult execute(XBit8 opcode, Z80 z80) throws Z80Exception {
 
-        XBit16 hlValue = z80.getRegs().getHL();
-        XBit16 topStackValue = helper.read16bitFromMemory(z80, z80.getRegs().getSp());
-
-
-        z80.getRegs().setHL(topStackValue);
-        helper.write16bitToMemory(
-                z80,
-                z80.getRegs().getSp(),
-                hlValue
-        );
+        exchangeRegistersHelper.exchange16bitRegWithStackTop(z80, RegisterBank.Reg16bit.HL);
 
         return InstructionResult.builder()
                 .machineCycles(5)

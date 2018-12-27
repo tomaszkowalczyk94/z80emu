@@ -5,6 +5,7 @@ import lombok.Setter;
 import org.tomaszkowalczyk94.xbit.XBit16;
 import org.tomaszkowalczyk94.xbit.XBit8;
 import org.tomaszkowalczyk94.xbit.XBitUtils;
+import org.tomaszkowalczyk94.z80emu.core.register.exception.UnsupportedGeneralPurposeRegisterException;
 import org.tomaszkowalczyk94.z80emu.core.register.exception.UnsupportedGeneralPurposeRegisterIdException;
 
 /**
@@ -121,6 +122,41 @@ public class RegisterBank {
                 throw new UnsupportedGeneralPurposeRegisterIdException(id);
         }
     }
+
+    public XBit16 get16bitRegister(Reg16bit regEnum) throws UnsupportedGeneralPurposeRegisterException {
+        switch (regEnum) {
+            case BC: return getBC();
+            case DE: return getDE();
+            case HL: return getHL();
+            case SP: return getSp();
+            case AF: return getAf();
+            default:
+                throw new UnsupportedGeneralPurposeRegisterException();
+        }
+    }
+
+    public void set16bitRegister(Reg16bit regEnum, XBit16 value) throws UnsupportedGeneralPurposeRegisterException {
+        switch (regEnum) {
+            case BC:
+                setBC(value);
+                break;
+            case DE:
+                setDE(value);
+                break;
+            case HL:
+                setHL(value);
+                break;
+            case SP:
+                setSp(value);
+                break;
+            case AF:
+                setAf(value);
+                break;
+            default:
+                throw new UnsupportedGeneralPurposeRegisterException();
+        }
+    }
+
     /**
      * alias for {@link DuplicableRegisterSet#getA()}
      */
