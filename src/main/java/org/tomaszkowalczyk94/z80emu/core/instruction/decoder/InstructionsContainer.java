@@ -7,6 +7,7 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.blocktransfer.LoadDataAndIn
 import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.Call16bitIfCondition;
 import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.RetIfCondition;
 import org.tomaszkowalczyk94.z80emu.core.instruction.compare.CompareAndDecrement;
+import org.tomaszkowalczyk94.z80emu.core.instruction.compare.CompareAndDecrementAndRepeat;
 import org.tomaszkowalczyk94.z80emu.core.instruction.compare.CompareAndIncrement;
 import org.tomaszkowalczyk94.z80emu.core.instruction.compare.CompareAndIncrementAndRepeat;
 import org.tomaszkowalczyk94.z80emu.core.instruction.exchange.*;
@@ -107,6 +108,6 @@ public class InstructionsContainer {
     CompareAndIncrement compareAndIncrement = new CompareAndIncrement(instructionHelper, compareAndIncrementHelper);
     CompareAndIncrementAndRepeat compareAndIncrementAndRepeat = new CompareAndIncrementAndRepeat(instructionHelper, compareAndIncrementHelper);
     CompareAndDecrement compareAndDecrement = new CompareAndDecrement(instructionHelper, compareAndIncrementHelper);
-
+    CompareAndDecrementAndRepeat compareAndDecrementAndRepeat = new CompareAndDecrementAndRepeat(instructionHelper, compareAndIncrementHelper);
 
 }
