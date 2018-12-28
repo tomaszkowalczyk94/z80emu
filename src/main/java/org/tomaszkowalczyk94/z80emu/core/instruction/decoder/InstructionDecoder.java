@@ -241,6 +241,8 @@ public class InstructionDecoder {
                 return instructionsContainer.compareAndIncrement;
             case 0xB1:
                 return instructionsContainer.compareAndIncrementAndRepeat;
+            case 0xA9:
+                return instructionsContainer.compareAndDecrement;
             default:
                 throw new UnsupportedInstructionException(opcode, secondByte);
         }
