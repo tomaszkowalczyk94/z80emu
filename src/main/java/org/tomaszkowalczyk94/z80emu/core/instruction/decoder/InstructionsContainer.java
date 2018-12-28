@@ -6,6 +6,7 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.blocktransfer.LoadDataAndIn
 import org.tomaszkowalczyk94.z80emu.core.instruction.blocktransfer.LoadDataAndIncrementAndRepeat;
 import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.Call16bitIfCondition;
 import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.RetIfCondition;
+import org.tomaszkowalczyk94.z80emu.core.instruction.compare.CompareAndIncrement;
 import org.tomaszkowalczyk94.z80emu.core.instruction.exchange.*;
 import org.tomaszkowalczyk94.z80emu.core.instruction.helper.*;
 import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.Call16bit;
@@ -23,6 +24,7 @@ public class InstructionsContainer {
     private JumpHelper jumpHelper = new JumpHelper(instructionHelper, conditionHelper);
     private ExchangeRegistersHelper exchangeRegistersHelper = new ExchangeRegistersHelper(instructionHelper);
     private LoadDataAndIncrementHelper loadDataAndIncrementHelper = new LoadDataAndIncrementHelper();
+    private FlagHelper flagHelper = new FlagHelper();
 
     //8bit load group
     LoadRegFromReg loadRegFromReg = new LoadRegFromReg(instructionHelper);
@@ -44,8 +46,8 @@ public class InstructionsContainer {
     LoadMemoryBy16BitFromA loadMemoryBy16BitFromA = new LoadMemoryBy16BitFromA(instructionHelper);
     LoadIFromA loadIFromA = new LoadIFromA(instructionHelper);
     LoadRFromA loadRFromA = new LoadRFromA(instructionHelper);
-    LoadAFromI loadAFromI = new LoadAFromI(instructionHelper);
-    LoadAFromR loadAFromR = new LoadAFromR(instructionHelper);
+    LoadAFromI loadAFromI = new LoadAFromI(instructionHelper, flagHelper);
+    LoadAFromR loadAFromR = new LoadAFromR(instructionHelper, flagHelper);
 
     //16bit load group
     LoadRegFrom16bit loadRegFrom16bit = new LoadRegFrom16bit(instructionHelper);
@@ -99,4 +101,9 @@ public class InstructionsContainer {
     LoadDataAndIncrementAndRepeat loadDataAndIncrementAndRepeat = new LoadDataAndIncrementAndRepeat(instructionHelper, loadDataAndIncrementHelper);
     LoadDataAndDecrement loadDataAndDecrement = new LoadDataAndDecrement(instructionHelper, loadDataAndIncrementHelper);
     LoadDataAndDecrementAndRepeat loadDataAndDecrementAndRepeat = new LoadDataAndDecrementAndRepeat(instructionHelper, loadDataAndIncrementHelper);
+    CompareAndIncrement compareAndIncrement = new CompareAndIncrement(instructionHelper, flagHelper);
+
+
+
+
 }

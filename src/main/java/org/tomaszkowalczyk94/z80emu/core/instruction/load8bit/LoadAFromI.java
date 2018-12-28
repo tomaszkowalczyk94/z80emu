@@ -3,6 +3,7 @@ package org.tomaszkowalczyk94.z80emu.core.instruction.load8bit;
 import org.tomaszkowalczyk94.xbit.XBit8;
 import org.tomaszkowalczyk94.z80emu.core.Z80;
 import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
+import org.tomaszkowalczyk94.z80emu.core.instruction.helper.FlagHelper;
 import org.tomaszkowalczyk94.z80emu.core.instruction.helper.InstructionHelper;
 import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
 import org.tomaszkowalczyk94.z80emu.core.register.FlagRegManager.Flag;
@@ -59,8 +60,11 @@ import org.tomaszkowalczyk94.z80emu.core.register.FlagRegManager.Flag;
  */
 public class LoadAFromI extends Instruction {
 
-    public LoadAFromI(InstructionHelper helper) {
+    private FlagHelper flagHelper;
+
+    public LoadAFromI(InstructionHelper helper, FlagHelper flagHelper) {
         super(helper);
+        this.flagHelper = flagHelper;
     }
 
     @Override
@@ -69,9 +73,9 @@ public class LoadAFromI extends Instruction {
                 z80.getRegs().getI()
         );
 
-        helper.setSignFlagByA(z80);
-        helper.setZeroFlagByA(z80);
-        helper.setPvFlagByIff2(z80);
+        flagHelper.setSignFlagByA(z80);
+        flagHelper.setZeroFlagByA(z80);
+        flagHelper.setPvFlagByIff2(z80);
 
         z80.getRegs().setFlag(Flag.H, false);
         z80.getRegs().setFlag(Flag.N, false);
