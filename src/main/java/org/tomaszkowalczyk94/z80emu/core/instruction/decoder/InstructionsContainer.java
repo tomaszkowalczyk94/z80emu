@@ -7,6 +7,7 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.blocktransfer.LoadDataAndIn
 import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.Call16bitIfCondition;
 import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.RetIfCondition;
 import org.tomaszkowalczyk94.z80emu.core.instruction.compare.CompareAndIncrement;
+import org.tomaszkowalczyk94.z80emu.core.instruction.compare.CompareAndIncrementAndRepeat;
 import org.tomaszkowalczyk94.z80emu.core.instruction.exchange.*;
 import org.tomaszkowalczyk94.z80emu.core.instruction.helper.*;
 import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.Call16bit;
@@ -25,6 +26,7 @@ public class InstructionsContainer {
     private ExchangeRegistersHelper exchangeRegistersHelper = new ExchangeRegistersHelper(instructionHelper);
     private LoadDataAndIncrementHelper loadDataAndIncrementHelper = new LoadDataAndIncrementHelper();
     private FlagHelper flagHelper = new FlagHelper();
+    private CompareAndIncrementHelper compareAndIncrementHelper = new CompareAndIncrementHelper(flagHelper);
 
     //8bit load group
     LoadRegFromReg loadRegFromReg = new LoadRegFromReg(instructionHelper);
@@ -101,8 +103,8 @@ public class InstructionsContainer {
     LoadDataAndIncrementAndRepeat loadDataAndIncrementAndRepeat = new LoadDataAndIncrementAndRepeat(instructionHelper, loadDataAndIncrementHelper);
     LoadDataAndDecrement loadDataAndDecrement = new LoadDataAndDecrement(instructionHelper, loadDataAndIncrementHelper);
     LoadDataAndDecrementAndRepeat loadDataAndDecrementAndRepeat = new LoadDataAndDecrementAndRepeat(instructionHelper, loadDataAndIncrementHelper);
-    CompareAndIncrement compareAndIncrement = new CompareAndIncrement(instructionHelper, flagHelper);
-
+    CompareAndIncrement compareAndIncrement = new CompareAndIncrement(instructionHelper, compareAndIncrementHelper);
+    CompareAndIncrementAndRepeat compareAndIncrementAndRepeat = new CompareAndIncrementAndRepeat(instructionHelper, compareAndIncrementHelper);
 
 
 

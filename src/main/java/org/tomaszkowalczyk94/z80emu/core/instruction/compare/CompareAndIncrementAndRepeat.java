@@ -9,12 +9,12 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.helper.CompareAndIncrementH
 import org.tomaszkowalczyk94.z80emu.core.instruction.helper.InstructionHelper;
 
 /**
- * <h2>CPI</h2>
+ * <h2>CPIR</h2>
  *
  * <table border="1" cellspacing="0">
  *     <tr>
  *         <td>Operation</td>
- *         <td>A – (HL), HL ← HL +1, BC ← BC – 1</td>
+ *         <td>A – (HL), HL ← HL+1, BC ← BC – 1</td>
  *     </tr>
  *     <tr>
  *         <td>Op Code:</td>
@@ -25,6 +25,15 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.helper.InstructionHelper;
  *         <td>None</td>
  *     </tr>
  * </table>
+ * <br>
+ * The contents of the memory location addressed by the HL register pair is compared with
+ * the contents of the Accumulator. During a compare operation, a condition bit is set. HL is
+ * incremented and the Byte Counter (register pair BC) is decremented. If decrementing
+ * causes BC to go to 0 or if A = (HL), the instruction is terminated. If BC is not 0 and A ≠
+ * (HL), the program counter is decremented by two and the instruction is repeated. Inter
+ * rupts are recognized and two refresh cycles are executed after each data transfer.
+ * If BC is set to 0 before instruction execution, the instruction loops through 64 KB if no
+ * match is found.
  * <br>
  * The contents of the memory location addressed by the HL register is compared with the
  * contents of the Accumulator. With a true compare, a condition bit is set. Then HL is incre
@@ -37,11 +46,11 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.helper.InstructionHelper;
  * N is set.<br />
  * C is not affected.<br />
  */
-public class CompareAndIncrement extends Instruction {
+public class CompareAndIncrementAndRepeat extends Instruction {
 
     private CompareAndIncrementHelper compareAndIncrementHelper;
 
-    public CompareAndIncrement(InstructionHelper helper, CompareAndIncrementHelper compareAndIncrementHelper) {
+    public CompareAndIncrementAndRepeat(InstructionHelper helper, CompareAndIncrementHelper compareAndIncrementHelper) {
         super(helper);
         this.compareAndIncrementHelper = compareAndIncrementHelper;
     }
@@ -49,13 +58,21 @@ public class CompareAndIncrement extends Instruction {
     @Override
     public InstructionResult execute(XBit8 opcode, Z80 z80) throws Z80Exception {
 
-        compareAndIncrementHelper.execute(z80, 1);
-
-        return InstructionResult.builder()
-                .machineCycles(4)
-                .clocks(16)
-                .executionTime(4.00f)
-                .size(2)
-                .build();
+        if(compareAndIncrementHelper.execute(z80, 1)) {
+            return InstructionResult.builder()
+                    .machineCycles(4)
+                    .clocks(16)
+                    .executionTime(4.00f)
+                    .size(2)
+                    .build();
+        }else {
+            return InstructionResult.builder()
+                    .machineCycles(5)
+                    .clocks(21)
+                    .executionTime(5.25f)
+                    .autoIncrementPc(false)
+                    .size(2)
+                    .build();
+        }
     }
 }
