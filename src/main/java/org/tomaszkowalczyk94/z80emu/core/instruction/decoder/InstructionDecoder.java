@@ -73,6 +73,8 @@ public class InstructionDecoder {
                 return instructionsContainer.exchangeExtraRegisters;
             case 0xE3:
                 return instructionsContainer.exchangeHlWithStackTop;
+            case 0xDB:
+                return instructionsContainer.inputDataToA;
             default: //nothing, going to next switch
         }
 

@@ -4,6 +4,8 @@ import lombok.Data;
 import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
 import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
 import org.tomaszkowalczyk94.z80emu.core.instruction.decoder.InstructionDecoder;
+import org.tomaszkowalczyk94.z80emu.core.io.IoDevice;
+import org.tomaszkowalczyk94.z80emu.core.io.SimpleIoDevice;
 import org.tomaszkowalczyk94.z80emu.core.memory.Memory;
 import org.tomaszkowalczyk94.z80emu.core.register.RegisterBank;
 
@@ -13,6 +15,7 @@ import static org.tomaszkowalczyk94.z80emu.core.register.RegisterBank.Reg16bit.P
 public class Z80 {
 
     Memory memory = new Memory();
+    IoDevice io = new SimpleIoDevice(8);
 
     RegisterBank registerBank = new RegisterBank();
     InstructionDecoder instructionDecoder = new InstructionDecoder();
