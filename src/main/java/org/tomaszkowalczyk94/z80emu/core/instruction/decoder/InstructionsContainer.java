@@ -15,6 +15,7 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.helper.*;
 import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.Call16bit;
 import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.Ret;
 import org.tomaszkowalczyk94.z80emu.core.instruction.inout.InputDataToA;
+import org.tomaszkowalczyk94.z80emu.core.instruction.inout.InputDataToR;
 import org.tomaszkowalczyk94.z80emu.core.instruction.jump.*;
 import org.tomaszkowalczyk94.z80emu.core.instruction.load16bit.*;
 import org.tomaszkowalczyk94.z80emu.core.instruction.load8bit.*;
@@ -113,7 +114,7 @@ public class InstructionsContainer {
 
     //input and output group
     InputDataToA inputDataToA = new InputDataToA(instructionHelper);
-
+    InputDataToR inputDataToR = new InputDataToR(instructionHelper);
 
 
 }

@@ -222,6 +222,11 @@ public class InstructionDecoder {
             return instructionsContainer.loadMemBy16bitFromReg;
         }
 
+        if(secondByte.getValueOfBits(7,6) == 0b01 &&
+           secondByte.getValueOfBits(2,0) == 0b000 ) {
+            return instructionsContainer.inputDataToR;
+        }
+
         switch (secondByte.getUnsignedValue()) {
             case 0x47:
                 return instructionsContainer.loadIFromA;
