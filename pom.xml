@@ -6,6 +6,7 @@
     <artifactId>z80emu-core</artifactId>
     <packaging>jar</packaging>
     <name>z80emu</name>
+    <url>https://github.com/tomaszkowalczyk94/z80emu-core</url>
     <version>0.1.0</version>
 
     <properties>
