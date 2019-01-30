@@ -3,3 +3,5 @@
 z80emu.iml
 
 
+/bin/
+/target/

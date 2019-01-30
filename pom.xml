@@ -2,11 +2,10 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.tomaszkowalczyk94.z80emu.core</groupId>
+    <groupId>org.tomaszkowalczyk94.z80emu</groupId>
     <artifactId>z80emu-core</artifactId>
     <packaging>jar</packaging>
     <name>z80emu</name>
-    <url>https://github.com/tomaszkowalczyk94/z80emu-core</url>
     <version>0.1.0</version>
 
     <properties>
@@ -29,7 +28,7 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.github.tomaszkowalczyk94</groupId>
+            <groupId>org.tomaszkowalczyk94.xbit</groupId>
             <artifactId>xbit</artifactId>
             <version>1.1.5</version>
         </dependency>
@@ -37,8 +36,15 @@
 
     <repositories>
         <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
+            <id>myMavenRepoRead</id>
+            <url>https://mymavenrepo.com/repo/PmCL80jeU82fLVGyuUt4/</url>
         </repository>
     </repositories>
+
+    <distributionManagement>
+        <repository>
+            <id>myMavenRepo.write</id>
+            <url>${myMavenRepoWriteUrl}</url>
+        </repository>
+    </distributionManagement>
 </project>
