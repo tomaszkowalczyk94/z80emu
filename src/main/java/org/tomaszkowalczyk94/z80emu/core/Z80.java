@@ -1,6 +1,9 @@
 package org.tomaszkowalczyk94.z80emu.core;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import org.tomaszkowalczyk94.xbit.XBit8;
 import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
 import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
 import org.tomaszkowalczyk94.z80emu.core.instruction.decoder.InstructionDecoder;
@@ -11,27 +14,21 @@ import org.tomaszkowalczyk94.z80emu.core.register.RegisterBank;
 
 import static org.tomaszkowalczyk94.z80emu.core.register.RegisterBank.Reg16bit.PC;
 
-@Data
 public class Z80 {
 
-    Memory memory = new Memory();
-    IoDevice io = new SimpleIoDevice(8);
+    @Getter Memory memory = new Memory();
+    @Getter IoDevice io = new SimpleIoDevice(8);
 
-    RegisterBank registerBank = new RegisterBank();
-    InstructionDecoder instructionDecoder = new InstructionDecoder();
+    @Getter RegisterBank registerBank = new RegisterBank();
+    private InstructionDecoder instructionDecoder = new InstructionDecoder();
 
-    int clockCyclesCounter = 0;
-    int instructionCounter = 0;
-    boolean iff1 = false;
-    boolean iff2 = false;
-
-    public void run() throws Z80Exception {
-        while (true) {
-            runOneInstruction();
-        }
-    }
+    @Getter int clockCyclesCounter = 0;
+    @Getter int instructionCounter = 0;
+    @Getter boolean iff1 = false;
+    @Getter boolean iff2 = false;
 
     public void runOneInstruction() throws Z80Exception {
+        handleInterrupts();
 
         Instruction instruction = instructionDecoder.decode(memory, registerBank.getPc());
 
@@ -49,6 +46,10 @@ public class Z80 {
 
     }
 
+    private void handleInterrupts() {
+
+    }
+
     /**
      * alias for {@link Z80#getMemory()}
      */
@@ -61,5 +62,17 @@ public class Z80 {
      */
     public RegisterBank getRegs() {
         return getRegisterBank();
+    }
+
+    public void makeInterrupt(XBit8 addressBus) {
+
+    }
+
+    public void makeNonMaskableInterrupt(XBit8 addressBus) {
+
+    }
+
+    public void reset(XBit8 addressBus) {
+
     }
 }
