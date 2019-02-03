@@ -50,12 +50,12 @@ public class InstructionHelper {
 
         z80.getMem().write(
                 address,
-                value.getLowByte()
+                value.getSecondByte()
         );
 
         z80.getMem().write(
                 addressOfHigh,
-                value.getHighByte()
+                value.getFirstByte()
         );
 
     }
@@ -77,12 +77,12 @@ public class InstructionHelper {
         //write value to stack
         z80.getMem().write(
                 XBitUtils.incrementBy(z80.getRegs().getSp(), -1),
-                value.getHighByte()
+                value.getFirstByte()
         );
 
         z80.getMem().write(
                 XBitUtils.incrementBy(z80.getRegs().getSp(), -2),
-                value.getLowByte()
+                value.getSecondByte()
         );
 
         //set stack pointer

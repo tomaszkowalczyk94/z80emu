@@ -41,6 +41,6 @@ public class Memory {
             throw new MemoryException("address is too big");
         }
 
-        memoryArray[addressInt] = value.getSignedValue();
+        memoryArray[addressInt] = (byte)value.getSignedValue();
     }
 }

@@ -15,7 +15,7 @@ public class InstructionDecoder {
     public Instruction decode(Memory memory, XBit16 pc) throws UnsupportedInstructionException, MemoryException {
         XBit8 opcode = memory.read(pc);
 
-        short opcodeUnsignedValue = opcode.getUnsignedValue();
+        int opcodeUnsignedValue = opcode.getUnsignedValue();
         XBit8 secondByte = readSecondByte(memory, pc);
 
         switch (opcodeUnsignedValue) {

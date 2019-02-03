@@ -36,6 +36,6 @@ public class SimpleIoDevice implements IoDevice {
     @Override
     public void write(XBit16 addressBus, XBit8 dataBus) {
         int arrIndex = addressBus.getValueOfBits(bitsOfPortAddress - 1, 0);
-        memoryArray[arrIndex] = dataBus.getUnsignedValue();
+        memoryArray[arrIndex] = (short)dataBus.getUnsignedValue();
     }
 }

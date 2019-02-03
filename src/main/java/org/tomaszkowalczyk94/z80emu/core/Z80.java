@@ -16,16 +16,16 @@ import static org.tomaszkowalczyk94.z80emu.core.register.RegisterBank.Reg16bit.P
 
 public class Z80 {
 
-    @Getter Memory memory = new Memory();
-    @Getter IoDevice io = new SimpleIoDevice(8);
+    @Getter @Setter Memory memory = new Memory();
+    @Getter @Setter IoDevice io = new SimpleIoDevice(8);
 
     @Getter RegisterBank registerBank = new RegisterBank();
     private InstructionDecoder instructionDecoder = new InstructionDecoder();
 
     @Getter int clockCyclesCounter = 0;
     @Getter int instructionCounter = 0;
-    @Getter boolean iff1 = false;
-    @Getter boolean iff2 = false;
+    @Getter @Setter boolean iff1 = false;
+    @Getter @Setter boolean iff2 = false;
 
     public void runOneInstruction() throws Z80Exception {
         handleInterrupts();

@@ -29,8 +29,8 @@ public class DuplicableRegisterSet {
     }
 
     public void setBC(@NonNull XBit16 value) {
-        b = value.getHighByte();
-        c = value.getLowByte();
+        b = value.getFirstByte();
+        c = value.getSecondByte();
     }
 
     public XBit16 getDE() {
@@ -38,8 +38,8 @@ public class DuplicableRegisterSet {
     }
 
     public void setDE(@NonNull XBit16 value) {
-        d = value.getHighByte();
-        e = value.getLowByte();
+        d = value.getFirstByte();
+        e = value.getSecondByte();
     }
 
     public XBit16 getHL() {
@@ -47,8 +47,8 @@ public class DuplicableRegisterSet {
     }
 
     public void setHL(XBit16 value) {
-        h = value.getHighByte();
-        l = value.getLowByte();
+        h = value.getFirstByte();
+        l = value.getSecondByte();
     }
 
     public XBit16 getAf() {
@@ -56,8 +56,8 @@ public class DuplicableRegisterSet {
     }
 
     public void setAf(XBit16 value) {
-        a = value.getHighByte();
-        f = value.getLowByte();
+        a = value.getFirstByte();
+        f = value.getSecondByte();
     }
 
     /**
