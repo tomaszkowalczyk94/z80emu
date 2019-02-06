@@ -1,6 +1,5 @@
 package org.tomaszkowalczyk94.z80emu.core;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.tomaszkowalczyk94.xbit.XBit8;
@@ -20,15 +19,15 @@ public class Z80 {
     @Getter @Setter IoDevice io = new SimpleIoDevice(8);
 
     @Getter RegisterBank registerBank = new RegisterBank();
+    @Getter InterruptsManager interruptsManager = new InterruptsManager();
     private InstructionDecoder instructionDecoder = new InstructionDecoder();
+
 
     @Getter int clockCyclesCounter = 0;
     @Getter int instructionCounter = 0;
-    @Getter @Setter boolean iff1 = false;
-    @Getter @Setter boolean iff2 = false;
 
     public void runOneInstruction() throws Z80Exception {
-        handleInterrupts();
+        interruptsManager.handleInterrupts(this);
 
         Instruction instruction = instructionDecoder.decode(memory, registerBank.getPc());
 
@@ -43,10 +42,6 @@ public class Z80 {
         if(result.isAutoIncrementPc()) {
             registerBank.incrementReg16bit(PC, result.getSize());
         }
-
-    }
-
-    private void handleInterrupts() {
 
     }
 

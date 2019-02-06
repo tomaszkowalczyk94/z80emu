@@ -1,5 +1,6 @@
 package org.tomaszkowalczyk94.z80emu.core.instruction.decoder;
 
+import org.tomaszkowalczyk94.z80emu.core.helper.*;
 import org.tomaszkowalczyk94.z80emu.core.instruction.blocktransfer.LoadDataAndDecrement;
 import org.tomaszkowalczyk94.z80emu.core.instruction.blocktransfer.LoadDataAndDecrementAndRepeat;
 import org.tomaszkowalczyk94.z80emu.core.instruction.blocktransfer.LoadDataAndIncrement;
@@ -11,7 +12,6 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.compare.CompareAndDecrement
 import org.tomaszkowalczyk94.z80emu.core.instruction.compare.CompareAndIncrement;
 import org.tomaszkowalczyk94.z80emu.core.instruction.compare.CompareAndIncrementAndRepeat;
 import org.tomaszkowalczyk94.z80emu.core.instruction.exchange.*;
-import org.tomaszkowalczyk94.z80emu.core.instruction.helper.*;
 import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.Call16bit;
 import org.tomaszkowalczyk94.z80emu.core.instruction.callandreturn.Ret;
 import org.tomaszkowalczyk94.z80emu.core.instruction.inout.InputDataToA;
@@ -31,6 +31,7 @@ public class InstructionsContainer {
     private LoadDataAndIncrementHelper loadDataAndIncrementHelper = new LoadDataAndIncrementHelper();
     private FlagHelper flagHelper = new FlagHelper();
     private CompareAndIncrementHelper compareAndIncrementHelper = new CompareAndIncrementHelper(flagHelper);
+    private StackHelper stackHelper = new StackHelper();
 
     //8bit load group
     LoadRegFromReg loadRegFromReg = new LoadRegFromReg(instructionHelper);
@@ -70,16 +71,16 @@ public class InstructionsContainer {
     LoadSpFromHl loadSpFromHl = new LoadSpFromHl(instructionHelper);
     LoadSpFromIx loadSpFromIx = new LoadSpFromIx(instructionHelper);
     LoadSpFromIy loadSpFromIy = new LoadSpFromIy(instructionHelper);
-    PushReg pushReg = new PushReg(instructionHelper);
-    PushIx pushIx = new PushIx(instructionHelper);
-    PushIy pushIy = new PushIy(instructionHelper);
-    PopReg popReg = new PopReg(instructionHelper);
-    PopIx popIx = new PopIx(instructionHelper);
-    PopIy popIy = new PopIy(instructionHelper);
+    PushReg pushReg = new PushReg(instructionHelper, stackHelper);
+    PushIx pushIx = new PushIx(instructionHelper, stackHelper);
+    PushIy pushIy = new PushIy(instructionHelper, stackHelper);
+    PopReg popReg = new PopReg(instructionHelper, stackHelper);
+    PopIx popIx = new PopIx(instructionHelper, stackHelper);
+    PopIy popIy = new PopIy(instructionHelper, stackHelper);
 
     //call and return group
-    Call16bit call16bit = new Call16bit(instructionHelper);
-    Call16bitIfCondition call16bitIfCondition = new Call16bitIfCondition(instructionHelper, conditionHelper);
+    Call16bit call16bit = new Call16bit(instructionHelper, stackHelper);
+    Call16bitIfCondition call16bitIfCondition = new Call16bitIfCondition(instructionHelper, conditionHelper, stackHelper);
     Ret ret = new Ret(instructionHelper);
     RetIfCondition retIfCondition = new RetIfCondition(instructionHelper, conditionHelper);
 

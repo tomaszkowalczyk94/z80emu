@@ -24,7 +24,7 @@ public class LoadAFromRTest {
 
         z80.getRegs().setF(XBit8.valueOfUnsigned(0xFF));
 
-        z80.setIff2(true);
+        z80.getInterruptsManager().setIff2(true);
 
         z80.getRegs().setI(regR);
     }

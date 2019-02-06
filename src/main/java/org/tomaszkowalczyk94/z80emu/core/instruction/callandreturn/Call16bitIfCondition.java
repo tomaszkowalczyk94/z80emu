@@ -5,10 +5,11 @@ import org.tomaszkowalczyk94.xbit.XBit8;
 import org.tomaszkowalczyk94.xbit.XBitUtils;
 import org.tomaszkowalczyk94.z80emu.core.Z80;
 import org.tomaszkowalczyk94.z80emu.core.Z80Exception;
+import org.tomaszkowalczyk94.z80emu.core.helper.StackHelper;
 import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
 import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
-import org.tomaszkowalczyk94.z80emu.core.instruction.helper.ConditionHelper;
-import org.tomaszkowalczyk94.z80emu.core.instruction.helper.InstructionHelper;
+import org.tomaszkowalczyk94.z80emu.core.helper.ConditionHelper;
+import org.tomaszkowalczyk94.z80emu.core.helper.InstructionHelper;
 
 /**
  * <h2>CALL cc, nn</h2>
@@ -54,11 +55,14 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.helper.InstructionHelper;
  */
 public class Call16bitIfCondition extends Instruction {
 
+
+    StackHelper stackHelper;
     private ConditionHelper conditionHelper;
 
-    public Call16bitIfCondition(InstructionHelper helper, ConditionHelper conditionHelper) {
+    public Call16bitIfCondition(InstructionHelper helper, ConditionHelper conditionHelper, StackHelper stackHelper) {
         super(helper);
         this.conditionHelper = conditionHelper;
+        this.stackHelper = stackHelper;
     }
 
     @Override
@@ -73,7 +77,7 @@ public class Call16bitIfCondition extends Instruction {
 
             XBit16 incrementedPc = XBitUtils.incrementBy(z80.getRegs().getPc(), 3);
 
-            helper.pushToStack(
+            stackHelper.pushToStack(
                     z80,
                     incrementedPc
             );

@@ -4,8 +4,9 @@ import org.tomaszkowalczyk94.xbit.XBit16;
 import org.tomaszkowalczyk94.xbit.XBit8;
 import org.tomaszkowalczyk94.z80emu.core.Z80;
 import org.tomaszkowalczyk94.z80emu.core.Z80Exception;
+import org.tomaszkowalczyk94.z80emu.core.helper.StackHelper;
 import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
-import org.tomaszkowalczyk94.z80emu.core.instruction.helper.InstructionHelper;
+import org.tomaszkowalczyk94.z80emu.core.helper.InstructionHelper;
 import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
 
 import static org.tomaszkowalczyk94.z80emu.core.register.RegisterBank.Reg16bit.AF;
@@ -42,8 +43,11 @@ import static org.tomaszkowalczyk94.z80emu.core.register.RegisterBank.Reg16bit.A
  *
  */
 public class PushReg extends Instruction {
-    public PushReg(InstructionHelper helper) {
+    StackHelper stackHelper;
+
+    public PushReg(InstructionHelper helper, StackHelper stackHelper) {
         super(helper);
+        this.stackHelper = stackHelper;
     }
 
     @Override
@@ -54,7 +58,7 @@ public class PushReg extends Instruction {
                 AF
         );
 
-        helper.pushToStack(z80, valueToPush);
+        stackHelper.pushToStack(z80, valueToPush);
 
         return InstructionResult.builder()
                 .machineCycles(3)

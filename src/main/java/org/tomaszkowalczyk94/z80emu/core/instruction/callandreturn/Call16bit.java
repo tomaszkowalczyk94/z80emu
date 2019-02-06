@@ -5,8 +5,9 @@ import org.tomaszkowalczyk94.xbit.XBit8;
 import org.tomaszkowalczyk94.xbit.XBitUtils;
 import org.tomaszkowalczyk94.z80emu.core.Z80;
 import org.tomaszkowalczyk94.z80emu.core.Z80Exception;
+import org.tomaszkowalczyk94.z80emu.core.helper.StackHelper;
 import org.tomaszkowalczyk94.z80emu.core.instruction.Instruction;
-import org.tomaszkowalczyk94.z80emu.core.instruction.helper.InstructionHelper;
+import org.tomaszkowalczyk94.z80emu.core.helper.InstructionHelper;
 import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
 
 
@@ -42,9 +43,11 @@ import org.tomaszkowalczyk94.z80emu.core.instruction.InstructionResult;
  */
 public class Call16bit extends Instruction {
 
+    StackHelper stackHelper;
 
-    public Call16bit(InstructionHelper helper) {
+    public Call16bit(InstructionHelper helper, StackHelper stackHelper) {
         super(helper);
+        this.stackHelper = stackHelper;
     }
 
     @Override
@@ -52,7 +55,7 @@ public class Call16bit extends Instruction {
 
         XBit16 incrementedPc = XBitUtils.incrementBy(z80.getRegs().getPc(), 3);
 
-        helper.pushToStack(
+        stackHelper.pushToStack(
                 z80,
                 incrementedPc
         );

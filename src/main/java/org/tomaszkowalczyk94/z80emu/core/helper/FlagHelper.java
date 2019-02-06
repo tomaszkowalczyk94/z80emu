@@ -1,6 +1,7 @@
-package org.tomaszkowalczyk94.z80emu.core.instruction.helper;
+package org.tomaszkowalczyk94.z80emu.core.helper;
 
 import org.tomaszkowalczyk94.xbit.XBit8;
+import org.tomaszkowalczyk94.z80emu.core.InterruptsManager;
 import org.tomaszkowalczyk94.z80emu.core.Z80;
 
 import static org.tomaszkowalczyk94.z80emu.core.register.FlagRegManager.Flag.*;
@@ -65,7 +66,7 @@ public class FlagHelper {
      * interrupt enable flip-flop (IFF2) for storage or testing.
      */
     public void setPvFlagByIff2(Z80 z80) {
-        z80.getRegs().setFlag(PV, z80.isIff2());
+        z80.getRegs().setFlag(PV, z80.getInterruptsManager().isIff2());
     }
 
 }

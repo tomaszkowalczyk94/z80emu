@@ -1,7 +1,7 @@
-package org.tomaszkowalczyk94.z80emu.core.instruction.helper;
+package org.tomaszkowalczyk94.z80emu.core.helper;
 
 import org.tomaszkowalczyk94.z80emu.core.Z80;
-import org.tomaszkowalczyk94.z80emu.core.instruction.helper.exception.UnsupportedConditionException;
+import org.tomaszkowalczyk94.z80emu.core.helper.exception.UnsupportedConditionException;
 import org.tomaszkowalczyk94.z80emu.core.register.FlagRegManager;
 
 public class ConditionHelper {

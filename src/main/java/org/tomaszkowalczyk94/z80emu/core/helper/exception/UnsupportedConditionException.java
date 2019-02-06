@@ -1,4 +1,4 @@
-package org.tomaszkowalczyk94.z80emu.core.instruction.helper.exception;
+package org.tomaszkowalczyk94.z80emu.core.helper.exception;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
