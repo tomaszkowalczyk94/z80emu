@@ -44,7 +44,7 @@
         <dependency>
             <groupId>org.tomaszkowalczyk94.xbit</groupId>
             <artifactId>xbit</artifactId>
-            <version>1.2.0</version>
+            <version>1.2.1</version>
         </dependency>
     </dependencies>
 

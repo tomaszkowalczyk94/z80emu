@@ -12,6 +12,12 @@ public class InstructionDecoder {
 
     private final InstructionsContainer instructionsContainer = new InstructionsContainer();
 
+    public Instruction decodeOneByte(XBit8 instructionByte) throws MemoryException, UnsupportedInstructionException {
+        Memory memory = new Memory();
+        memory.write(0, instructionByte);
+        return decode(memory, XBit16.valueOfUnsigned(0));
+    }
+
     public Instruction decode(Memory memory, XBit16 pc) throws UnsupportedInstructionException, MemoryException {
         XBit8 opcode = memory.read(pc);
 

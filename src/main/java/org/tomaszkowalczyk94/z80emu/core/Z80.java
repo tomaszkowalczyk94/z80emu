@@ -20,7 +20,7 @@ public class Z80 {
 
     @Getter RegisterBank registerBank = new RegisterBank();
     @Getter InterruptsManager interruptsManager = new InterruptsManager();
-    private InstructionDecoder instructionDecoder = new InstructionDecoder();
+    protected InstructionDecoder instructionDecoder = new InstructionDecoder();
 
 
     @Getter int clockCyclesCounter = 0;
