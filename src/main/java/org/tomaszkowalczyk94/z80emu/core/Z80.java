@@ -42,7 +42,6 @@ public class Z80 {
         if(result.isAutoIncrementPc()) {
             registerBank.incrementReg16bit(PC, result.getSize());
         }
-
     }
 
     /**
