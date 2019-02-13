@@ -120,6 +120,8 @@ public class InstructionDecoder {
                 return instructionsContainer.loadRegFrom8Bit;
             case 0b001:
                 return instructionsContainer.loadRegFrom16bit;
+            case 0b101:
+                return instructionsContainer.dec8bitReg;
             default:
                 throw new UnsupportedInstructionException(opcode);
         }
