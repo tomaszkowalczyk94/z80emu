@@ -81,6 +81,8 @@ public class InstructionDecoder {
                 return instructionsContainer.exchangeHlWithStackTop;
             case 0xDB:
                 return instructionsContainer.inputDataToA;
+            case 0xBE:
+                return instructionsContainer.compareAWithMemoryByHl;
             default: //nothing, going to next switch
         }
 

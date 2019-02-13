@@ -7,7 +7,7 @@
     <packaging>jar</packaging>
     <name>z80emu</name>
     <url>https://github.com/tomaszkowalczyk94/z80emu-core</url>
-    <version>0.1.2</version>
+    <version>0.1.4</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -44,7 +44,7 @@
         <dependency>
             <groupId>org.tomaszkowalczyk94.xbit</groupId>
             <artifactId>xbit</artifactId>
-            <version>1.2.1</version>
+            <version>1.2.2</version>
         </dependency>
     </dependencies>
 
