@@ -42,7 +42,11 @@ public class CompareAWithMemoryByHl extends Instruction {
                 (z80.getRegs().getBC().getSignedValue() != 0)
         );
         z80.getRegs().setFlag(N, true);
-        z80.getRegs().setFlag(C, result.carry);
+
+
+        z80.getRegs().setFlag(C,
+                ((z80.getRegs().getA().getSignedValue()-memValue.getSignedValue()) & 0x100) != 0
+                );
 
         return InstructionResult.builder()
                 .machineCycles(2)
