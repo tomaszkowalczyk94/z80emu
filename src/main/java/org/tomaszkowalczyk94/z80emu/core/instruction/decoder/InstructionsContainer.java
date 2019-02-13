@@ -1,6 +1,7 @@
 package org.tomaszkowalczyk94.z80emu.core.instruction.decoder;
 
 import org.tomaszkowalczyk94.z80emu.core.helper.*;
+import org.tomaszkowalczyk94.z80emu.core.instruction.aritmetic16bit.Inc16bitReg;
 import org.tomaszkowalczyk94.z80emu.core.instruction.aritmetic8bit.Dec8bitReg;
 import org.tomaszkowalczyk94.z80emu.core.instruction.blocktransfer.LoadDataAndDecrement;
 import org.tomaszkowalczyk94.z80emu.core.instruction.blocktransfer.LoadDataAndDecrementAndRepeat;
@@ -120,5 +121,6 @@ public class InstructionsContainer {
 
     Dec8bitReg dec8bitReg = new Dec8bitReg(instructionHelper, flagHelper);
 
+    Inc16bitReg inc16bitReg = new Inc16bitReg(instructionHelper, flagHelper);
 
 }

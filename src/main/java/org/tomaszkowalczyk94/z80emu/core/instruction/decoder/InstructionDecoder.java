@@ -115,6 +115,11 @@ public class InstructionDecoder {
     }
 
     private Instruction decode00bits(XBit8 opcode) throws UnsupportedInstructionException {
+
+        if(opcode.getValueOfBits(3,0) == 0b0011) {
+            return instructionsContainer.inc16bitReg;
+        }
+
         switch (opcode.getValueOfBits(2,0)) {
             case 0b110:
                 return instructionsContainer.loadRegFrom8Bit;
