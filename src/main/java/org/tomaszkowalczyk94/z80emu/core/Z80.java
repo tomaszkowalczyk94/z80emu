@@ -24,6 +24,7 @@ public class Z80 {
 
 
     @Getter int clockCyclesCounter = 0;
+    @Getter int machineCyclesCounter = 0;
     @Getter int instructionCounter = 0;
 
     public void runOneInstruction() throws Z80Exception {
@@ -38,6 +39,8 @@ public class Z80 {
 
         clockCyclesCounter += result.getClocks();
         instructionCounter++;
+        machineCyclesCounter += result.getMachineCycles();
+
 
         if(result.isAutoIncrementPc()) {
             registerBank.incrementReg16bit(PC, result.getSize());
